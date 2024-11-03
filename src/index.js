@@ -1,17 +1,46 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+// import * as serviceWorker from './serviceWorker';
+import {Route,BrowserRouter,Routes} from 'react-router-dom'; 
+
+import Login from './components/Login';
+import App from './App';
+
+import WordComp from './components/WordComp';
+import Memo1Comp from './components/Memo1Comp';
+import Memo2Comp from './components/Memo2Comp';
+
+import { CookiesProvider} from 'react-cookie';
+
+const routing = (
+  <React.StrictMode>
+    <BrowserRouter>
+    <CookiesProvider>
+      {/* cookies providerで囲むことでnavbarで提供される削除等の処理が */}
+
+      <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/main" element={<App />} />
+          <Route path="/word" element={<WordComp />} />
+          <Route path="/memo1" element={<Memo1Comp />} />
+          <Route path="/memo2" element={<Memo2Comp />} />
+
+      </Routes>
+
+    </CookiesProvider>
+    </BrowserRouter>
+  </React.StrictMode>
+)
+
+
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  routing
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+
 reportWebVitals();
