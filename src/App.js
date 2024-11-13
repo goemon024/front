@@ -8,8 +8,10 @@ import Test from './components/Test';
 
 import { createTheme, ThemeProvider as MuiThemeProvider} from "@mui/material/styles";
 import indigo from "@mui/material/colors/indigo";
+
+import { DataProvider } from './context/DataContext';
 // import Navbar from "./components/Navbar";  
-// import ApiContextProvider from './context/ApiContext';
+// import DataProvider from './context/DataContext';
 
 const theme = createTheme({
   palette: {
@@ -25,9 +27,11 @@ const theme = createTheme({
 
 function App() {
   return (
+    <DataProvider>
     <div>
-      <Test />
+      <Main />
     </div>
+    </DataProvider>
   );
 }
 

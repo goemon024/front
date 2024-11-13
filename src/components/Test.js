@@ -39,14 +39,12 @@ const Test = () => {
       return(      
       <div className="one-data">
       <span key={memo1.id} className="Memo1">{memo1.memo}</span>
-      <span key={memo1.id} className="date" >{memo1.date}</span>
+      <span key={memo1.id} className="date" >{memo1.reg_date}</span>
       <div className="buttons">
        <a href ="{% url 'wlist:memo_update' m.pk %}" class="btn btn-info" tabindex="-1" role="button" aria-disabled="true">編集</a>
        <a href ="{% url 'wlist:memo_delete' m.pk %}" class="btn btn-success" tabindex="-1" role="button" aria-disabled="true">削除</a>
       </div>
       </div>
-
-
       )
     })}
 
