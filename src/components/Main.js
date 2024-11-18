@@ -1,7 +1,11 @@
-import React from 'react';
+import React,{ useContext,useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { DataContext } from '../context/DataContext';
 
 const MainPage = () => {
+  const { memo1Table, loading } = useContext(DataContext);
+  console.log(memo1Table.data)
+
   return (
     <div>
       <h1>Ebing House note application</h1>

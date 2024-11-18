@@ -8,7 +8,7 @@ import dayjs from 'dayjs';
 import './css/flashcard.css';
 import FlashCard from './FlashCard';
 
-const WordComp = (props) => {
+const WordList = (props) => {
   const [cookies] = useCookies(['current-token']);  // useCookiesを使う
   const token = cookies['current-token'];           // useCookiesを使う
 
@@ -74,4 +74,4 @@ const WordComp = (props) => {
   )
 }
 
-export default WordComp
+export default WordList

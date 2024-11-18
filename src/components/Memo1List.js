@@ -1,4 +1,4 @@
-import React,{useContext,useState,useEffect} from 'react';
+import React,{ useContext,useState,useEffect } from 'react';
 import { DataContext } from '../context/DataContext';
 
 // import axios from 'axios'
@@ -7,25 +7,81 @@ import { Typography } from '@mui/material';
 // import { useCookies } from 'react-cookie';          // useCookiesを使う
 import dayjs from 'dayjs';
 
-import './css/flashcard.css';
-import FlashCard from './FlashCard';
+// import './css/flashcard.css';
+// import FlashCard from './FlashCard';
+import './css/list.css';
+import HoverMenu from './HoverMenu';
+import DeleteModal from './DeleteModal';
+import UpdateModal from './UpdateModal';
 
-const Memo1Comp = () => {
-  const { memo1Table, loading } = useContext(DataContext);
+
+
+const Memo1List = () => {
+  const { memo1Table, setMemo1Table , loading } = useContext(DataContext);
+  const [deleteIsOpen, setDeleteIsOpen] = useState(false);
+  const [updateIsOpen, setUpdateIsOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);  // モーダル表示時の値の受渡し
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return `${date.getMonth() + 1}月${date.getDate()}日`; // 月は0始まり
+};
 
   if (loading) {
       return <p>Loading...</p>;
   }
 
+
   return (
+    <div>
+   <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">メモリスト</h1>
+    </div>
+   </div>
+    
       <div>
-          <h2>Table 1 Data</h2>
-          <ul>
+          <div class="container">
+              {memo1Table
+              .slice()
+              .sort((a,b)=> new Date(b.reg_date) - new Date(a.reg_date))
+              .map(item => (
+            <div class="word-and-buttons" key={item.id}>
+              <span class="memo">{ item.memo }</span>
+              <span class="date">{formatDate(item.reg_date)}</span>
+            
+            <div class="buttons">
+            <button onClick={() => {setSelectedItem(item);setUpdateIsOpen(true)}} class="btn btn-info"   >編集</button>
+            <button onClick={() => {setSelectedItem(item);setDeleteIsOpen(true)}} class="btn btn-success">削除</button>
+
+            {selectedItem &&(
+            <UpdateModal isOpen={updateIsOpen} onRequestClose={() => setUpdateIsOpen(false)}
+            data={selectedItem} dataDisplay={selectedItem.memo}/>
+            )}
+            
+            {selectedItem &&(
+            <DeleteModal isOpen={deleteIsOpen} onRequestClose={() => setDeleteIsOpen(false)}
+            data={selectedItem} dataDisplay={selectedItem.memo.slice(0,30)}/>
+            )}
+
+            </div>
+            </div>
+
+            ))}
+          </div>
+
+          {/* <ul>
               {memo1Table.map(item => (
-                  <li key={item.id}>{item.memo1}</li>
-              ))}
-          </ul>
-      </div>
+                <div class="word-and-buttons">
+               <li key={item.id}>{item.memo}</li>
+               </div>
+            ))}
+          </ul> */}
+        </div>
+    {/* <HoverMenu links={{ href: '/memo1', text: 'メモ帳編集'}} /> */}
+    <HoverMenu links={[]} />
+    {/* <DeleteModal /> */}
+    </div>
   );
 }
 
@@ -97,4 +153,4 @@ const Memo1Comp = () => {
 //   )
 // }
 
-export default Memo1Comp
+export default Memo1List

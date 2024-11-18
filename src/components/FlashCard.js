@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './css/flashcard.css';
+import HoverMenu from './HoverMenu';
 
 const FlashCard = ({ cardData })  => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -17,7 +18,9 @@ const FlashCard = ({ cardData })  => {
     };
 
     return (
-        <div className="flashcard-container" onClick={slideToNextCard}>
+      <>
+        {cardData.length > 0 ?
+        (<div className="flashcard-container" onClick={slideToNextCard}>
         {cardData.map((card, index) => (
           <div
             key={index}
@@ -26,7 +29,15 @@ const FlashCard = ({ cardData })  => {
             {card.memo}
           </div>
         ))}
+      </div>)
+
+      :(<div class="no-data">
+      記録されているメモがありません。
+      <div>
+      <a href="/main" class="button">戻る</a>
       </div>
+      </div>)}
+      </>
     );
 }
 

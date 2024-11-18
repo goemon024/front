@@ -47,6 +47,9 @@ export const DataProvider = ({ children }) => {
                 ]);
                 setWordTable(res1.data);
                 setMemo1Table(res2.data);
+
+                console.log("XXXXXXXXXXXXXXXXX");
+
                 // setMemo2Table(res3.data);
             } catch (error) {
                 console.error('データの取得に失敗しました:', error);
@@ -58,6 +61,10 @@ export const DataProvider = ({ children }) => {
         fetchData();
     }, []);
 
+
+
+
+    
     // table1を更新する関数
     // const updateTable1 = async (newData) => {
     //     try {
@@ -75,8 +82,9 @@ export const DataProvider = ({ children }) => {
     return (
         <DataContext.Provider value={{ 
             wordTable,
+            setWordTable,
             memo1Table,
-            // table3,
+            setMemo1Table,
             loading,
             // updateTable1
         }}>
