@@ -8,7 +8,7 @@ import { Typography } from '@mui/material';
 import dayjs from 'dayjs';
 
 import './css/flashcard.css';
-import FlashCard from './FlashCard';
+import FlashCard from './FlashMemo1';
 // import './css/list.css';
 
 

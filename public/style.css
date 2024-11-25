@@ -49,7 +49,7 @@
 
 
 /* style2.css */
-body, html {
+body, html, #root {
     height: 100%; /* 全体の高さを設定 */
     width: 100%;
     margin: 0; /* マージンをリセット */

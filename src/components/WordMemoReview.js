@@ -2,19 +2,29 @@ import React,{ useContext,useState,useEffect } from 'react';
 import { DataContext } from '../context/DataContext';
 
 // import axios from 'axios'
-import { Typography } from '@mui/material';
+
 
 // import { useCookies } from 'react-cookie';          // useCookiesを使う
 import dayjs from 'dayjs';
 
 import './css/flashcard.css';
 import FlashMemo1 from './FlashMemo1';
+import FlashMemo2 from './FlashMemo2';
+import FlashWord from './FlashWord';
 import HoverMenu from './HoverMenu';
 // import './css/list.css';
 
 
-const Memo1Review = () => {
-  const { memo1Table, loading } = useContext(DataContext);
+const WordMemoReview = ({selectedTable, isAll}) => {
+  const { loading } = useContext(DataContext);
+
+  const { wordTable, memo1Table, memo2Table } = useContext(DataContext);
+
+  const tableData = {
+    word: wordTable,
+    memo1: memo1Table,
+    memo2: memo2Table,
+  }[selectedTable];
 
   if (loading) {
     return <p>Loading...</p>;
@@ -32,10 +42,18 @@ const Memo1Review = () => {
   // const filteredData = memo1Table.filter(data => 
   //   [today,agoDay1,agoDay7,agoDay28].includes(data.reg_date));
 
-  const filteredData = memo1Table.filter(data => 
+  const filteredData = isAll === true ? tableData
+   : tableData.filter(data =>
       [today, agoDay1, agoDay7, agoDay28].includes(dayjs(data.reg_date).format('YYYY-MM-DD'))
     );
 
+  
+
+  // if (isAll !== true){
+  // const filteredData = tableData.filter(data => 
+  //     [today, agoDay1, agoDay7, agoDay28].includes(dayjs(data.reg_date).format('YYYY-MM-DD'))
+  //   );
+  // }
   // const filteredData = memo1Table.filter(data => {
   //     const regDate = dayjs(data.reg_date); // data.reg_date を dayjs オブジェクトに変換
   //     return regDate.isAfter(dayjs().subtract(31, 'day')) && regDate.isBefore(dayjs().add(1, 'day'));
@@ -52,10 +70,23 @@ const Memo1Review = () => {
 
   return (
     <div>
-    <FlashMemo1 cardData={shuffleArray(filteredData)} />
-    <HoverMenu links={{href:'/memo1',text:'メモ帳編集'}} />
+      {selectedTable === 'memo1' ? (
+        <FlashMemo1 cardData={shuffleArray(filteredData)} />
+      ) : selectedTable === 'memo2' ? (
+        <FlashMemo2 cardData={shuffleArray(filteredData)} />
+      ) : (
+        <FlashWord cardData={shuffleArray(filteredData)} />
+      )}
+
+     {selectedTable === 'memo1' ? (
+      <HoverMenu links={{href:'/memo1',text:'メモ帳編集'}} />
+      ) : selectedTable === 'memo2' ? (
+      <HoverMenu links={{href:'/memo2',text:'メモ帳編集'}} />
+      ) : (
+      <HoverMenu links={{href:'/word',text:'英単語帳編集'}} />
+      )}
     </div>
   )
 }
 
-export default Memo1Review
+export default WordMemoReview

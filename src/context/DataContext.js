@@ -25,14 +25,14 @@ export const DataProvider = ({ children }) => {
 
     const [wordTable, setWordTable] = useState([]);
     const [memo1Table, setMemo1Table] = useState([]);
-    // const [memo2Table, setMemo2Table] = useState([]);
+    const [memo2Table, setMemo2Table] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
             
             try {
-                const [res1, res2 ] = await Promise.all([
+                const [res1, res2, res3 ] = await Promise.all([
                     axios.get('http://localhost:8000/api_word/word/',{
                         headers: {
                             'Authorization': `Token ${token}`
@@ -43,12 +43,17 @@ export const DataProvider = ({ children }) => {
                             'Authorization': `Token ${token}`
                         }
                     }),
-                    // axios.get('/api_memo2/memo2/'),
+                    axios.get('http://localhost:8000/api_memo2/memo2/',{
+                        headers: {
+                            'Authorization': `Token ${token}`
+                        }
+                    }),
                 ]);
                 setWordTable(res1.data);
                 setMemo1Table(res2.data);
+                setMemo2Table(res3.data);
 
-                console.log("XXXXXXXXXXXXXXXXX");
+                console.log("READING CONTEXT");
 
                 // setMemo2Table(res3.data);
             } catch (error) {
@@ -85,6 +90,8 @@ export const DataProvider = ({ children }) => {
             setWordTable,
             memo1Table,
             setMemo1Table,
+            memo2Table,
+            setMemo2Table,
             loading,
             // updateTable1
         }}>

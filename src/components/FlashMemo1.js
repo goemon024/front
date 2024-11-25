@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './css/flashcard.css';
 import HoverMenu from './HoverMenu';
 
-const FlashCard = ({ cardData })  => {
+const FlashMemo1 = ({ cardData })  => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isAnimating, setIsAnimating] = useState(false);
   
@@ -41,4 +41,4 @@ const FlashCard = ({ cardData })  => {
     );
 }
 
-export default FlashCard
+export default FlashMemo1

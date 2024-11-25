@@ -11,61 +11,81 @@
   
 
 
-body {
+.body {
     margin: 0;
     overflow: hidden;
 }
-#flashcard-container {
+.flashcard-container {
     width: 100vw;
     height: 100vh;
     position: relative;
     overflow: hidden;
+
 }
 .flashcard {
-    /* width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: block;
-    justify-content: center;
-    align-items: center; */
-    /* font-size: 2em; */
-    /* text-align: center;
-    background: whitesmoke;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    transition: transform 0.5s ease-in-out; */
-
     position: absolute;
     width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform 0.4s ease;
+    transition: transform 0.3s ease, opacity 0.3s ease;
 
     font-size: 36px; 
     text-align: center;
-    padding:48px;
 
+    background: #f0f0f0;
 }
 .flashcard.hidden {
     /* display: none; */
-    transform: translateX(100%);
+    /* transform: translateX(100%); */
+    transition: opacity 0.4s ease; 
     opacity: 0;
 }
 
 .flashcard.active {
-  transform: translateX(0); 
+  /* transform: translateX(0%); */
   opacity: 1;
 } 
 
-.upperpart {
+.flashcard.enter-from-right {
+    transform: translateX(-100%);
+    opacity: 1;
+  } 
+
+  .flashcard.enter-from-left {
+    /* transform: translateX(-100%); */
+    /* transform:scale(0.5);
+    opacity: 1; */
+    transform: rotateY(180deg);
+    opacity:0.5;
+    transition: transform 0.3s ease, opacity 0.3 ease;
+    
+  } 
+
+
+/* .upperpart {
     align-content: center;
     background: #f0f0f0;
     font-size: 2rem; 
     padding: 3rem;
+} */
+
+.upperpart {
+    align-content: center;
+    background: #f0f0f0;
+    font-size: clamp(4rem, 10vw, 10rem);
+    display: flex;
+    width: 100%;
+    height: 30% ;
+    position: relative ;
+    white-space: nowrap;
+}
+
+.underpart {
+    background: whitesmoke;
+    padding:0 px;
+    font-size: clamp(2rem, 4vw, 4rem);
 }
 
 .no-data {
@@ -77,6 +97,14 @@ body {
     font-size: 24px; 
     font-weight: bold; 
     text-align: center;
+}
+
+.graystatus {
+    opacity:0;
+}
+
+.noneDisplay{
+    display:none;
 }
 
 @media (max-width: 576px){
@@ -101,12 +129,15 @@ a.mobile-hide {
 }
 
 .upperpart {
-
     display: flex;
     justify-content: center;
     align-items: center;
-
     font-size: 1.5rem;
     padding: 1rem;
 }
+
+.underpart {
+    font-size: 1.5rem; 
+}
+
 }  

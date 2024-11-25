@@ -17,6 +17,13 @@ const MainPage = () => {
       <Link to="/word/review">
         <button>復習（1、7、28日前）</button>
       </Link>
+      <Link to="/word/all">
+        <button>ＡＬＬ</button>
+      </Link>
+      <Link to="/word/create">
+        <button>本日のインプット</button>
+      </Link>
+
 
       <h2>メモ帳１</h2>
       <Link to="/memo1">
@@ -25,6 +32,10 @@ const MainPage = () => {
       <Link to="/memo1/review">
         <button>復習（1、7、28日前）</button>
       </Link>
+      <Link to="/memo1/create">
+        <button>本日のインプット</button>
+      </Link>
+
 
       <h2>メモ帳２</h2>
       <Link to="/memo2">
@@ -33,6 +44,15 @@ const MainPage = () => {
       <Link to="/memo2/review">
         <button>復習（1、7、28日前）</button>
       </Link>
+
+      <Link to="/memo2/ALL">
+        <button>ALL</button>
+      </Link>
+
+      <Link to="/memo2/create">
+        <button>本日のインプット</button>
+      </Link>
+
     </div>
   );
 };

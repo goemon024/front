@@ -1,5 +1,5 @@
 .word-and-buttons .memo {
-    flex: 1; /* 残りの幅を使う */
+    flex: 1;  /* 残りの幅を使う */
     white-space: nowrap; /* テキストが長くても改行させない */
     overflow: hidden; /* テキストが長すぎる場合は隠す */
     text-overflow: ellipsis; /* テキストが長すぎる場合は省略記号を表示 */
@@ -10,13 +10,45 @@
     margin-left: 10px;
 }
 
-
   .date {
     flex: 0 0 60; 
     overflow: hidden; /* テキストが長すぎる場合は隠す */
     text-overflow: ellipsis; /* テキストが長すぎる場合は省略記号を表示 */
     padding-left: 10px; /* 少しの間隔を設定 */
 }
+
+.word-and-buttons .memo1 {
+    flex: 0.3; /* 残りの幅を使う */
+    white-space: nowrap; /* テキストが長くても改行させない */
+    overflow: hidden; /* テキストが長すぎる場合は隠す */
+    text-overflow: ellipsis; /* テキストが長すぎる場合は省略記号を表示 */
+    padding-left: 10px; /* 少しの間隔を設定 */
+}
+
+.word-and-buttons .memo2 {
+    flex: 0.7; /* 残りの幅を使う */
+    white-space: nowrap; /* テキストが長くても改行させない */
+    overflow: hidden; /* テキストが長すぎる場合は隠す */
+    text-overflow: ellipsis; /* テキストが長すぎる場合は省略記号を表示 */
+    padding-left: 10px; /* 少しの間隔を設定 */
+}
+
+.word-and-buttons .mean1,.word {
+    flex: 0.12; /* 残りの幅を使う */
+    white-space: nowrap; /* テキストが長くても改行させない */
+    overflow: hidden; /* テキストが長すぎる場合は隠す */
+    text-overflow: ellipsis; /* テキストが長すぎる場合は省略記号を表示 */
+    padding-left: 10px; /* 少しの間隔を設定 */
+}
+
+.word-and-buttons .mean2 {
+    flex: 0.7; /* 残りの幅を使う */
+    white-space: nowrap; /* テキストが長くても改行させない */
+    overflow: hidden; /* テキストが長すぎる場合は隠す */
+    text-overflow: ellipsis; /* テキストが長すぎる場合は省略記号を表示 */
+    padding-left: 10px; /* 少しの間隔を設定 */
+}
+
 
 
   /* #hoverMenu {

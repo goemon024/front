@@ -7,17 +7,18 @@ import { useCookies } from 'react-cookie';
 
 Modal.setAppElement('#root'); // アクセシビリティのため
 
-const DeleteModal = ({ isOpen, onRequestClose, data, dataDisplay }) => {
-  const { memo1Table, setMemo1Table } = useContext(DataContext);
-  const [cookies] = useCookies(['current-token']);  // useCookiesを使う
-  const token = cookies['current-token'];           // useCookiesを使う
+const DeleteModal = ({ isOpen, onRequestClose, data, dataDisplay, setTable, apiUrl }) => {
+  // const { memo1Table, setMemo1Table } = useContext(DataContext);
+  const [cookies] = useCookies(['current-token']); 
+  const token = cookies['current-token'];          
 
   const handleDelete = async () => {
     try {
       console.log(data.id)
       console.log(data.user)
-      console.log(setMemo1Table)
-      await axios.delete(`http://localhost:8000/api_memo1/memo1/${data.id}`,{
+      console.log(`${apiUrl}${data.id}`)
+
+      await axios.delete(`${apiUrl}${data.id}`,{
         headers: {
             'Authorization': `Token ${token}`
         }
@@ -25,9 +26,9 @@ const DeleteModal = ({ isOpen, onRequestClose, data, dataDisplay }) => {
       // setModalIsOpen(false); // モーダルを閉じる
       // setSelectedItem(null); // 選択をリセット
   
-      setMemo1Table(memo1Table => memo1Table.filter(memo => memo.id !== data.id));
+      setTable(prevTable => prevTable.filter(record => record.id !== data.id));
     } catch (error) {
-      console.error("Error display deleting memo:", error);
+      console.error("Error display deleting record:", error);
     }
   };
 

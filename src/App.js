@@ -1,5 +1,7 @@
 
-import React from 'react';
+import React, { useContext } from 'react';
+import { DataContext } from './App';
+
 import './App.css';
 
 import Main from './components/Main';
@@ -13,13 +15,21 @@ import MainPage from './components/Main';
 import Login from './components/Login';
 
 import WordList from './components/WordList';
-import WordReview from './components/WordReview';
+import WordCreate from './components/WordCreate';
+
+// import WordReview from './components/WordReview';
 import Memo1List from './components/Memo1List';
-import Memo1Review from './components/Memo1Review';
+// import Memo1Review from './components/Memo1Review';
+import Memo1Create from './components/Memo1Create';
 import Memo2List from './components/Memo2List';
-import Memo2Review from './components/Memo2Review';
+// import Memo2Review from './components/Memo2Review';
+
+import Memo2Create from './components/Memo2Create';
+import WordMemoReview from './components/WordMemoReview';
 
 import { DataProvider } from './context/DataContext';
+
+
 // import Navbar from "./components/Navbar";  
 // import DataProvider from './context/DataContext';
 
@@ -37,21 +47,29 @@ const theme = createTheme({
 
 function App() {
   return (
-    <MuiThemeProvider theme={theme}>
+    // <MuiThemeProvider theme={theme}>
     <DataProvider>
       <Routes>
         <Route path="/main" element={<MainPage />} />
+
         <Route path="/word" element={<WordList />} />
-        <Route path="/word/review" element={<WordReview />} />
+        <Route path="/word/review" element={<WordMemoReview selectedTable="word" isAll={true}/>} />
+        <Route path="/word/all" element={<WordMemoReview selectedTable="word" isAll={true}/>} />
+        <Route path="/word/create" element={<WordCreate />} />
+
         <Route path="/memo1" element={<Memo1List />} />
-        <Route path="/memo1/review" element={<Memo1Review />} />
+        <Route path="/memo1/create" element={<Memo1Create />} />
+        <Route path="/memo1/review" element={<WordMemoReview selectedTable="memo1" isAll={true}/>} />
+
         <Route path="/memo2" element={<Memo2List />} />
-        <Route path="/memo2/review" element={<Memo2Review />} />
+        <Route path="/memo2/review" element={<WordMemoReview selectedTable="memo2" isAll={false}/>} />
+        <Route path="/memo2/all" element={<WordMemoReview selectedTable="memo2" isAll={true}/>} />
+        <Route path="/memo2/create" element={<Memo2Create />} />
 
         <Route path="/" element={<Login />} />
       </Routes>
     </DataProvider>
-    </MuiThemeProvider>
+    // </MuiThemeProvider>
   );
 }
 

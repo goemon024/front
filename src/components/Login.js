@@ -9,12 +9,23 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import CircularProgress from "@mui/material/CircularProgress";
 import { styled } from "@mui/system";  // styled or makeStyles
+// import { makeStyles } from '@mui/styles';
+
 // import { backdropClasses } from "@mui/material";
 
 import { START_FETCH,FETCH_SUCCESS,ERROR_CATCHED,INPUT_EDIT_LOG,INPUT_EDIT_REG,TOGGLE_MODE } from "./actionTypes"; 
 
 
 const useStyles = styled((theme)=>({
+    // textfield: {
+    //     input: { color: '#999999' }, // 入力文字の色とサイズ
+    //     label: { color: 'rgba(255, 255, 255, 0.7)' }, // ラベルの色
+    //     '& .MuiOutlinedInput-root': {
+    //         '& fieldset': {
+    //             borderColor: 'gray', // 非アクティブ時の枠の色
+    //         },},
+    // }, 
+
     paper:{
         marginTop: theme.spacing(8),
         display: 'flex',
@@ -176,6 +187,16 @@ const Login = (props) => {
         dispatch({type:TOGGLE_MODE})
     }
 
+    const textFieldStyle = {
+            input: { color: '#999999' }, // 入力文字の色とサイズ
+            label: { color: 'rgba(255, 255, 255, 0.7)' }, // ラベルの色
+            '& .MuiOutlinedInput-root': {
+                '& fieldset': {
+                  borderColor: 'gray', // 非アクティブ時の枠の色
+                },
+              },
+          }
+
   return (
     <>
 
@@ -186,7 +207,8 @@ const Login = (props) => {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    height: '100vh'
+    height: '100vh',
+    color: '#d0d0d0',
     }}>
     {/* material-uiのsign-inを参照 */}
 
@@ -212,14 +234,18 @@ const Login = (props) => {
             name = "username"
             value={state.credentialsLog.username}
             onChange={inputChangedLog()}
-            autoFocus/>:
+            autoFocus
+            sx={textFieldStyle}
+            
+            />:
             <TextField
             variant="outlined" margin="normal"
             fullWidth label = "username"
             name = "username"
             value={state.credentialsReg.username}
             onChange={inputChangedReg()}
-            autoFocus/>
+            autoFocus
+            sx={textFieldStyle}/>
         }
 
         {state.isLoginView ? 
@@ -229,14 +255,16 @@ const Login = (props) => {
             name = "password"
             type = "password"
             value={state.credentialsLog.password}
-            onChange={inputChangedLog()}/>:
+            onChange={inputChangedLog()}
+            sx={textFieldStyle}/>:
           <TextField
             variant="outlined" margin="normal"
             fullWidth label = "Password"
             name = "password"
             type = "password"
             value={state.credentialsReg.password}
-            onChange={inputChangedReg()}/>
+            onChange={inputChangedReg()}
+            sx={textFieldStyle}/>
         }
         <span className={classes.spanError}>{state.error}</span>
 
