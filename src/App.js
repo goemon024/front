@@ -53,8 +53,10 @@ function App() {
         <Route path="/main" element={<MainPage />} />
 
         <Route path="/word" element={<WordList />} />
-        <Route path="/word/review" element={<WordMemoReview selectedTable="word" isAll={true}/>} />
-        <Route path="/word/all" element={<WordMemoReview selectedTable="word" isAll={true}/>} />
+        <Route path="/word/review" element={<WordMemoReview selectedTable="word" isAll={true} isCalendar={false}/>} />
+        <Route path="/word/all" element={<WordMemoReview selectedTable="word" isAll={true} isCalendar={false}/>} />
+        <Route path="/word/calendar" element={<WordMemoReview selectedTable="word" isAll={false} isCalendar={true} startDate={null} endDate={null}/>} />
+
         <Route path="/word/create" element={<WordCreate />} />
 
         <Route path="/memo1" element={<Memo1List />} />

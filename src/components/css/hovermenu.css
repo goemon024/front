@@ -57,11 +57,14 @@
     color: white;
     overflow: hidden;
     transition: width 0.3s ease;
+    z-index:10;
   }
 
   #hoverMenu a {
     margin-bottom: 20px ;
     display:block;
+    color:rgba(15, 115, 230, 1);
+    font-weight: bold;
   } 
 
   @media (max-width: 576px) {

@@ -59,7 +59,7 @@ const WordList = () => {
     <div>
     <div class="jumbotron jumbotron-fluid">
     <div class="container">
-      <h1 class="display-4">英単語リスト</h1>
+      <h1 class="display-4" style={{marginTop:'20px'}}>英単語リスト</h1>
     </div>
    </div>
 

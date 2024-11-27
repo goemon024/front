@@ -1,4 +1,6 @@
-import React, { useReducer } from "react";
+import React, { useReducer,useContext } from "react";
+import { DataContext } from '../context/DataContext';
+
 import { withCookies } from "react-cookie";
 import axios from "axios";
 import Avatar from "@mui/material/Avatar";
@@ -10,7 +12,6 @@ import Container from "@mui/material/Container";
 import CircularProgress from "@mui/material/CircularProgress";
 import { styled } from "@mui/system";  // styled or makeStyles
 // import { makeStyles } from '@mui/styles';
-
 // import { backdropClasses } from "@mui/material";
 
 import { START_FETCH,FETCH_SUCCESS,ERROR_CATCHED,INPUT_EDIT_LOG,INPUT_EDIT_REG,TOGGLE_MODE } from "./actionTypes"; 
@@ -123,6 +124,8 @@ const loginReducer = (state, action)=>{
 
 const Login = (props) => {
     // 現状のpropsは空のオブジェクトだが、後から追加する場合を想定して引数にprops。
+    const { setUserName } = useContext(DataContext);
+
     const classes = useStyles();
     const [state,dispatch] = useReducer(loginReducer,initialState);
 
@@ -160,9 +163,15 @@ const Login = (props) => {
                         'X-CSRFToken':document.cookie.match(/csrftoken=([^;]*)/)?.[1]
                 }})
                 
+                // console.log("XXXXXXXXXXXXX")
+                // setUserName(res.data.username)
+                // console.log(res.data.username)
+
                 props.cookies.set('current-token',res.data.token)
+                props.cookies.set("username", res.data.username, { path: "/" });
                 res.data.token ? window.location.href = "/main" : window.location.href="/"
                 dispatch({type: FETCH_SUCCESS})
+                
           } catch(error) {
             console.error("Error during authentication:", error);
             dispatch({type:ERROR_CATCHED})

@@ -1,8 +1,9 @@
-import React,{ useContext,useState,useEffect } from 'react';
+import React,{ useContext } from 'react';
 import { DataContext } from '../context/DataContext';
 
-// import axios from 'axios'
+import { useLocation } from "react-router-dom";
 
+// import axios from 'axios'
 
 // import { useCookies } from 'react-cookie';          // useCookiesを使う
 import dayjs from 'dayjs';
@@ -15,10 +16,10 @@ import HoverMenu from './HoverMenu';
 // import './css/list.css';
 
 
-const WordMemoReview = ({selectedTable, isAll}) => {
+const WordMemoReview = ({selectedTable, isAll, isCalendar}) => {
   const { loading } = useContext(DataContext);
-
   const { wordTable, memo1Table, memo2Table } = useContext(DataContext);
+  const location = useLocation();
 
   const tableData = {
     word: wordTable,
@@ -29,6 +30,11 @@ const WordMemoReview = ({selectedTable, isAll}) => {
   if (loading) {
     return <p>Loading...</p>;
 }
+
+  // url navigatorからのstartDateとendDateの受取
+  const queryParams = new URLSearchParams(location.search);
+  const startDate = queryParams.get("startDate");
+  const endDate = queryParams.get("endDate");
 
   // const [state, setState] = useState("card")         // all か flashcardの表示状態設定
   // const [tableData, setTableData] = useState([]);   // テーブルデータの取得状態
@@ -42,7 +48,15 @@ const WordMemoReview = ({selectedTable, isAll}) => {
   // const filteredData = memo1Table.filter(data => 
   //   [today,agoDay1,agoDay7,agoDay28].includes(data.reg_date));
 
-  const filteredData = isAll === true ? tableData
+  console.log(startDate,endDate)
+
+  const filteredData = isCalendar === true ?
+     tableData.filter(data =>{
+        const regDate = dayjs(data.reg_date).format('YYYY-MM-DD'); // 日付をフォーマット
+        return startDate && endDate
+          ? regDate >= startDate && regDate <= endDate // 開始日と終了日の範囲内
+          : true; })
+   : isAll === true ? tableData
    : tableData.filter(data =>
       [today, agoDay1, agoDay7, agoDay28].includes(dayjs(data.reg_date).format('YYYY-MM-DD'))
     );

@@ -26,6 +26,7 @@ export const DataProvider = ({ children }) => {
     const [wordTable, setWordTable] = useState([]);
     const [memo1Table, setMemo1Table] = useState([]);
     const [memo2Table, setMemo2Table] = useState([]);
+    const [userName, setUserName] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -93,6 +94,8 @@ export const DataProvider = ({ children }) => {
             memo2Table,
             setMemo2Table,
             loading,
+            userName,
+            setUserName,
             // updateTable1
         }}>
             {children}
