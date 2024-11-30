@@ -28,6 +28,7 @@ import Memo2Create from './components/Memo2Create';
 import WordMemoReview from './components/WordMemoReview';
 
 import { DataProvider } from './context/DataContext';
+import PrivateRoute from './context/PrivateRoute';
 
 
 // import Navbar from "./components/Navbar";  
@@ -50,25 +51,34 @@ function App() {
     // <MuiThemeProvider theme={theme}>
     <DataProvider>
       <Routes>
-        <Route path="/main" element={<MainPage />} />
+      <Route path="/" element={<Login />} />
+      <Route
+          path="/*"
+          element={
+            <PrivateRoute>
+              <Routes>
+              <Route path="/main" element={<MainPage />} />
 
-        <Route path="/word" element={<WordList />} />
-        <Route path="/word/review" element={<WordMemoReview selectedTable="word" isAll={true} isCalendar={false}/>} />
-        <Route path="/word/all" element={<WordMemoReview selectedTable="word" isAll={true} isCalendar={false}/>} />
-        <Route path="/word/calendar" element={<WordMemoReview selectedTable="word" isAll={false} isCalendar={true} startDate={null} endDate={null}/>} />
+              <Route path="/word" element={<WordList />} />
+              <Route path="/word/review" element={<WordMemoReview selectedTable="word" isAll={true} isCalendar={false}/>} />
+              <Route path="/word/all" element={<WordMemoReview selectedTable="word" isAll={true} isCalendar={false}/>} />
+              <Route path="/word/calendar" element={<WordMemoReview selectedTable="word" isAll={false} isCalendar={true} startDate={null} endDate={null}/>} />
+              <Route path="/word/create" element={<WordCreate />} />
 
-        <Route path="/word/create" element={<WordCreate />} />
+              <Route path="/memo1" element={<Memo1List />} />
+              <Route path="/memo1/create" element={<Memo1Create />} />
+              <Route path="/memo1/review" element={<WordMemoReview selectedTable="memo1" isAll={true}/>} />
+              <Route path="/memo1/calendar" element={<WordMemoReview selectedTable="memo1" isAll={false} isCalendar={true} startDate={null} endDate={null}/>} />
 
-        <Route path="/memo1" element={<Memo1List />} />
-        <Route path="/memo1/create" element={<Memo1Create />} />
-        <Route path="/memo1/review" element={<WordMemoReview selectedTable="memo1" isAll={true}/>} />
+              <Route path="/memo2" element={<Memo2List />} />
+              <Route path="/memo2/review" element={<WordMemoReview selectedTable="memo2" isAll={false}/>} />
+              <Route path="/memo2/all" element={<WordMemoReview selectedTable="memo2" isAll={true}/>} />
+              <Route path="/memo2/calendar" element={<WordMemoReview selectedTable="memo2" isAll={false} isCalendar={true} startDate={null} endDate={null}/>} />
+              <Route path="/memo2/create" element={<Memo2Create />} />
 
-        <Route path="/memo2" element={<Memo2List />} />
-        <Route path="/memo2/review" element={<WordMemoReview selectedTable="memo2" isAll={false}/>} />
-        <Route path="/memo2/all" element={<WordMemoReview selectedTable="memo2" isAll={true}/>} />
-        <Route path="/memo2/create" element={<Memo2Create />} />
-
-        <Route path="/" element={<Login />} />
+              </Routes>
+            </PrivateRoute>
+          }></Route>
       </Routes>
     </DataProvider>
     // </MuiThemeProvider>

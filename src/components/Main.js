@@ -4,7 +4,8 @@ import { DataContext } from '../context/DataContext';
 import dayjs from "dayjs";
 
 import { CookiesProvider, withCookies } from 'react-cookie';
-import './css/main.css';
+import styles from './css/main.module.css';
+import axios from 'axios';
 
 const MainPage = (props) => {
   const { memo1Table, loading, userName } = useContext(DataContext);
@@ -29,15 +30,31 @@ const MainPage = (props) => {
   const handleSubmit2 = (event) => {
     event.preventDefault();
     console.log(startDate2,endDate2)
-    navigate(`/word/calendar?startDate=${startDate2}&endDate=${endDate2}`);
+    navigate(`/memo1/calendar?startDate=${startDate2}&endDate=${endDate2}`);
   };
 
   const handleSubmit3 = (event) => {
     event.preventDefault();
     console.log(startDate3,endDate3)
-    navigate(`/word/calendar?startDate=${startDate3}&endDate=${endDate3}`);
+    navigate(`/memo2/calendar?startDate=${startDate3}&endDate=${endDate3}`);
   };
 
+  const handleLogout = async () => {
+    try {
+      await axios.post('http://localhost:8000/api/logout/', null, {
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': document.cookie.match(/csrftoken=([^;]*)/)?.[1], // CSRFトークンを取得
+        },
+        withCredentials: true, // クッキーを送信
+      });
+      localStorage.removeItem('current-token');
+      localStorage.removeItem('username');
+      window.location.href = '/';
+    } catch (error) {
+      console.error('ログアウトエラー:', error);
+    }
+  };
 
   return (
 
@@ -50,41 +67,75 @@ const MainPage = (props) => {
       height: '100vh',
       color: '#d0d0d0',
       }}>
-<div className="main-container">
-<div className = "menu-container">
+<div className={styles['main-container']}>
+<div className = {styles["menu-container"]}>
         {/* <button class="media-large btn btn-secondary mb-2"  style={{marginTop:'5em'}}>チュートリアル</button> */}
         <Link to="/word">
-                <button className="media-large btn btn-secondary mb-2" style={{marginTop:'3em'}}>英単語帳編集</button>
+                <button className="media-large btn btn-secondary mb-2" style={{marginTop:'1rem'}}>英単語帳編集</button>
         </Link>
         <Link to="/memo1">
-                <button className="media-large btn btn-secondary mb-2" style={{marginTop:'3em'}}>メモ帳１編集</button>
+                <button className="media-large btn btn-secondary mb-2" style={{marginTop:'1rem'}}>メモ帳１編集</button>
         </Link>
         <Link to="/memo2">
-                <button className="media-large btn btn-secondary mb-2" style={{marginTop:'3em'}}>メモ帳２編集</button>
+                <button className="media-large btn btn-secondary mb-2" style={{marginTop:'1rem'}}>メモ帳２編集</button>
         </Link>
 
 
-        <div style={{border: '2px solid #8FBC8F', borderRadius: '10px', padding:'5%'}}>
+        <div style={{border: '2px solid #8FBC8F', borderRadius: '10px', padding:'5%',
+          display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '1em' }}>
         <form onSubmit={handleSubmit1}>
-          <label htmlFor="start_date">開始日:</label>
-          <input
-            type="date"
-            id="start_date"
-            value={startDate1}
-            onChange={(e) => setStartDate1(e.target.value)}
+          <p style={{fontSize:'20px',marginBottom:'10px',alignSelf: 'flex-start'}}>英単語ドリル</p>
+          <div style={{display: 'flex', justifyContent: 'flex-end',gap:'1em', width:'100%'}}>
+          <label htmlFor="start_date" style={{justifyContent:'flex-start'}}>From:</label>
+          <input type="date" id="start_date" value={startDate1} onChange={(e) => setStartDate1(e.target.value)}
           />
+          </div>
           <br />
-          <label htmlFor="end_date">終了日:</label>
-          <input
-            type="date"
-            id="end_date"
-            value={endDate1}
-            onChange={(e) => setEndDate1(e.target.value)}
-          />
+          <div style={{display: 'flex', justifyContent: 'flex-end',gap:'1em', width:'100%'}}>
+          <label htmlFor="end_date">to:</label>
+          <input type="date" id="end_date" value={endDate1} onChange={(e) => setEndDate1(e.target.value)}
+          /></div>
           <br />
-          <button type="submit">送信</button>
+          <button type="submit" class='btn btn-success block' style={{width:'75%', alignSelf:'right'}}>開始</button>
         </form>
+        </div>
 
+        <div style={{border: '2px solid #339fff', borderRadius: '10px', padding:'5%',
+          display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '1em'}}>
+        <form onSubmit={handleSubmit2}>
+        <p style={{fontSize:'20px',marginBottom:'10px',alignSelf: 'flex-start'}}>メモ帳１ドリル</p>
+          <div style={{display: 'flex', justifyContent: 'flex-end',gap:'1em', width:'100%'}}>
+          <label htmlFor="start_date" style={{justifyContent:'flex-start'}}>From:</label>
+          <input type="date" id="start_date" value={startDate2} onChange={(e) => setStartDate2(e.target.value)}
+          />
+          </div>
+          <br />
+          <div style={{display: 'flex', justifyContent: 'flex-end',gap:'1em', width:'100%'}}>
+          <label htmlFor="end_date">to:</label>
+          <input type="date" id="end_date" value={endDate2} onChange={(e) => setEndDate2(e.target.value)}
+          /></div>
+          <br />
+          <button type="submit" class='btn btn-primary block' style={{width:'75%', alignSelf:'right'}}>開始</button>
+        </form>
+        </div>
+
+        <div style={{border: '2px solid #55d0ff', borderRadius: '10px', padding:'5%',
+          display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '1em'}}>
+        <form onSubmit={handleSubmit3}>
+        <p style={{fontSize:'20px',marginBottom:'10px',alignSelf: 'flex-start'}}>メモ帳２ドリル</p>
+          <div style={{display: 'flex', justifyContent: 'flex-end',gap:'1em', width:'100%'}}>
+          <label htmlFor="start_date" style={{justifyContent:'flex-start'}}>From:</label>
+          <input type="date" id="start_date" value={startDate3} onChange={(e) => setStartDate3(e.target.value)}
+          />
+          </div>
+          <br />
+          <div style={{display: 'flex', justifyContent: 'flex-end',gap:'1em', width:'100%'}}>
+          <label htmlFor="end_date">to:</label>
+          <input type="date" id="end_date" value={endDate3} onChange={(e) => setEndDate3(e.target.value)}
+          /></div>
+          <br />
+          <button type="submit" class='btn btn-light block' style={{width:'75%', alignSelf:'right'}}>開始</button>
+        </form>
 
         {/* <form method="get" action="{% url 'wlist:word_drill' %}" >
             <p class="block">英単語ドリル</p>
@@ -104,13 +155,13 @@ const MainPage = (props) => {
 
 
 
-<div className="content-container">
-        <div className="container" style={{display: "block",margin:"20px"}}>
+<div className={styles["content-container"]}>
+        <div className={styles["container"]} style={{display: "block",margin:"20px"}}>
             <h2>エビングハウス 英単語帳＆メモ帳</h2>
             <p>{props.cookies.get("username")} さん</p>    
         </div>
-        <div className="container" style={{display: "flex",margin:"20px"}}>
-            <div id="menu1" style={{border:"8px solid greenyellow",  backgroundColor:"rgba(0,100,100,0.2)"}}>
+        <div className={styles["container"]} style={{display: "flex",margin:"20px"}}>
+            <div id={styles["menu1"]} style={{border:"8px solid greenyellow",  backgroundColor:"rgba(0,100,100,0.2)"}}>
                 <h3>英単語帳</h3>
                 <Link to="/word/create">
                 <button className="btn btn-success mb-2" >今日のインプット</button>
@@ -123,7 +174,7 @@ const MainPage = (props) => {
                 </Link>
             </div>
 
-            <div id="menu2" style={{border:"8px solid #339fff",  backgroundColor:"rgba(50,100,150,0.2)"}}>
+            <div id={styles["menu2"]} style={{border:"8px solid #339fff",  backgroundColor:"rgba(50,100,150,0.2)"}}>
                 <h3>メモ帳１</h3>
                 <Link to="/memo1/create">
                 <button className="btn btn-primary mb-2" >今日のインプット</button>
@@ -137,7 +188,7 @@ const MainPage = (props) => {
             </div>
             
 
-            <div id="menu1" style={{border:'8px solid #55d0ff', backgroundColor: 'rgba(60,100,60,0.2)'}}>
+            <div id={styles["menu1"]} style={{border:'8px solid #55d0ff', backgroundColor: 'rgba(60,100,60,0.2)'}}>
                 <h3>メモ帳２</h3>
                 <Link to="/memo2/create">
                 <button className="btn btn-light mb-2" >今日のインプット</button>
@@ -149,8 +200,10 @@ const MainPage = (props) => {
                 <button className="btn btn-light mb-2" >ＡＬＬ</button>
                 </Link>
             </div>
-
-            </div>  </div></div>    </div>
+            </div>
+            <button onClick={handleLogout} style={{margin:'150px 20px',color: 'rgba(175,175,175,1)',border: 'white',borderRadius: '3px',cursor: 'pointer',
+            textDecoration: 'underline',fontSize: '20px',}} aria-label="ログアウト">ログアウト</button>
+            </div></div>    </div>
   );
 };
 

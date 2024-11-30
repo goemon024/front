@@ -77,7 +77,7 @@ const WordCreate = () => {
       <form
         onSubmit={handleCreate}
         style={{ marginBottom: '50px', display: 'flex', flexDirection: 'column', 
-            alignItems: 'flex-start', width: '300px'}}>
+            alignItems: 'flex-start', width: '400px'}}>
         <label style={{ marginBottom: '10px' }}>New Word:</label>
         <textarea
           id="word"
@@ -86,7 +86,7 @@ const WordCreate = () => {
           rows="1"
           column="100"
           onChange={handleInputChange1}
-          style={{ padding: '5px', fontSize: '16px', marginBottom: '10px', resize: 'vertical' }}
+          style={{ padding: '5px', fontSize: '16px', width:'100%', marginBottom: '10px', resize: 'vertical' }}
           placeholder="new word"
         ></textarea>
 

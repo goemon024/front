@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './css/hovermenu.css';
+import axios from 'axios';
 
 const HoverMenu = ({links}) => {
   const [menuWidth, setMenuWidth] = useState(0);
@@ -34,6 +35,7 @@ const HoverMenu = ({links}) => {
 
   // }, []);
 
+
   const handleResize = () => {
     setIsMobile(window.innerWidth <= 567);
   };
@@ -50,8 +52,26 @@ const HoverMenu = ({links}) => {
   };
 }, [isMobile]);
 
-  
 
+
+  const handleLogout = async () => {
+    try {
+      await axios.post('http://localhost:8000/api/logout/', null, {
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': document.cookie.match(/csrftoken=([^;]*)/)?.[1], // CSRFトークンを取得
+        },
+        withCredentials: true, // クッキーを送信
+      });
+      
+      localStorage.removeItem('current-token');
+      localStorage.removeItem('username');
+      window.location.href = '/';
+    } catch (error) {
+      console.error('ログアウトエラー:', error);
+    }
+  };
+  
   return (
     <div
       id="hoverMenu"
@@ -70,7 +90,13 @@ const HoverMenu = ({links}) => {
 
       <a href="/main" >TOP</a>
       <a href={links.href} >{links.text}</a>
-      <a href="/" class="mobile-hide">LOG OUT</a>
+
+      <button className='LogoutButton' onClick={handleLogout} style={{
+        backgroundColor: 'transparent',
+        color: 'rgba(15, 115, 230, 1)',
+        border: 'none',
+        cursor: 'pointer',
+      }}aria-label="ログアウト">LOG OUT</button>
 
     </div>
   );

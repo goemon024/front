@@ -12,7 +12,7 @@
 
 // src/context/DataContext.js
 
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect,useContext } from 'react';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';     
 
@@ -28,6 +28,8 @@ export const DataProvider = ({ children }) => {
     const [memo2Table, setMemo2Table] = useState([]);
     const [userName, setUserName] = useState(null);
     const [loading, setLoading] = useState(true);
+
+    const [isAuthenticated, setIsAuthenticated] = useState(false); 
 
     useEffect(() => {
         const fetchData = async () => {
@@ -96,11 +98,17 @@ export const DataProvider = ({ children }) => {
             loading,
             userName,
             setUserName,
+            isAuthenticated,
+            setIsAuthenticated,
             // updateTable1
         }}>
             {children}
         </DataContext.Provider>
     );
+};
+
+export const useDataContext = () => {
+    return useContext(DataContext);
 };
 
 

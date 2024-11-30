@@ -1,5 +1,10 @@
 import React, { useReducer,useContext } from "react";
-import { DataContext } from '../context/DataContext';
+// import { DataContext } from '../context/DataContext';
+
+
+import { useDataContext } from '../context/DataContext';
+import { Navigate, useNavigate } from 'react-router-dom';
+
 
 import { withCookies } from "react-cookie";
 import axios from "axios";
@@ -124,7 +129,9 @@ const loginReducer = (state, action)=>{
 
 const Login = (props) => {
     // 現状のpropsは空のオブジェクトだが、後から追加する場合を想定して引数にprops。
-    const { setUserName } = useContext(DataContext);
+    const { setIsAuthenticated,setUserName } = useDataContext();
+    const navigate = useNavigate();
+    // const { setUserName } = useContext();
 
     const classes = useStyles();
     const [state,dispatch] = useReducer(loginReducer,initialState);
@@ -169,8 +176,15 @@ const Login = (props) => {
 
                 props.cookies.set('current-token',res.data.token)
                 props.cookies.set("username", res.data.username, { path: "/" });
+
+                localStorage.setItem('current-token', res.data.token);
+                localStorage.setItem('username', res.data.username);
+
+                // setIsAuthenticated(true)
+                // res.data.token ? navigate("/main") : navigate("/")
                 res.data.token ? window.location.href = "/main" : window.location.href="/"
                 dispatch({type: FETCH_SUCCESS})
+
                 
           } catch(error) {
             console.error("Error during authentication:", error);
