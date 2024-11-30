@@ -80,6 +80,15 @@ body, html {
         display:none;
 }
 
+.logout{
+    margin: 150px 20px;
+    color: rgba(175,175,175,1);
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 20px;
+    display: inline-block;
+}
+
 @media (max-width: 768px) {
     .content-container {
         overflow-y: auto;
@@ -92,6 +101,7 @@ body, html {
 
     #menu1,#menu2{
         width:40vw;
+        height:50vh;
         min-width:200px;
     }
 }
@@ -126,4 +136,9 @@ body, html {
     #menu1,#menu2{
         width:75vw;
     }
+
+    .logout{
+        margin: 20px 20px;
+    }
+
 }

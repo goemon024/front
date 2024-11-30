@@ -1,10 +1,4 @@
-import React, { useReducer,useContext } from "react";
-// import { DataContext } from '../context/DataContext';
-
-
-import { useDataContext } from '../context/DataContext';
-import { Navigate, useNavigate } from 'react-router-dom';
-
+import React, { useReducer } from "react";
 
 import { withCookies } from "react-cookie";
 import axios from "axios";
@@ -129,9 +123,6 @@ const loginReducer = (state, action)=>{
 
 const Login = (props) => {
     // 現状のpropsは空のオブジェクトだが、後から追加する場合を想定して引数にprops。
-    const { setIsAuthenticated,setUserName } = useDataContext();
-    const navigate = useNavigate();
-    // const { setUserName } = useContext();
 
     const classes = useStyles();
     const [state,dispatch] = useReducer(loginReducer,initialState);
@@ -169,10 +160,6 @@ const Login = (props) => {
                 headers:{'content-type':'application/json',
                         'X-CSRFToken':document.cookie.match(/csrftoken=([^;]*)/)?.[1]
                 }})
-                
-                // console.log("XXXXXXXXXXXXX")
-                // setUserName(res.data.username)
-                // console.log(res.data.username)
 
                 props.cookies.set('current-token',res.data.token)
                 props.cookies.set("username", res.data.username, { path: "/" });
@@ -180,8 +167,6 @@ const Login = (props) => {
                 localStorage.setItem('current-token', res.data.token);
                 localStorage.setItem('username', res.data.username);
 
-                // setIsAuthenticated(true)
-                // res.data.token ? navigate("/main") : navigate("/")
                 res.data.token ? window.location.href = "/main" : window.location.href="/"
                 dispatch({type: FETCH_SUCCESS})
 
@@ -193,7 +178,7 @@ const Login = (props) => {
         }else{
             try{
                 dispatch({type:START_FETCH})
-                await axios.post('http://localhost:8000/api/user/create/', state.credentialsReg,{
+                await axios.post('http://localhost:8000/api_user/create/', state.credentialsReg,{
                 headers:{'content-type':'application/json',
                     'X-CSRFToken':document.cookie.match(/csrftoken=([^;]*)/)?.[1]
                 }})

@@ -1,18 +1,4 @@
-// import {withCookies} from 'react-cookie'
-
-// const ApiContextProvider = (props) => {
-//   const token = props.cookies.get('current-token')
-//   const [profile,setProfile]=useState([])
-//   const [profiles,setProfiles] = useState([])
-//   const [editedProfile,setEditedProfile] = useState({id:'',nickName:''})
-//   const [askList, setAskList] =useState([])
-//   const [askListFull, setAskListFull]=useState([])
-//   const [inbox,setInbox]= useState([])
-//   const [cover, setCover] = useState([]) // 画像情報格納
-
-// src/context/DataContext.js
-
-import React, { createContext, useState, useEffect,useContext } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';     
 
@@ -28,8 +14,6 @@ export const DataProvider = ({ children }) => {
     const [memo2Table, setMemo2Table] = useState([]);
     const [userName, setUserName] = useState(null);
     const [loading, setLoading] = useState(true);
-
-    const [isAuthenticated, setIsAuthenticated] = useState(false); 
 
     useEffect(() => {
         const fetchData = async () => {
@@ -70,23 +54,6 @@ export const DataProvider = ({ children }) => {
     }, []);
 
 
-
-
-    
-    // table1を更新する関数
-    // const updateTable1 = async (newData) => {
-    //     try {
-    //         const response = await axios.put(`/api/table1/${newData.id}/`, newData);
-    //         setTable1((prevTable1) =>
-    //             prevTable1.map((item) =>
-    //                 item.id === newData.id ? response.data : item
-    //             )
-    //         );
-    //     } catch (error) {
-    //         console.error('データの更新に失敗しました:', error);
-    //     }
-    // };
-
     return (
         <DataContext.Provider value={{ 
             wordTable,
@@ -98,8 +65,6 @@ export const DataProvider = ({ children }) => {
             loading,
             userName,
             setUserName,
-            isAuthenticated,
-            setIsAuthenticated,
             // updateTable1
         }}>
             {children}
@@ -107,9 +72,6 @@ export const DataProvider = ({ children }) => {
     );
 };
 
-export const useDataContext = () => {
-    return useContext(DataContext);
-};
-
-
-
+// export const useDataContext = () => {
+//     return useContext(DataContext);
+// };

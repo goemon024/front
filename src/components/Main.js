@@ -201,8 +201,7 @@ const MainPage = (props) => {
                 </Link>
             </div>
             </div>
-            <button onClick={handleLogout} style={{margin:'150px 20px',color: 'rgba(175,175,175,1)',border: 'white',borderRadius: '3px',cursor: 'pointer',
-            textDecoration: 'underline',fontSize: '20px',}} aria-label="ログアウト">ログアウト</button>
+            <button className={styles['logout']} onClick={handleLogout} aria-label="ログアウト">ログアウト</button>
             </div></div>    </div>
   );
 };

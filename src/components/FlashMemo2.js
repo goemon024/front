@@ -43,9 +43,10 @@ const FlashCard = ({ cardData })  => {
         {cardData.map((card, index) => (
           <div key={index} className={`flashcard ${index === currentIndex ? 'active' : 'hidden'}`}
           style = {{display:'block',width:'100%',height:'100%'}}>
-          <div className={'upperpart'}  onClick={slideToNextCard1} style = {{width:'100%',height:'60%',alignContent:'center'}}>{card.memo1}</div>
+          <div className={'upperpart'}  onClick={slideToNextCard1} style = {{width:'100%',height:'60%',alignContent:'center',fontSize:'5rem', justifyContent:'center',
+              alignItems: 'center'}}>{card.memo1}</div>
           <div className={paging===0 ? 'underpart graystatus' : 'underpart'}
-          onClick={slideToNextCard2} style = {{width:'100%',height:'35%',alignContent:'center'}}>{card.memo2}
+          onClick={slideToNextCard2} style = {{width:'100%',height:'35%',alignContent:'center',fontSize:'3rem'}}>{card.memo2}
           </div>
           </div>
         ))}
@@ -61,3 +62,5 @@ const FlashCard = ({ cardData })  => {
 }
 
 export default FlashCard
+
+
