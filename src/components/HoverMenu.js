@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './css/hovermenu.css';
 import axios from 'axios';
+import API_URL from '../config';
 
 const HoverMenu = ({links}) => {
   const [menuWidth, setMenuWidth] = useState(0);
@@ -56,7 +57,7 @@ const HoverMenu = ({links}) => {
 
   const handleLogout = async () => {
     try {
-      await axios.post('http://localhost:8000/api/logout/', null, {
+      await axios.post(`${API_URL}/api/logout/`, null, {
         headers: {
           'Content-Type': 'application/json',
           'X-CSRFToken': document.cookie.match(/csrftoken=([^;]*)/)?.[1], // CSRFトークンを取得
