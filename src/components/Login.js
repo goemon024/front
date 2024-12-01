@@ -13,6 +13,8 @@ import { styled } from "@mui/system";  // styled or makeStyles
 // import { makeStyles } from '@mui/styles';
 // import { backdropClasses } from "@mui/material";
 
+import API_URL from '../config';
+
 import { START_FETCH,FETCH_SUCCESS,ERROR_CATCHED,INPUT_EDIT_LOG,INPUT_EDIT_REG,TOGGLE_MODE } from "./actionTypes"; 
 
 
@@ -156,7 +158,7 @@ const Login = (props) => {
         if(state.isLoginView){
           try{
                 dispatch({type:START_FETCH})
-                const res = await axios.post('http://localhost:8000/authen/',state.credentialsLog,{
+                const res = await axios.post(`${API_URL}/authen/`,state.credentialsLog,{
                 headers:{'content-type':'application/json',
                         'X-CSRFToken':document.cookie.match(/csrftoken=([^;]*)/)?.[1]
                 }})
@@ -178,7 +180,7 @@ const Login = (props) => {
         }else{
             try{
                 dispatch({type:START_FETCH})
-                await axios.post('http://localhost:8000/api_user/create/', state.credentialsReg,{
+                await axios.post(`${API_URL}/api_user/create/`, state.credentialsReg,{
                 headers:{'content-type':'application/json',
                     'X-CSRFToken':document.cookie.match(/csrftoken=([^;]*)/)?.[1]
                 }})

@@ -10,6 +10,7 @@ import dayjs from 'dayjs';
 import './css/create.css';
 // import './css/list.css';
 import HoverMenu from './HoverMenu';
+import API_URL from '../config';
 
 const Memo1Create = () => {
     const { memo1Table, setMemo1Table } = useContext(DataContext);
@@ -49,7 +50,7 @@ const Memo1Create = () => {
         e.preventDefault();
         if (!formData) return;
         try {
-                const response = await axios.post('http://localhost:8000/api_memo1/memo1/',{
+                const response = await axios.post(`${API_URL}/api_memo1/memo1/`,{
                     memo: formData,
                     reg_date: today,
                 },{

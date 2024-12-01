@@ -13,8 +13,7 @@ import './css/list.css';
 import HoverMenu from './HoverMenu';
 import DeleteModal from './DeleteModal';
 import UpdateModalMemo1 from './UpdateModalMemo1';
-
-
+import API_URL from '../config';
 
 const Memo1List = () => {
   const { memo1Table, setMemo1Table , loading } = useContext(DataContext);
@@ -22,7 +21,7 @@ const Memo1List = () => {
   const [updateIsOpen, setUpdateIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);  // モーダル表示時の値の受渡し
 
-  const api_url = 'http://localhost:8000/api_memo1/memo1/'
+  const api_url = `${API_URL}/api_memo1/memo1/`
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);

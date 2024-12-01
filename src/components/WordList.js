@@ -9,6 +9,7 @@ import './css/list.css';
 import HoverMenu from './HoverMenu';
 import DeleteModal from './DeleteModal';
 import UpdateModalWord from './UpdateModalWord';
+import API_URL from '../config';
 
 const WordList = () => {
   const { wordTable, setWordTable , loading } = useContext(DataContext);
@@ -16,7 +17,7 @@ const WordList = () => {
   const [updateIsOpen, setUpdateIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);  // モーダル表示時の値の受渡し
 
-  const api_url = 'http://localhost:8000/api_word/word/'
+  const api_url = `${API_URL}/api_word/word/`
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);

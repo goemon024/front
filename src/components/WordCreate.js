@@ -8,6 +8,7 @@ import dayjs from 'dayjs';
 
 import './css/create.css';
 import HoverMenu from './HoverMenu';
+import API_URL from '../config';
 
 const WordCreate = () => {
     const { wordTable, setWordTable } = useContext(DataContext);
@@ -47,7 +48,7 @@ const WordCreate = () => {
         e.preventDefault();
         if (!formData1) return;
         try {
-                const response = await axios.post('http://localhost:8000/api_word/word/',{
+                const response = await axios.post(`${API_URL}/api_word/word/`,{
                     word: formData1,
                     reg_date: today,
                 },{

@@ -9,6 +9,7 @@ import dayjs from 'dayjs';
 
 import './css/create.css';
 import HoverMenu from './HoverMenu';
+import API_URL from '../config';
 
 const Memo2Create = () => {
     const { memo2Table, setMemo2Table } = useContext(DataContext);
@@ -50,7 +51,7 @@ const Memo2Create = () => {
         if (!formData1) return;
         if (!formData2) return;
         try {
-                const response = await axios.post('http://localhost:8000/api_memo2/memo2/',{
+                const response = await axios.post(`${API_URL}/api_memo2/memo2/`,{
                     memo1: formData1,
                     memo2: formData2,
                     reg_date: today,

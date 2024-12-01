@@ -6,6 +6,7 @@ import dayjs from "dayjs";
 import { CookiesProvider, withCookies } from 'react-cookie';
 import styles from './css/main.module.css';
 import axios from 'axios';
+import API_URL from '../config';
 
 const MainPage = (props) => {
   const { memo1Table, loading, userName } = useContext(DataContext);
@@ -41,7 +42,7 @@ const MainPage = (props) => {
 
   const handleLogout = async () => {
     try {
-      await axios.post('http://localhost:8000/api/logout/', null, {
+      await axios.post(`${API_URL}/api/logout/`, null, {
         headers: {
           'Content-Type': 'application/json',
           'X-CSRFToken': document.cookie.match(/csrftoken=([^;]*)/)?.[1], // CSRFトークンを取得
