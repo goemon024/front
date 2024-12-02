@@ -41,28 +41,23 @@ const MainPage = (props) => {
   };
 
   const handleLogout = async () => {
-    const csrfToken = document.cookie.match(/csrftoken=([^;]*)/)?.[1];
-    if (!csrfToken) {
-      console.error("CSRFトークンが取得できませんでした");
-      return;
-    }
 
-    const token = localStorage.getItem('current-token');
-    try {
-      await axios.post(`${API_URL}/api/logout/`, null, {
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRFToken': document.cookie.match(/csrftoken=([^;]*)/)?.[1], // CSRFトークンを取得
-          ...(token && { 'Authorization': `Bearer ${token}` }),
-        },
-        withCredentials: true, // クッキーを送信
-      });
+    // const token = localStorage.getItem('current-token');
+    // try {
+    //   await axios.post(`${API_URL}/api/logout/`, null, {
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //       'X-CSRFToken': document.cookie.match(/csrftoken=([^;]*)/)?.[1], // CSRFトークンを取得
+    //       ...(token && { 'Authorization': `Bearer ${token}` }),
+    //     },
+    //     withCredentials: true, // クッキーを送信
+    //   });
       localStorage.removeItem('current-token');
       localStorage.removeItem('username');
       window.location.href = '/';
-    } catch (error) {
-      console.error('ログアウトエラー:', error);
-    }
+    // } catch (error) {
+    //   console.error('ログアウトエラー:', error);
+    // }
   };
 
   return (

@@ -56,21 +56,21 @@ const HoverMenu = ({links}) => {
 
 
   const handleLogout = async () => {
-    try {
-      await axios.post(`${API_URL}/api/logout/`, null, {
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRFToken': document.cookie.match(/csrftoken=([^;]*)/)?.[1], // CSRFトークンを取得
-        },
-        withCredentials: true, // クッキーを送信
-      });
+    // try {
+    //   await axios.post(`${API_URL}/api/logout/`, null, {
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //       'X-CSRFToken': document.cookie.match(/csrftoken=([^;]*)/)?.[1], // CSRFトークンを取得
+    //     },
+    //     withCredentials: true, // クッキーを送信
+    //   });
       
       localStorage.removeItem('current-token');
       localStorage.removeItem('username');
       window.location.href = '/';
-    } catch (error) {
-      console.error('ログアウトエラー:', error);
-    }
+    // } catch (error) {
+    //   console.error('ログアウトエラー:', error);
+    // }
   };
   
   return (
