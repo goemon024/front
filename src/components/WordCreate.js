@@ -48,7 +48,8 @@ const WordCreate = () => {
         e.preventDefault();
         if (!formData1) return;
         try {
-                const response = await axios.post(`${API_URL}/api_word/word/`,{
+                // const response = await axios.post(`${API_URL}/api_word/word/`,{
+                const response = await axios.post(`/api_word/word/`,{
                     word: formData1,
                     reg_date: today,
                 },{

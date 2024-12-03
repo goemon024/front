@@ -22,17 +22,20 @@ export const DataProvider = ({ children }) => {
             try {
 
                 const [res1, res2, res3 ] = await Promise.all([
-                    axios.get(`${API_URL}/api_word/word/`,{
+                    // axios.get(`${API_URL}/api_word/word/`,{
+                    axios.get(`/api_word/word/`,{
                         headers: {
                             'Authorization': `Token ${token}`
                         }
                     }),
-                    axios.get(`${API_URL}/api_memo1/memo1/`,{
+                    // axios.get(`${API_URL}/api_memo1/memo1/`,{
+                    axios.get(`/api_memo1/memo1/`,{
                         headers: {
                             'Authorization': `Token ${token}`
                         }
                     }),
-                    axios.get(`${API_URL}/api_memo2/memo2/`,{
+                    // axios.get(`${API_URL}/api_memo2/memo2/`,{
+                    axios.get(`/api_memo2/memo2/`,{
                         headers: {
                             'Authorization': `Token ${token}`
                         }

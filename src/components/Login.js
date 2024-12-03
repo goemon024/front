@@ -158,7 +158,8 @@ const Login = (props) => {
         if(state.isLoginView){
           try{
                 dispatch({type:START_FETCH})
-                const res = await axios.post(`${API_URL}/authen/`,state.credentialsLog,{
+                // const res = await axios.post(`${API_URL}/authen/`,state.credentialsLog,{
+                const res = await axios.post(`/authen/`,state.credentialsLog,{
                 headers:{'content-type':'application/json',
                         'X-CSRFToken':document.cookie.match(/csrftoken=([^;]*)/)?.[1]
                 }})
@@ -180,7 +181,8 @@ const Login = (props) => {
         }else{
             try{
                 dispatch({type:START_FETCH})
-                await axios.post(`${API_URL}/api_user/create/`, state.credentialsReg,{
+                // await axios.post(`${API_URL}/api_user/create/`, state.credentialsReg,{
+                await axios.post(`/api_user/create/`, state.credentialsReg,{
                 headers:{'content-type':'application/json',
                     'X-CSRFToken':document.cookie.match(/csrftoken=([^;]*)/)?.[1]
                 }})

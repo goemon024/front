@@ -17,7 +17,8 @@ const WordList = () => {
   const [updateIsOpen, setUpdateIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);  // モーダル表示時の値の受渡し
 
-  const api_url = `${API_URL}/api_word/word/`
+  // const api_url = `${API_URL}/api_word/word/`
+  const api_url = `/api_word/word/`
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);

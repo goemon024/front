@@ -50,7 +50,8 @@ const Memo1Create = () => {
         e.preventDefault();
         if (!formData) return;
         try {
-                const response = await axios.post(`${API_URL}/api_memo1/memo1/`,{
+                // const response = await axios.post(`${API_URL}/api_memo1/memo1/`,{
+                const response = await axios.post(`/api_memo1/memo1/`,{  
                     memo: formData,
                     reg_date: today,
                 },{

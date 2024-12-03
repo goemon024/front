@@ -51,7 +51,8 @@ const Memo2Create = () => {
         if (!formData1) return;
         if (!formData2) return;
         try {
-                const response = await axios.post(`${API_URL}/api_memo2/memo2/`,{
+                // const response = await axios.post(`${API_URL}/api_memo2/memo2/`,{
+                const response = await axios.post(`/api_memo2/memo2/`,{
                     memo1: formData1,
                     memo2: formData2,
                     reg_date: today,
