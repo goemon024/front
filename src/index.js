@@ -6,6 +6,9 @@ import reportWebVitals from './reportWebVitals';
 import { CookiesProvider, withCookies } from 'react-cookie';
 
 import App from './App';
+import './components/css/reset.css'
+import './components/css/style.css'
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
