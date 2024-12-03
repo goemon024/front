@@ -31,6 +31,9 @@ import { DataProvider } from './context/DataContext';
 import PrivateRoute from './context/PrivateRoute';
 
 
+import './components/css/reset.css';
+import './components/css/style.css';
+
 // import Navbar from "./components/Navbar";  
 // import DataProvider from './context/DataContext';
 
