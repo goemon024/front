@@ -2,7 +2,7 @@
   "name": "sns-react",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://pure-reaches-08614-283f2e14249d.herokuapp.com",
+  "proxy": "http://localhost:8000",
   "homepage": "/static/react",
   "dependencies": {
     "@emotion/react": "^11.13.3",
