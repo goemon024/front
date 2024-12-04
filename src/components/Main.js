@@ -63,7 +63,7 @@ const MainPage = (props) => {
   return (
 
     <div style={{
-      backgroundImage: 'url("/images/login_background2.webp")',
+      backgroundImage: 'url("/static/react/images/login_background2.webp")',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       justifyContent: 'center',

@@ -213,7 +213,7 @@ const Login = (props) => {
     <>
 
     <div style={{
-    backgroundImage: 'url("/images/login_background2.webp")',
+    backgroundImage: 'url("/static/react/images/login_background2.webp")',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     display: 'flex',
