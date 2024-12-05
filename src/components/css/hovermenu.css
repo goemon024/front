@@ -83,6 +83,7 @@
         width: 100%;     /* 幅を100%に */
         height: 6%;    /* 高さは自動調整 */
         background-color: #333;
+        transition: none;
     }
 
     /* メニュー内のリンクを横並びに */

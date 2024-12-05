@@ -39,7 +39,7 @@ const Memo2List = () => {
     <div>
    <div class="jumbotron jumbotron-fluid">
     <div class="container">
-      <h1 class="display-4" style={{marginTop:'20px'}}>メモリスト</h1>
+      <h1 class="display-4" style={{marginTop:'20px'}}>メモリスト２</h1>
     </div>
    </div>
     

@@ -10,7 +10,7 @@ import dayjs from 'dayjs';
 // import './css/flashcard.css';
 // import FlashCard from './FlashCard';
 import './css/list.css';
-import HoverMenu from './HoverMenu';
+import StaticMenu from './StaticMenu';
 import DeleteModal from './DeleteModal';
 import UpdateModalMemo1 from './UpdateModalMemo1';
 import API_URL from '../config';
@@ -35,7 +35,7 @@ const Memo1List = () => {
 
 
   return (
-    <div>
+    <div style ={{position:'relative',top:'0px',left:'80px'}}>
    <div class="jumbotron jumbotron-fluid">
     <div class="container">
       <h1 class="display-4" style={{marginTop:'20px'}}>メモリスト</h1>
@@ -82,8 +82,8 @@ const Memo1List = () => {
             ))}
           </ul> */}
         </div>
-    {/* <HoverMenu links={{ href: '/memo1', text: 'メモ帳編集'}} /> */}
-    <HoverMenu links={[]} />
+    {/* <StaticMenu links={{ href: '/memo1', text: 'メモ帳編集'}} /> */}
+    <StaticMenu links={[]} />
     {/* <DeleteModal /> */}
     </div>
   );
