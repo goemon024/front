@@ -6,6 +6,7 @@ import API_URL from '../config';
 const HoverMenu = ({links}) => {
   const [menuWidth, setMenuWidth] = useState(0);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 567);
+  // reactのmaterial UI、アニメーション用のライブラリをreactで。
 
   useEffect(() => {
     const handleMouseMove = (e) => {

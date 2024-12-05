@@ -13,14 +13,16 @@ const DeleteModal = ({ isOpen, onRequestClose, data, dataDisplay, setTable, apiU
   const token = cookies['current-token'];          
 
   const handleDelete = async () => {
-    try {
+      try {
       console.log(data.id)
       console.log(data.user)
-      console.log(`${apiUrl}${data.id}`)
+      console.log(`${apiUrl}${data.id}/`)
+      console.log("csrf:" +  document.cookie.match(/csrftoken=([^;]*)/)?.[1])
+  
 
-      await axios.delete(`${apiUrl}${data.id}`,{
+      await axios.delete(`${apiUrl}${data.id}/`,{
         headers: {
-            'Authorization': `Token ${token}`
+            'Authorization': `Token ${token}`,
         }
     });
       // setModalIsOpen(false); // モーダルを閉じる
@@ -45,6 +47,9 @@ const DeleteModal = ({ isOpen, onRequestClose, data, dataDisplay, setTable, apiU
           bottom: 'auto',
           marginRight: '-50%',
           transform: 'translate(-50%, -50%)',
+          maxWidth: '90%',
+          maxHeight: '90%', 
+          overflowY: 'auto',
         },
         overlay: {
           backgroundColor: 'rgba(0.5, 0.5, 0.5, 0.01)',
