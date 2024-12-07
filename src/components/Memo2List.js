@@ -1,20 +1,11 @@
-import React,{ useContext,useState,useEffect } from 'react';
+import React,{ useContext,useState} from 'react';
 import { DataContext } from '../context/DataContext';
 
-// import axios from 'axios'
-import { Typography } from '@mui/material';
-
-// import { useCookies } from 'react-cookie';          // useCookiesを使う
-import dayjs from 'dayjs';
-
-// import './css/flashcard.css';
-// import FlashCard from './FlashCard';
 import './css/list.css';
-import HoverMenu from './HoverMenu';
 import DeleteModal from './DeleteModal';
 import UpdateModalMemo2 from './UpdateModalMemo2';
+import LogoutButton from './LogoutButton';
 
-import API_URL from '../config';
 
 const Memo2List = () => {
   const { memo2Table, setMemo2Table , loading } = useContext(DataContext);
@@ -22,7 +13,6 @@ const Memo2List = () => {
   const [updateIsOpen, setUpdateIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);  // モーダル表示時の値の受渡し
 
-  // const api_url = `${API_URL}/api_memo2/memo2/`
   const api_url = `/api_memo2/memo2/`
 
   const formatDate = (dateString) => {
@@ -36,28 +26,34 @@ const Memo2List = () => {
 
 
   return (
-    <div>
-   <div class="jumbotron jumbotron-fluid">
-    <div class="container">
-      <h1 class="display-4" style={{marginTop:'20px'}}>メモリスト２</h1>
-    </div>
-   </div>
+    <div style={{display:'flex'}}>
+      <div id="staticMenu">
+      <a href="/main">TOP</a>
+      <LogoutButton />
+      </div>
+
+    <div className="listContent">
+      <div className="jumbotron jumbotron-fluid">
+      <div className="container">
+        <h1 className="display-4" style={{marginTop:'20px'}}>メモリスト２</h1>
+      </div>
+      </div>
     
       <div>
-          <div class="container" style={{height:'100%'}}>
+          <div className="container" style={{height:'100%'}}>
               {memo2Table
               .slice()
               .sort((a,b)=> new Date(b.reg_date) - new Date(a.reg_date))
               .map(item => (
-            <div class="word-and-buttons" key={item.id}>
-              <span class="memo1">{ item.memo1 }</span>
-              <span class="memo2">{ item.memo2 }</span>
+            <div className="word-and-buttons" key={item.id}>
+              <span className="memo1">{ item.memo1 }</span>
+              <span className="memo2">{ item.memo2 }</span>
      
-              <span class="date">{formatDate(item.reg_date)}</span>
+              <span className="date">{formatDate(item.reg_date)}</span>
             
-            <div class="buttons">
-            <button onClick={() => {setSelectedItem(item);setUpdateIsOpen(true)}} class="btn btn-info"   >編集</button>
-            <button onClick={() => {setSelectedItem(item);setDeleteIsOpen(true)}} class="btn btn-success">削除</button>
+            <div className="buttons">
+            <button onClick={() => {setSelectedItem(item);setUpdateIsOpen(true)}} className="btn btn-info"   >編集</button>
+            <button onClick={() => {setSelectedItem(item);setDeleteIsOpen(true)}} className="btn btn-success">削除</button>
 
             {selectedItem &&(
             <UpdateModalMemo2 isOpen={updateIsOpen} onRequestClose={() => setUpdateIsOpen(false)}
@@ -77,18 +73,8 @@ const Memo2List = () => {
             ))}
           </div>
 
-          {/* <ul>
-              {memo1Table.map(item => (
-                <div class="word-and-buttons">
-               <li key={item.id}>{item.memo}</li>
-               </div>
-            ))}
-          </ul> */}
         </div>
-    {/* <HoverMenu links={{ href: '/memo1', text: 'メモ帳編集'}} /> */}
-    <HoverMenu links={[]} />
-    {/* <DeleteModal /> */}
-    </div>
+    </div></div>
   );
 }
 

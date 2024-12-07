@@ -2,14 +2,12 @@ import React,{useState,useEffect,useContext} from 'react'
 import { DataContext } from '../context/DataContext';
 
 import axios from 'axios'
-import { Typography } from '@mui/material';
 
 import { useCookies } from 'react-cookie';
 import dayjs from 'dayjs';
 
 import './css/create.css';
-import HoverMenu from './HoverMenu';
-import API_URL from '../config';
+import LogoutButton from './LogoutButton';
 
 const Memo2Create = () => {
     const { memo2Table, setMemo2Table } = useContext(DataContext);
@@ -79,10 +77,17 @@ const Memo2Create = () => {
 
 
   return (
-    <div>
+    <div style={{display:'flex'}}>
+    <div id="staticMenu">
+    <a href="/main">TOP</a>
+    <a href="/memo2">メモ帳２編集</a>
+    <LogoutButton />
+    </div>
+
+    <div className="createContent">
     <div style={{ display: 'flex',
                   justifyContent: isScrollable ? "flex-start" : "center",
-                  padding: isScrollable ? "100px 20px 5px" : "5%",
+                  padding: isScrollable ? "100px 20px 5px" : "0px 0px 0px 50px",
                   overflowY: 'auto', alignItems: 'center',height: '100vh',
                   flexDirection: 'column', width: '100%'}}>
       <form
@@ -126,8 +131,7 @@ const Memo2Create = () => {
         )}
       </div>
     </div>
-     <HoverMenu links={{href:'/memo2',text:'メモ帳編集'}} />
-    </div>
+    </div></div>
   )
 }
 

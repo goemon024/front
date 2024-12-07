@@ -7,8 +7,8 @@ import { useCookies } from 'react-cookie';
 import dayjs from 'dayjs';
 
 import './css/create.css';
-import HoverMenu from './HoverMenu';
-import API_URL from '../config';
+import LogoutButton from './LogoutButton';
+// import { Block } from '@mui/icons-material';
 
 const WordCreate = () => {
     const { wordTable, setWordTable } = useContext(DataContext);
@@ -70,16 +70,23 @@ const WordCreate = () => {
       };
 
   return (
-    <div>
+    <div style={{display:'flex'}}>
+      <div id="staticMenu">
+      <a href="/main">TOP</a>
+      <a href="/word">英単語編集</a>
+      <LogoutButton />
+      </div>
+    
+    <div className="createContent">
     <div style={{ display: 'flex',
                   justifyContent: isScrollable ? "flex-start" : "center",
-                  padding: isScrollable ? "100px 20px 5px" : "5%",
+                  padding: isScrollable ? "100px 20px 5px" : "0px 0px 0px 25px",
                   overflowY: 'auto', alignItems: 'center',height: '100vh',
                   flexDirection: 'column', width: '100%'}}>
       <form
         onSubmit={handleCreate}
         style={{ marginBottom: '50px', display: 'flex', flexDirection: 'column', 
-            alignItems: 'flex-start', width: '400px'}}>
+            alignItems: 'flex-start', width: '300px'}}>
         <label style={{ marginBottom: '10px' }}>New Word:</label>
         <textarea
           id="word"
@@ -111,7 +118,7 @@ const WordCreate = () => {
         )}
       </div>
     </div>
-     <HoverMenu links={{href:'/word',text:'単語帳編集'}} />
+    </div>
     </div>
   )
 }

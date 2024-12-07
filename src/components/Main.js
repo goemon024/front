@@ -86,7 +86,7 @@ const MainPage = (props) => {
 
 
         <div style={{border: '2px solid #8FBC8F', borderRadius: '10px', padding:'5%',
-          display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '1em' }}>
+          display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '1em' }}>
         <form onSubmit={handleSubmit1}>
           <p style={{fontSize:'20px',marginBottom:'10px',alignSelf: 'flex-start'}}>英単語ドリル</p>
           <div style={{display: 'flex', justifyContent: 'flex-end',gap:'1em', width:'100%'}}>
@@ -105,7 +105,7 @@ const MainPage = (props) => {
         </div>
 
         <div style={{border: '2px solid #339fff', borderRadius: '10px', padding:'5%',
-          display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '1em'}}>
+          display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '1em'}}>
         <form onSubmit={handleSubmit2}>
         <p style={{fontSize:'20px',marginBottom:'10px',alignSelf: 'flex-start'}}>メモ帳１ドリル</p>
           <div style={{display: 'flex', justifyContent: 'flex-end',gap:'1em', width:'100%'}}>
@@ -124,7 +124,7 @@ const MainPage = (props) => {
         </div>
 
         <div style={{border: '2px solid #55d0ff', borderRadius: '10px', padding:'5%',
-          display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '1em'}}>
+          display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '1em'}}>
         <form onSubmit={handleSubmit3}>
         <p style={{fontSize:'20px',marginBottom:'10px',alignSelf: 'flex-start'}}>メモ帳２ドリル</p>
           <div style={{display: 'flex', justifyContent: 'flex-end',gap:'1em', width:'100%'}}>

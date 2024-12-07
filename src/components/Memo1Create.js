@@ -2,15 +2,15 @@ import React,{useState,useEffect,useContext} from 'react'
 import { DataContext } from '../context/DataContext';
 
 import axios from 'axios'
-import { Typography } from '@mui/material';
 
 import { useCookies } from 'react-cookie';
 import dayjs from 'dayjs';
 
 import './css/create.css';
+import LogoutButton from './LogoutButton';
 // import './css/list.css';
-import HoverMenu from './HoverMenu';
-import API_URL from '../config';
+// import HoverMenu from './HoverMenu';
+
 
 const Memo1Create = () => {
     const { memo1Table, setMemo1Table } = useContext(DataContext);
@@ -72,10 +72,17 @@ const Memo1Create = () => {
       };
 
   return (
-    <div>
+    <div style={{display:'flex'}}>
+    <div id="staticMenu">
+    <a href="/main">TOP</a>
+    <a href="/memo1">メモ帳１編集</a>
+    <LogoutButton />
+    </div>
+
+    <div className="createContent">
     <div style={{ display: 'flex',
                   justifyContent: isScrollable ? "flex-start" : "center",
-                  padding: isScrollable ? "100px 20px 5px" : "5%",
+                  padding: isScrollable ? "100px 20px 5px" : "0px 0px 0px 50px ",
                   overflowY: 'auto', alignItems: 'center',height: '100vh',
                   flexDirection: 'column', width: '100%'}}>
       <form
@@ -108,8 +115,8 @@ const Memo1Create = () => {
         )}
       </div>
     </div>
-     <HoverMenu links={{href:'/memo1',text:'メモ帳編集'}} />
-    </div>
+     {/* <HoverMenu links={{href:'/memo1',text:'メモ帳編集'}} /> */}
+    </div></div>
   )
 }
 

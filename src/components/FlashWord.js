@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './css/flashcard.css';
-import HoverMenu from './HoverMenu';
+// import HoverMenu from './HoverMenu';
 
 const FlashWord = ({ cardData })  => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -90,18 +90,20 @@ const FlashWord = ({ cardData })  => {
           <div className={'upperpart'} style = {{height:'30%',position:'relative'}}>
             <div className={'left'} onClick={slideToPrevious1} style={{position: 'absolute',zIndex:"2",left:'0',width:'40%'}}></div>
             <div className={'right'} onClick={slideToNextCard1} style={{position: 'absolute',zIndex:"2",right:'0',width:'60%'}}></div>
-            <span style={{position: 'absolute',zIndex:"1",top: '50%',left: '50%',transform: 'translate(-50%, -50%)'}}>
+            <span style={{whiteSpace: 'nowrap',position: 'absolute',zIndex:"1",top: '50%',left: '50%',transform: 'translate(-50%, -50%)'}}>
                 {card.word} </span>
           </div>
 
-          <div className={paging ===0 ? 'underpart graystatus' : 'underpart'} style = {{height:'65%',position:'relative'}}>
+          <div className={paging ===0 ? 'underpart graystatus' : 'underpart'}
+           style = {{height:'65%',width:'100%',position:'relative', overflow:'hidden'}}>
             <div className={'left'} onClick={slideToPrevious2} style={{position: 'absolute',zIndex:"2",left:'0',top:'0',width:'40%'}}></div>
             <div className={'right'} onClick={slideToNextCard2} style={{position: 'absolute',zIndex:"2",right:'0',top:'0',width:'60%'}}></div>
             <div style={{position: 'absolute',zIndex:"1"}}>
                   <span className={paging ===2 ? "mean1":"noneDisplay"}>{card.mean1}<br /><br /></span>
                   <span  className={paging===2 ? 'mean2':"noneDisplay"}>{card.mean2}</span>
                   <img  className={paging ===1 ? "meanImage": "noneDisplay"} src={card.img} alt="generated image by API" 
-              style={{height:'100%',maxHeight: '100%', objectFit: 'contain',margin: 'auto',}} />
+              style={{  height:'100%',objectFit: 'contain'}}
+               />
             </div>
           </div>
 
