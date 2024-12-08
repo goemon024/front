@@ -2,8 +2,8 @@
   "name": "sns-react",
   "version": "0.1.0",
   "private": true,
-  "proxy":"http://localhost:8000",
-  "homepage": "https://pure-reaches-08614-283f2e14249d.herokuapp.com",
+  "proxy": "http://localhost:8000",
+  "homepage": "/static/react",
   "dependencies": {
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
@@ -28,7 +28,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build-deploy": "./build-deploy.sh"
   },
   "eslintConfig": {
     "extends": [

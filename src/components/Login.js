@@ -181,7 +181,8 @@ const Login = (props) => {
         }else{
             try{
                 dispatch({type:START_FETCH})
-                await axios.post(`${API_URL}/api_user/create/`, state.credentialsReg,{
+                // await axios.post(`${API_URL}/api_user/create/`, state.credentialsReg,{
+                await axios.post(`/api_user/create/`, state.credentialsReg,{
                 headers:{'content-type':'application/json',
                     'X-CSRFToken':document.cookie.match(/csrftoken=([^;]*)/)?.[1]
                 }})
@@ -212,7 +213,7 @@ const Login = (props) => {
     <>
 
     <div style={{
-    backgroundImage: 'url("/images/login_background2.webp")',
+    backgroundImage: 'url("/static/react/images/login_background2.webp")',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     display: 'flex',

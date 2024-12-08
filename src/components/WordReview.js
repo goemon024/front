@@ -1,8 +1,7 @@
-import React,{ useContext,useState,useEffect } from 'react';
+import React,{ useContext } from 'react';
 import { DataContext } from '../context/DataContext';
 
 // import axios from 'axios'
-import { Typography } from '@mui/material';
 
 // import { useCookies } from 'react-cookie';          // useCookiesを使う
 import dayjs from 'dayjs';

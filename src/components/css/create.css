@@ -13,6 +13,11 @@ body, html {
   height: 35px; 
 }
 
+.createContent {
+  margin-left: 100px;        /* メニューの幅分だけ余白を作る */
+  padding: 10px;            /* コンテンツの余白 */
+  overflow-y: auto;          /* 縦方向にスクロール可能にする */
+}
 
 @media (max-width: 576px){
    .form {
@@ -29,6 +34,11 @@ body, html {
     width: 300px;
     height: 35px; 
   }
-  
+
+  .createContent {
+    margin-left: 0px;        /* メニューの幅分だけ余白を作る */
+    padding: 10px;            /* コンテンツの余白 */
+    overflow-y: auto;          /* 縦方向にスクロール可能にする */
+  }
 
 }

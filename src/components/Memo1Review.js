@@ -1,4 +1,4 @@
-import React,{ useContext,useState,useEffect } from 'react';
+import React,{ useContext } from 'react';
 import { DataContext } from '../context/DataContext';
 
 // import axios from 'axios'
@@ -10,8 +10,6 @@ import dayjs from 'dayjs';
 import './css/flashcard.css';
 import FlashMemo1 from './FlashMemo1';
 import HoverMenu from './HoverMenu';
-// import './css/list.css';
-
 
 const Memo1Review = () => {
   const { memo1Table, loading } = useContext(DataContext);

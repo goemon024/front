@@ -1,5 +1,4 @@
-import React,{ useEffect, useContext,useState } from 'react';
-import { DataContext } from '../context/DataContext';
+import React,{ useEffect,useState } from 'react';
 import Modal from 'react-modal';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';     
@@ -112,9 +111,11 @@ const UpdateModalMemo1 = ({ isOpen, onRequestClose, data, dataDisplay, setTable,
           bottom: 'auto',
           marginRight: '-50%',
           transform: 'translate(-50%, -50%)',
-
-          width: '90%', // 画面幅の90%を占める
-          maxWidth: '500px', // 最大幅を500pxに制限
+          maxWidth: '90%',
+          maxHeight: '90%', 
+          overflowY: 'auto',
+          // width: '90%', // 画面幅の90%を占める
+          // maxWidth: '500px', // 最大幅を500pxに制限
           // height: 'auto', // 自動で高さ調整
           // maxHeight: '80vh', // 画面高さの80%以内に制限
           // overflow: 'auto', // 内容がオーバーフローした場合にスクロール
