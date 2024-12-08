@@ -1,5 +1,4 @@
 import React,{ useEffect, useState } from 'react';
-import { DataContext } from '../context/DataContext';
 import Modal from 'react-modal';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';

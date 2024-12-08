@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';     
-import API_URL from '../config';
+// import API_URL from '../config';
 
 // Contextの作成
 export const DataContext = createContext();
