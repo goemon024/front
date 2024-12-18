@@ -16,7 +16,7 @@ import HoverMenu from './HoverMenu';
 // import './css/list.css';
 
 
-const WordMemoReview = ({selectedTable, isAll, isCalendar}) => {
+const WordMemoReview = ({selectedTable, isAll=false, isCalendar=false, isList=false}) => {
   const { loading } = useContext(DataContext);
   const { wordTable, memo1Table, memo2Table } = useContext(DataContext);
   const location = useLocation();
@@ -50,7 +50,11 @@ const WordMemoReview = ({selectedTable, isAll, isCalendar}) => {
 
   console.log(startDate,endDate)
 
-  const filteredData = isCalendar === true ?
+  const filteredData = isList === true ?
+      tableData.filter(data=>{
+        return data.fusen===true
+      })  
+   : isCalendar === true ?
      tableData.filter(data =>{
         const regDate = dayjs(data.reg_date).format('YYYY-MM-DD'); // 日付をフォーマット
         return startDate && endDate

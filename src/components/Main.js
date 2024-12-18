@@ -176,6 +176,10 @@ const MainPage = (props) => {
                 <Link to="/word/all">
                 <button className="btn btn-success mb-2" >ＡＬＬ</button>
                 </Link>
+                <Link to="/word/checklist">
+                <button className="btn btn-success mb-2" >チェックリスト</button>
+                </Link>
+
             </div>
 
             <div id={styles["menu2"]} style={{border:"8px solid #339fff",  backgroundColor:"rgba(50,100,150,0.2)"}}>

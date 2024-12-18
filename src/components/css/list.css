@@ -75,6 +75,19 @@
     font-weight: bold;
   } 
 
+  .pagination button {
+    color: rgba(200,100,100,1);
+    margin: 0 10px; /* 水平方向にスペースを追加 */
+  }
+
+  .pagination {
+  display: flex; /* 子要素を横並びに配置 */
+  justify-content: center; /* 子要素を水平方向に中央配置 */
+  margin: 20px auto; /* ページネーション全体の上下に余白を追加 */
+  width: 100%; /* 必要に応じて調整 */
+  }
+
+
   @media (max-width: 576px) {
     #staticMenu {
         position: fixed; /* 最上部に固定 */
