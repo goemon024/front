@@ -13,6 +13,8 @@ export const DataProvider = ({ children }) => {
     const [wordTable, setWordTable] = useState([]);
     const [memo1Table, setMemo1Table] = useState([]);
     const [memo2Table, setMemo2Table] = useState([]);
+    const [sentenceTable, setSentenceTable] = useState([]);
+
     const [userName, setUserName] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -21,7 +23,7 @@ export const DataProvider = ({ children }) => {
             
             try {
 
-                const [res1, res2, res3 ] = await Promise.all([
+                const [res1, res2, res3, res4 ] = await Promise.all([
                     // axios.get(`${API_URL}/api_word/word/`,{
                     axios.get(`/api_word/word/`,{
                         headers: {
@@ -40,10 +42,16 @@ export const DataProvider = ({ children }) => {
                             'Authorization': `Token ${token}`
                         }
                     }),
+                    axios.get(`/api_word/sentence/`,{
+                        headers: {
+                            'Authorization': `Token ${token}`
+                        }
+                    }),
                 ]);
                 setWordTable(res1.data);
                 setMemo1Table(res2.data);
                 setMemo2Table(res3.data);
+                setSentenceTable(res4.data);
 
                 console.log("READING CONTEXT");
 
@@ -67,6 +75,8 @@ export const DataProvider = ({ children }) => {
             setMemo1Table,
             memo2Table,
             setMemo2Table,
+            sentenceTable,
+            setSentenceTable,
             loading,
             userName,
             setUserName,

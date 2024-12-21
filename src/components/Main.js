@@ -179,6 +179,10 @@ const MainPage = (props) => {
                 <Link to="/word/checklist">
                 <button className="btn btn-success mb-2" >チェックリスト</button>
                 </Link>
+                <Link to="/word/sentence_all">
+                <button className="btn btn-success mb-2" >Sentence Practice</button>
+                </Link>
+
 
             </div>
 

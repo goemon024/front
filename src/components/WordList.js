@@ -113,6 +113,7 @@ const WordList = () => {
             <div className="word-and-buttons" key={item.id}>
 
               <input
+              className="checklist"
               type="checkbox"
               checked={item.fusen}
               onChange={(e) => handleCheckboxChange(item.id, e.target.checked)}/>

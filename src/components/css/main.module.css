@@ -58,7 +58,7 @@ body, html {
     gap: 1em;
     padding: 1em; /* 内側の余白を追加 */
     width:20vw;
-    height:45vh;
+    height:55vh;
     border-radius: 12px;
 }
 
@@ -81,7 +81,7 @@ body, html {
 }
 
 .logout{
-    margin: 150px 20px;
+    margin: 100px 20px;
     color: rgba(175,175,175,1);
     cursor: pointer;
     text-decoration: underline;

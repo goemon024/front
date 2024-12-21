@@ -12,19 +12,22 @@ import './css/flashcard.css';
 import FlashMemo1 from './FlashMemo1';
 import FlashMemo2 from './FlashMemo2';
 import FlashWord from './FlashWord';
+import FlashSentence from './FlashSentence';
 import HoverMenu from './HoverMenu';
 // import './css/list.css';
 
 
-const WordMemoReview = ({selectedTable, isAll=false, isCalendar=false, isList=false}) => {
+const WordMemoReview = ({selectedTable, isAll=false, isCalendar=false, isList=false,
+  isSentence=false,}) => {
   const { loading } = useContext(DataContext);
-  const { wordTable, memo1Table, memo2Table } = useContext(DataContext);
+  const { wordTable, memo1Table, memo2Table, sentenceTable } = useContext(DataContext);
   const location = useLocation();
 
   const tableData = {
     word: wordTable,
     memo1: memo1Table,
     memo2: memo2Table,
+    sente: sentenceTable,
   }[selectedTable];
 
   if (loading) {
@@ -50,7 +53,12 @@ const WordMemoReview = ({selectedTable, isAll=false, isCalendar=false, isList=fa
 
   console.log(startDate,endDate)
 
-  const filteredData = isList === true ?
+  // isListは、英単語のfusen対応のみ想定している。
+  const filteredData = isSentence === true ?
+      tableData.filter(data=>{
+      return data.eval==="OK"
+      })  
+   :isList === true ?
       tableData.filter(data=>{
         return data.fusen===true
       })  
@@ -63,7 +71,7 @@ const WordMemoReview = ({selectedTable, isAll=false, isCalendar=false, isList=fa
    : isAll === true ? tableData
    : tableData.filter(data =>
       [today, agoDay1, agoDay7, agoDay28].includes(dayjs(data.reg_date).format('YYYY-MM-DD'))
-    );
+    )
 
   
 
@@ -92,6 +100,8 @@ const WordMemoReview = ({selectedTable, isAll=false, isCalendar=false, isList=fa
         <FlashMemo1 cardData={shuffleArray(filteredData)} />
       ) : selectedTable === 'memo2' ? (
         <FlashMemo2 cardData={shuffleArray(filteredData)} />
+      ) : selectedTable === 'sente' ? (
+        <FlashSentence cardData={shuffleArray(filteredData)} />
       ) : (
         <FlashWord cardData={shuffleArray(filteredData)} />
       )}
