@@ -1,10 +1,10 @@
 
 # Djangoプロジェクトのルートディレクトリを入力する。
-DJANGO_MANAGE_DIR="your-backend-project-directory-absolute-pass"
+DJANGO_MANAGE_DIR="/home/goemon024/django/ebing_house"
 
 # 仮想環境(venv)有効化のためのactivateファイルの位置を記述する。
 # 下の例では、venvフォルダはバックエンドプロジェクト下に配置している。
-PYENV_ACTIVATE="$DJANGO_MANAGE_DIR/your-venv-name/bin/activate"
+PYENV_ACTIVATE="$DJANGO_MANAGE_DIR/dg1_env/bin/activate"
 
 
 # Reactアプリのルートディレクトリ。このままで可。

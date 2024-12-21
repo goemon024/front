@@ -1,0 +1,41 @@
+.upperpart-sen {
+    align-content: center;
+    background: #f0f0f0;
+    font-size: 4rem;
+    display: flex;
+    width: 100%;
+    height: 30% ;
+    position: relative ;
+    white-space: normal;
+}
+
+.underpart-sen {
+    display:flex;
+    background: whitesmoke;
+    padding:0 px;
+    font-size: 3rem;
+    width: 100% ;
+    height: 65% ;
+    justify-content: center; /* 水平方向の中央揃え */
+    align-items: center; /* 垂直方向の中央揃え */
+    /* align-content: center; */
+    position: relative ;
+    white-space: normal;
+}
+
+
+@media (max-width: 576px){
+
+.upperpart-sen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    padding: 1rem;
+}
+
+.underpart-sen {
+    font-size: 2rem; 
+}
+
+}  

@@ -1,4 +1,4 @@
-import React,{ useContext,useState } from 'react';
+import React,{ useContext,useState,useEffect } from 'react';
 import { DataContext } from '../context/DataContext';
 import './css/list.css';
 
@@ -6,22 +6,55 @@ import DeleteModal from './DeleteModal';
 import UpdateModalMemo1 from './UpdateModalMemo1';
 import LogoutButton from './LogoutButton';
 
+import { useCookies } from 'react-cookie';     
+import Pagenation from './Pagenation';
+
 const Memo1List = () => {
-  const { memo1Table, setMemo1Table , loading } = useContext(DataContext);
+  const [cookies] = useCookies(['current-token']);  // useCookiesを使う
+  const token = cookies['current-token'];           // useCookiesを使う
+
+  const { memo1Table, setMemo1Table } = useContext(DataContext);
   const [deleteIsOpen, setDeleteIsOpen] = useState(false);
   const [updateIsOpen, setUpdateIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);  // モーダル表示時の値の受渡し
 
+  const [pageData, setPageData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
   const api_url = `/api_memo1/memo1/`
+
+  useEffect(() => {
+ 
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`/api_memo1/pageMemo1/?page=${currentPage}`,{
+          headers: {
+            'Authorization': `Token ${token}`
+        },
+      });
+        const result = await response.json();
+        console.log(result)
+        setPageData(result.results);
+        setTotalPages(Math.ceil(result.count / 20)); // 1ページあたり20件の場合
+      } catch (error) {
+        console.error('データ取得エラー:', error);
+      }
+    };
+
+    fetchData();
+
+  }, [currentPage,memo1Table]);
+
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return `${date.getMonth() + 1}月${date.getDate()}日`; // 月は0始まり
 };
-
-  if (loading) {
-      return <p>Loading...</p>;
-  }
 
 
   return (
@@ -30,17 +63,21 @@ const Memo1List = () => {
     <a href="/main">TOP</a>
     <LogoutButton />
     </div>
+    
 
    <div className="listContent">
    <div className="jumbotron jumbotron-fluid">
     <div className="container">
-      <h1 className="display-4" style={{marginTop:'20px'}}>メモリスト１</h1>
+      <h3 className="display-4" style={{marginTop:'20px'}}>メモリスト１</h3>
     </div>
    </div>
-    
-      <div>
+
+   <Pagenation totalPages={totalPages} currentPage={currentPage}
+           handlePageChange={handlePageChange} />
+
+    <div>
           <div className="container" style={{height:'100%'}}>
-              {memo1Table
+              {pageData
               .slice()
               .sort((a,b)=> new Date(b.reg_date) - new Date(a.reg_date))
               .map(item => (
@@ -70,8 +107,11 @@ const Memo1List = () => {
             ))}
           </div>
           </div>
-        </div>
 
+          <Pagenation totalPages={totalPages} currentPage={currentPage}
+           handlePageChange={handlePageChange} />
+
+        </div>
     </div>
   );
 }
