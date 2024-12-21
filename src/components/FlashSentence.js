@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './css/fcSentence.css';
 import './css/flashcard.css';
 import HoverMenu from './HoverMenu';
 
@@ -43,10 +44,10 @@ const FlashCard = ({ cardData })  => {
         {cardData.map((card, index) => (
           <div key={index} className={`flashcard ${index === currentIndex ? 'active' : 'hidden'}`}
           style = {{display:'block',width:'100%',height:'100%'}}>
-          <div className={'upperpart'}  onClick={slideToNextCard1} style = {{width:'100%',height:'50%',alignContent:'center',fontSize:'3rem', justifyContent:'center',
+          <div className={'upperpart-sen'}  onClick={slideToNextCard1} style = {{width:'100%',height:'45%',alignContent:'center', justifyContent:'center',
               alignItems: 'center'}}>{card.eibun}</div>
-          <div className={paging===0 ? 'underpart graystatus' : 'underpart'}
-          onClick={slideToNextCard2} style = {{width:'100%',height:'45%',alignContent:'center',fontSize:'3rem'}}>{card.wayaku}
+          <div className={paging===0 ? 'underpart-sen graystatus' : 'underpart-sen'}
+          onClick={slideToNextCard2} style = {{width:'100%',height:'45%',alignContent:'center'}}>{card.wayaku}
           </div>
           </div>
         ))}
