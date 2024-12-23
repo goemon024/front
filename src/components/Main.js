@@ -77,6 +77,10 @@ const MainPage = (props) => {
         <Link to="/word">
                 <button className="media-large btn btn-secondary mb-2" style={{marginTop:'1rem'}}>英単語帳編集</button>
         </Link>
+        <Link to="/word/sentence">
+                <button className="media-large btn btn-secondary mb-2" style={{marginTop:'1rem'}}>Sentence帳編集</button>
+        </Link>
+
         <Link to="/memo1">
                 <button className="media-large btn btn-secondary mb-2" style={{marginTop:'1rem'}}>メモ帳１編集</button>
         </Link>
@@ -173,16 +177,23 @@ const MainPage = (props) => {
                 <Link to="/word/review">
                 <button className="btn btn-success mb-2" >復習（1,7,28日前）</button>
                 </Link>
-                <Link to="/word/all">
-                <button className="btn btn-success mb-2" >ＡＬＬ</button>
-                </Link>
+                <div style={{display:"flex",gap:"5px",marginTop:"25px"}}>
                 <Link to="/word/checklist">
-                <button className="btn btn-success mb-2" >チェックリスト</button>
+                <button className="btn btn-success mb-2" >単語 LIST</button>
+                </Link>
+                <Link to="/word/all">
+                <button className="btn btn-success mb-2" >単語 ALL</button>
+                </Link>
+                </div>
+
+                <div style={{display:"flex",gap:"5px",marginTop:"15px"}}>
+                <Link to="/word/sentence_list">
+                <button className="btn btn-success mb-2" >例文 LIST</button>
                 </Link>
                 <Link to="/word/sentence_all">
-                <button className="btn btn-success mb-2" >Sentence Practice</button>
+                <button className="btn btn-success mb-2" >例文 ALL</button>
                 </Link>
-
+                </div>
 
             </div>
 

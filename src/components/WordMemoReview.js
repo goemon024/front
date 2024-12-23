@@ -18,7 +18,7 @@ import HoverMenu from './HoverMenu';
 
 
 const WordMemoReview = ({selectedTable, isAll=false, isCalendar=false, isList=false,
-  isSentence=false,}) => {
+  isSentenceAll=false,isSentenceList=false}) => {
   const { loading } = useContext(DataContext);
   const { wordTable, memo1Table, memo2Table, sentenceTable } = useContext(DataContext);
   const location = useLocation();
@@ -54,9 +54,13 @@ const WordMemoReview = ({selectedTable, isAll=false, isCalendar=false, isList=fa
   console.log(startDate,endDate)
 
   // isListは、英単語のfusen対応のみ想定している。
-  const filteredData = isSentence === true ?
+  const filteredData = isSentenceAll === true ?
       tableData.filter(data=>{
       return data.eval==="OK"
+      })
+   :isSentenceList === true ?
+      tableData.filter(data=>{
+        return data.eval==="OK" && data.fusen===true
       })  
    :isList === true ?
       tableData.filter(data=>{
@@ -110,8 +114,10 @@ const WordMemoReview = ({selectedTable, isAll=false, isCalendar=false, isList=fa
       <HoverMenu links={{href:'/memo1',text:'メモ帳編集'}} />
       ) : selectedTable === 'memo2' ? (
       <HoverMenu links={{href:'/memo2',text:'メモ帳編集'}} />
-      ) : (
+      ) : selectedTable === 'word'  ? (
       <HoverMenu links={{href:'/word',text:'英単語帳編集'}} />
+      ) : (
+      <HoverMenu links={{href:'/word/sentence',text:'Sentence帳編集'}} />
       )}
     </div>
   )

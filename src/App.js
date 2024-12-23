@@ -17,6 +17,8 @@ import Login from './components/Login';
 import WordList from './components/WordList';
 import WordCreate from './components/WordCreate';
 
+import SentenceList from './components/SentenceList';
+
 // import WordReview from './components/WordReview';
 import Memo1List from './components/Memo1List';
 // import Memo1Review from './components/Memo1Review';
@@ -65,7 +67,11 @@ function App() {
               <Route path="/word/all" element={<WordMemoReview selectedTable="word" isAll={true} />} />
               <Route path="/word/checklist" element={<WordMemoReview selectedTable="word" isList={true} />} />
               <Route path="/word/calendar" element={<WordMemoReview selectedTable="word"  isCalendar={true} startDate={null} endDate={null}/>} />
-              <Route path="/word/sentence_all" element={<WordMemoReview selectedTable="sente" isSentence={true} />} />
+
+              <Route path="/word/sentence_all" element={<WordMemoReview selectedTable="sente" isSentenceAll={true} />} />
+              <Route path="/word/sentence_list" element={<WordMemoReview selectedTable="sente" isSentenceList={true} />} />
+              
+              <Route path="/word/sentence" element={<SentenceList />} />
 
 
               <Route path="/memo1" element={<Memo1List />} />

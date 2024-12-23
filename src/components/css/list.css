@@ -63,6 +63,13 @@
     overflow-y: auto;          /* 縦方向にスクロール可能にする */
   }
 
+.container {
+    /* display: block; 通常のブロック要素として縦に並べる */
+    width:100%;
+    /* 各要素の間にスペースを追加 */
+}
+
+
 #staticMenu{
     width: 100px;
     height: 100vh;
