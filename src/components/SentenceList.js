@@ -11,14 +11,14 @@ import Pagenation from './Pagenation';
 import axios from 'axios';
 
 
-const WordList = () => {
+const SentenceList = () => {
   const [cookies] = useCookies(['current-token']);  // useCookiesを使う
   const token = cookies['current-token'];           // useCookiesを使う
 
-  const { wordTable, setWordTable } = useContext(DataContext);
-  const [deleteIsOpen, setDeleteIsOpen] = useState(false);
-  const [updateIsOpen, setUpdateIsOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(null);  // モーダル表示時の値の受渡し
+  const { sentenceTable, setSentenceTable } = useContext(DataContext);
+  // const [deleteIsOpen, setDeleteIsOpen] = useState(false);
+  // const [updateIsOpen, setUpdateIsOpen] = useState(false);
+  // const [selectedItem, setSelectedItem] = useState(null);  // モーダル表示時の値の受渡し
 
   const [pageData, setPageData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -37,7 +37,7 @@ const WordList = () => {
         const result = await response.json();
         console.log(result)
         setPageData(result.results);
-        setTotalPages(Math.ceil(result.count / 20)); // 1ページあたり20件の場合
+        setTotalPages(Math.ceil(result.count / 10)); // 1ページあたり20件の場合
       } catch (error) {
         console.error('データ取得エラー:', error);
       }
@@ -45,7 +45,7 @@ const WordList = () => {
 
     fetchData();
 
-  }, [currentPage,wordTable]);
+  }, [currentPage, sentenceTable]);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -146,4 +146,4 @@ const WordList = () => {
   )
 }
 
-export default WordList
+export default SentenceList
