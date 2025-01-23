@@ -71,7 +71,7 @@ body, html {
 
 #m1_date,#m2_date,#w1_date,#w2_date {
     width:60%;
-    border: 1px solid #74cdcf; /* 枠線を明るい緑色に設定 */
+    border: 1px solid #74cdcf; /* 枠線を明るい緑色に設定 #74cdcf */
     border-radius: 4px;
     margin: 0.3em;
 }
