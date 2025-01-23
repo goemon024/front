@@ -77,8 +77,10 @@ export const DataProvider = ({ children }) => {
             } finally {
                 setLoading(false);
             }
+        }
             fetchData();
             }, []);
+
             // try {
 
             //     const [res1, res2, res3, res4 ] = await Promise.all([
