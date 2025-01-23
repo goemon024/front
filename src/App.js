@@ -51,12 +51,13 @@ const theme = createTheme({
 function App() {
   return (
     // <MuiThemeProvider theme={theme}>
-    <DataProvider>
+    // <DataProvider>
       <Routes>
       <Route path="/" element={<Login />} />
       <Route
           path="/*"
           element={
+            <DataProvider>
             <PrivateRoute>
               <Routes>
               <Route path="/main" element={<MainPage />} />
@@ -88,9 +89,9 @@ function App() {
               
               </Routes>
             </PrivateRoute>
+            </DataProvider>
           }></Route>
       </Routes>
-    </DataProvider>
     // </MuiThemeProvider>
   );
 }
