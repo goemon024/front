@@ -1,0 +1,117 @@
+.card-wrapper {
+    position: relative;
+    width: 300px;
+    height: 200px;
+}
+
+.card-background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+    opacity: 0.3;
+}
+
+.card-background.hovered {
+    transform: rotate(5deg);
+    opacity: 0.5;
+}
+
+.hover-card,
+.hover-card-drill {
+    position: relative;
+    /* display: inline-block; */
+    width: 300px;
+    height: 200px;
+    padding: 20px;
+    box-shadow: 3px 3px 20px rgba(235, 235, 235, 0.5);
+    border-radius: 8px;
+    transform: rotate(0deg);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+
+    background: rgba(235, 235, 235, 0.9);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    z-index: 2;
+}
+
+/* 折り紙のようなエフェクト（背景の重なり） */
+.hover-card::before,
+.hover-card-drill::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(235, 235, 235, 0.3);
+    top: 5px;
+    left: 5px;
+    border-radius: 8px;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    opacity: 0;
+    z-index: -1;
+}
+
+/* .hover-card::after {
+    background: rgba(255, 192, 203, 0.3);
+    top: -5px;
+    left: -5px;
+} */
+
+/* ホバー時のアニメーション */
+.hover-card.hovered {
+    transform: rotate(-3deg) scale(1.15);
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* ホバー時に背景の折り紙風エフェクトを表示 */
+.hover-card.hovered::before,
+.hover-card.hovered::after {
+    opacity: 1;
+    transform: rotate(5deg);
+    z-index: -1;
+}
+
+.card-text {
+    text-align: left;
+    width: 100%;
+    padding: 0 10px;
+}
+
+/* 1番目のcard-text（タイトル）のスタイル */
+.card-text1 {
+    font-size: 2.5em;
+    margin-bottom: auto;
+    margin-top: 20px;
+}
+
+.card-text2 {
+    font-size: 0.9em;
+    margin-bottom: 20px;
+    color: #666;
+}
+
+
+
+.card-text-drill {
+    margin-top: -0.8rem;
+    font-size: 2.0em;
+    color: #444;
+}
+
+.hover-card-drill.hovered {
+    transform: rotate(0deg) scale(1.1);
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.hover-card-drill.hovered::before {
+    opacity: 1;
+    transform: rotate(-6deg) scale(1.08);
+    z-index: -1;
+}

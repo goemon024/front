@@ -1,4 +1,4 @@
-import React,{ useContext } from 'react';
+import React, { useContext } from 'react';
 import { DataContext } from '../context/DataContext';
 
 import { useLocation } from "react-router-dom";
@@ -17,8 +17,8 @@ import HoverMenu from './HoverMenu';
 // import './css/list.css';
 
 
-const WordMemoReview = ({selectedTable, isAll=false, isCalendar=false, isList=false,
-  isSentenceAll=false,isSentenceList=false}) => {
+const WordMemoReview = ({ selectedTable, isAll = false, isCalendar = false, isList = false,
+  isSentenceAll = false, isSentenceList = false }) => {
   const { loading } = useContext(DataContext);
   const { wordTable, memo1Table, memo2Table, sentenceTable } = useContext(DataContext);
   const location = useLocation();
@@ -32,7 +32,7 @@ const WordMemoReview = ({selectedTable, isAll=false, isCalendar=false, isList=fa
 
   if (loading) {
     return <p>Loading...</p>;
-}
+  }
 
   // url navigatorからのstartDateとendDateの受取
   const queryParams = new URLSearchParams(location.search);
@@ -43,41 +43,42 @@ const WordMemoReview = ({selectedTable, isAll=false, isCalendar=false, isList=fa
   // const [tableData, setTableData] = useState([]);   // テーブルデータの取得状態
   // const [loading, setLoading] = useState(true);     // ローディング状態
 
-  const today    = dayjs().format('YYYY-MM-DD');
-  const agoDay1  = dayjs().subtract(1, 'day').format('YYYY-MM-DD');
-  const agoDay7  = dayjs().subtract(7, 'day').format('YYYY-MM-DD');
+  const today = dayjs().format('YYYY-MM-DD');
+  const agoDay1 = dayjs().subtract(1, 'day').format('YYYY-MM-DD');
+  const agoDay7 = dayjs().subtract(7, 'day').format('YYYY-MM-DD');
   const agoDay28 = dayjs().subtract(28, 'day').format('YYYY-MM-DD');
 
   // const filteredData = memo1Table.filter(data => 
   //   [today,agoDay1,agoDay7,agoDay28].includes(data.reg_date));
 
-  console.log(startDate,endDate)
+  console.log(startDate, endDate)
 
   // isListは、英単語のfusen対応のみ想定している。
   const filteredData = isSentenceAll === true ?
-      tableData.filter(data=>{
-      return data.eval==="OK"
+    tableData.filter(data => {
+      return data.eval === "OK"
+    })
+    : isSentenceList === true ?
+      tableData.filter(data => {
+        return data.eval === "OK" && data.fusen === true
       })
-   :isSentenceList === true ?
-      tableData.filter(data=>{
-        return data.eval==="OK" && data.fusen===true
-      })  
-   :isList === true ?
-      tableData.filter(data=>{
-        return data.fusen===true
-      })  
-   : isCalendar === true ?
-     tableData.filter(data =>{
-        const regDate = dayjs(data.reg_date).format('YYYY-MM-DD'); // 日付をフォーマット
-        return startDate && endDate
-          ? regDate >= startDate && regDate <= endDate // 開始日と終了日の範囲内
-          : true; })
-   : isAll === true ? tableData
-   : tableData.filter(data =>
-      [today, agoDay1, agoDay7, agoDay28].includes(dayjs(data.reg_date).format('YYYY-MM-DD'))
-    )
+      : isList === true ?
+        tableData.filter(data => {
+          return data.fusen === true
+        })
+        : isCalendar === true ?
+          tableData.filter(data => {
+            const regDate = dayjs(data.reg_date).format('YYYY-MM-DD'); // 日付をフォーマット
+            return startDate && endDate
+              ? regDate >= startDate && regDate <= endDate // 開始日と終了日の範囲内
+              : true;
+          })
+          : isAll === true ? tableData
+            : tableData.filter(data =>
+              [today, agoDay1, agoDay7, agoDay28].includes(dayjs(data.reg_date).format('YYYY-MM-DD'))
+            )
 
-  
+
 
   // if (isAll !== true){
   // const filteredData = tableData.filter(data => 
@@ -89,14 +90,14 @@ const WordMemoReview = ({selectedTable, isAll=false, isCalendar=false, isList=fa
   //     return regDate.isAfter(dayjs().subtract(31, 'day')) && regDate.isBefore(dayjs().add(1, 'day'));
   //   });
 
-    function shuffleArray(array) {
-      const newArray = [...array]; // 元の配列をコピー
-      for (let i = newArray.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [newArray[i], newArray[j]] = [newArray[j], newArray[i]]; // 要素を交換
-      }
-      return newArray;
+  function shuffleArray(array) {
+    const newArray = [...array]; // 元の配列をコピー
+    for (let i = newArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [newArray[i], newArray[j]] = [newArray[j], newArray[i]]; // 要素を交換
     }
+    return newArray;
+  }
 
   return (
     <div>
@@ -110,14 +111,14 @@ const WordMemoReview = ({selectedTable, isAll=false, isCalendar=false, isList=fa
         <FlashWord cardData={shuffleArray(filteredData)} />
       )}
 
-     {selectedTable === 'memo1' ? (
-      <HoverMenu links={{href:'/memo1',text:'メモ帳編集'}} />
+      {selectedTable === 'memo1' ? (
+        <HoverMenu links={{ href: '/memo1list', text: 'メモ帳編集' }} />
       ) : selectedTable === 'memo2' ? (
-      <HoverMenu links={{href:'/memo2',text:'メモ帳編集'}} />
-      ) : selectedTable === 'word'  ? (
-      <HoverMenu links={{href:'/word',text:'英単語帳編集'}} />
+        <HoverMenu links={{ href: '/memo2list', text: 'メモ帳編集' }} />
+      ) : selectedTable === 'word' ? (
+        <HoverMenu links={{ href: '/wordlist', text: '英単語帳編集' }} />
       ) : (
-      <HoverMenu links={{href:'/word/sentence',text:'Sentence帳編集'}} />
+        <HoverMenu links={{ href: '/word/sentence', text: 'Sentence帳編集' }} />
       )}
     </div>
   )

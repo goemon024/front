@@ -1,4 +1,4 @@
-import React,{ useContext } from 'react';
+import React, { useContext } from 'react';
 import { DataContext } from '../context/DataContext';
 
 // import axios from 'axios'
@@ -21,14 +21,14 @@ const Memo2Review = (props) => {
   const { memo2Table, loading } = useContext(DataContext);
 
   if (loading) {
-      return <p>Loading...</p>;
+    return <p>Loading...</p>;
   }
 
   // const filteredData = memo2Table.filter(data => 
   //   [today,agoDay1,agoDay7,agoDay28].includes(data.reg_date));
 
   const filteredData = memo2Table;
-  
+
   function shuffleArray(array) {
     const newArray = [...array]; // 元の配列をコピー
     for (let i = newArray.length - 1; i > 0; i--) {
@@ -39,12 +39,12 @@ const Memo2Review = (props) => {
   }
 
   return (
-    
+
     <div>
-    <FlashMemo2 cardData={shuffleArray(filteredData)}/>
-    <HoverMenu links={{href:'/memo2',text:'メモ帳編集'}} />
+      <FlashMemo2 cardData={shuffleArray(filteredData)} />
+      <HoverMenu links={{ href: '/memo2list', text: 'メモ帳編集' }} />
     </div>
-    
+
   )
 }
 

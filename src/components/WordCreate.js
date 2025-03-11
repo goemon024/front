@@ -1,4 +1,4 @@
-import React,{useState,useEffect,useContext} from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { DataContext } from '../context/DataContext';
 
 import axios from 'axios'
@@ -8,117 +8,124 @@ import dayjs from 'dayjs';
 
 import './css/create.css';
 import LogoutButton from './LogoutButton';
+import { Link } from 'react-router-dom';
 // import { Block } from '@mui/icons-material';
 
 const WordCreate = () => {
-    const { wordTable, setWordTable } = useContext(DataContext);
-    const [ cookies ] = useCookies(['current-token']);
-    const token = cookies['current-token'];
+  const { wordTable, setWordTable } = useContext(DataContext);
+  const [cookies] = useCookies(['current-token']);
+  const token = cookies['current-token'];
 
-    const today = dayjs().format('YYYY-MM-DD');
-    
-    const filteredData = wordTable.filter(data => 
-        dayjs(data.reg_date).format('YYYY-MM-DD') === today)
+  const today = dayjs().format('YYYY-MM-DD');
 
-    console.log(filteredData)
-    console.log(today)
+  const filteredData = wordTable.filter(data =>
+    dayjs(data.reg_date).format('YYYY-MM-DD') === today)
 
-    const [ todayWord, setTodayWord ] = useState(filteredData);
-    const [ formData1, setFormData1 ]= useState('');
-    const [ isScrollable, setIsScrollable]= useState(false);
-    
-    // console.log(memo1Table[0].reg_date)
+  console.log(filteredData)
+  console.log(today)
 
-    useEffect(() => {
-        const filteredData = wordTable.filter(data => 
-          dayjs(data.reg_date).format('YYYY-MM-DD') === today
-        );
-        setTodayWord(filteredData);
-      }, [wordTable]);
+  const [todayWord, setTodayWord] = useState(filteredData);
+  const [formData1, setFormData1] = useState('');
+  const [isScrollable, setIsScrollable] = useState(false);
 
-    useEffect(() => {
-        if (todayWord.length > 8) {
-          setIsScrollable(true);
-        } else {
-          setIsScrollable(false);
-        }
-      }, [todayWord]);
+  // console.log(memo1Table[0].reg_date)
 
-    const handleCreate = async (e) => {
-        e.preventDefault();
-        if (!formData1) return;
-        try {
-                // const response = await axios.post(`${API_URL}/api_word/word/`,{
-                const response = await axios.post(`/api_word/word/`,{
-                    word: formData1,
-                    reg_date: today,
-                },{
-                headers: {
-                  'Authorization': `Token ${token}`, 
-                },
-              });
-        //   setMemos([response.data, ...memos]); // 新しいメモをリストに追加
-          setWordTable((prev) => [...prev, response.data]);
-          setFormData1(''); // フォームをクリア
-        } catch (error) {
-          console.error('作成失敗:', error.response ? error.response.data : error.message);
-        }
-      };
-    
-      const handleInputChange1 = (e) => {
-        setFormData1(e.target.value);
-      };
+  useEffect(() => {
+    const filteredData = wordTable.filter(data =>
+      dayjs(data.reg_date).format('YYYY-MM-DD') === today
+    );
+    setTodayWord(filteredData);
+  }, [wordTable]);
+
+  useEffect(() => {
+    if (todayWord.length > 8) {
+      setIsScrollable(true);
+    } else {
+      setIsScrollable(false);
+    }
+  }, [todayWord]);
+
+  const handleCreate = async (e) => {
+    e.preventDefault();
+    if (!formData1) return;
+    try {
+      // const response = await axios.post(`${API_URL}/api_word/word/`,{
+      const response = await axios.post(`/api_word/word/`, {
+        word: formData1,
+        reg_date: today,
+      }, {
+        headers: {
+          'Authorization': `Token ${token}`,
+        },
+      });
+      //   setMemos([response.data, ...memos]); // 新しいメモをリストに追加
+      setWordTable((prev) => [...prev, response.data]);
+      setFormData1(''); // フォームをクリア
+    } catch (error) {
+      console.error('作成失敗:', error.response ? error.response.data : error.message);
+    }
+  };
+
+  const handleInputChange1 = (e) => {
+    setFormData1(e.target.value);
+  };
 
   return (
-    <div style={{display:'flex'}}>
+    <div style={{ display: 'flex' }}>
       <div id="staticMenu">
-      <a href="/main">TOP</a>
-      <a href="/word">英単語編集</a>
-      <LogoutButton />
+        <Link to="/main">TOP</Link>
+        <Link to="/wordlist">英単語編集</Link>
+        {/* <a href="/main">TOP</a>
+      <a href="/wordlist">英単語編集</a> */}
+        <LogoutButton />
       </div>
-    
-    <div className="createContent">
-    <div style={{ display: 'flex',
-                  justifyContent: isScrollable ? "flex-start" : "center",
-                  padding: isScrollable ? "100px 20px 5px" : "0px 0px 0px 25px",
-                  overflowY: 'auto', alignItems: 'center',height: '100vh',
-                  flexDirection: 'column', width: '100%'}}>
-      <form
-        onSubmit={handleCreate}
-        style={{ marginBottom: '50px', display: 'flex', flexDirection: 'column', 
-            alignItems: 'flex-start', width: '300px'}}>
-        <label style={{ marginBottom: '10px' }}>New Word:</label>
-        <textarea
-          id="word"
-          required
-          value={formData1}
-          rows="1"
-          column="100"
-          onChange={handleInputChange1}
-          style={{ padding: '5px', fontSize: '16px', width:'100%', marginBottom: '10px', resize: 'vertical' }}
-          placeholder="new word"
-        ></textarea>
 
-        <input type="submit" value="create" style={{ width: '80px', height: '30px', fontSize: '16px' }} />
-      </form>
+      <div className="createContent">
+        <div style={{
+          display: 'flex',
+          justifyContent: isScrollable ? "flex-start" : "center",
+          padding: isScrollable ? "100px 20px 5px" : "0px 0px 0px 25px",
+          overflowY: 'auto', alignItems: 'center', height: '100vh',
+          flexDirection: 'column', width: '100%'
+        }}>
+          <form
+            onSubmit={handleCreate}
+            style={{
+              marginBottom: '50px', display: 'flex', flexDirection: 'column',
+              alignItems: 'flex-start', width: '300px'
+            }}>
+            <label style={{ marginBottom: '10px' }}>New Word:</label>
+            <textarea
+              id="word"
+              required
+              value={formData1}
+              rows="1"
+              column="100"
+              onChange={handleInputChange1}
+              style={{ padding: '5px', fontSize: '16px', width: '100%', marginBottom: '10px', resize: 'vertical' }}
+              placeholder="new word"
+            ></textarea>
 
-      <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-        {todayWord.length > 0 ? (
-          todayWord.map((record) => (
-            <ul key={record.id} style={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}>
-              <li style={{ display: 'flex', flex: 1 }}>
-                <span style={{ flex: 0.15, overflow: 'hidden',textOverflow:'ellipsis'}}>{record.word}</span>
-                <span style={{ flex: 0.15, overflow: 'hidden',textOverflow:'ellipsis'}}>{record.mean1}</span>
-                <span style={{ flex: 0.7, overflow: 'hidden',textOverflow:'ellipsis'}}>{record.mean2}</span>
-              </li>
-            </ul>
-          ))
-        ) : (
-          <p>本日の記録はありません。</p>
-        )}
+            <input type="submit" value="create" style={{ width: '80px', height: '30px', fontSize: '16px' }} />
+          </form>
+
+          <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+            {todayWord.length > 0 ? (
+              todayWord.map((record) => (
+                <ul key={record.id} style={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}>
+                  <li style={{ display: 'flex', flex: 1 }}>
+                    <span style={{ flex: 0.15, overflow: 'hidden', textOverflow: 'ellipsis' }}>{record.word}</span>
+                    <span style={{ flex: 0.15, overflow: 'hidden', textOverflow: 'ellipsis' }}>{record.mean1}</span>
+                    <span style={{ flex: 0.7, overflow: 'hidden', textOverflow: 'ellipsis' }}>{record.mean2}</span>
+                  </li>
+                </ul>
+              ))
+            ) : (
+              <p>本日の記録はありません。</p>
+            )}
+          </div>
+        </div>
       </div>
-    </div>
-    </div>
     </div>
   )
 }

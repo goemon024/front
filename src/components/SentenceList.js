@@ -1,4 +1,4 @@
-import React,{useContext,useState,useEffect} from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { DataContext } from '../context/DataContext';
 import './css/list.css';
 
@@ -6,10 +6,10 @@ import DeleteModal from './DeleteModal';
 
 import LogoutButton from './LogoutButton';
 
-import { useCookies } from 'react-cookie';     
+import { useCookies } from 'react-cookie';
 import Pagenation from './Pagenation';
 import axios from 'axios';
-
+import { Link } from 'react-router-dom';
 
 const SentenceList = () => {
   const [cookies] = useCookies(['current-token']);  // useCookiesを使う
@@ -29,11 +29,11 @@ const SentenceList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`/api_word/pageSentence/?page=${currentPage}`,{
+        const response = await fetch(`/api_word/pageSentence/?page=${currentPage}`, {
           headers: {
             'Authorization': `Token ${token}`
-        },
-      });
+          },
+        });
         const result = await response.json();
         console.log(result)
         setPageData(result.results);
@@ -59,7 +59,7 @@ const SentenceList = () => {
       )
     );
 
-    console.log({ fusen: checked }); 
+    console.log({ fusen: checked });
 
     try {
       await axios.patch(
@@ -79,51 +79,53 @@ const SentenceList = () => {
         prevData.map((item) =>
           item.id === id ? { ...item, fusen: !checked } : item
         ));
-  };}
+    };
+  }
 
 
-//   const formatDate = (dateString) => {
-//     const date = new Date(dateString);
-//     return `${date.getMonth() + 1}月${date.getDate()}日`; // 月は0始まり
-// };
+  //   const formatDate = (dateString) => {
+  //     const date = new Date(dateString);
+  //     return `${date.getMonth() + 1}月${date.getDate()}日`; // 月は0始まり
+  // };
 
   return (
-    <div style={{display:'flex'}}>
+    <div style={{ display: 'flex' }}>
       <div id="staticMenu">
-      <a href="/main">TOP</a>
-      <LogoutButton />
+        {/* <a href="/main">TOP</a> */}
+        <Link to="/main">TOP</Link>
+        <LogoutButton />
       </div>
-    <div className='listContent' style={{width:'100%'}}>
-    <div className="jumbotron jumbotron-fluid">
-    <div className="container">
-      <h1 className="display-4" style={{marginTop:'20px'}}>英語例文リスト</h1>
-    </div>
-   </div>
+      <div className='listContent' style={{ width: '100%' }}>
+        <div className="jumbotron jumbotron-fluid">
+          <div className="container">
+            <h1 className="display-4" style={{ marginTop: '20px' }}>英語例文リスト</h1>
+          </div>
+        </div>
 
-   <Pagenation totalPages={totalPages} currentPage={currentPage}
-           handlePageChange={handlePageChange} />
+        <Pagenation totalPages={totalPages} currentPage={currentPage}
+          handlePageChange={handlePageChange} />
 
-   <div>
-   <div className="container" style={{height:'100%'}}>
-              {pageData
-              .filter(item => item.eval === "OK") 
+        <div>
+          <div className="container" style={{ height: '100%' }}>
+            {pageData
+              .filter(item => item.eval === "OK")
               .map(item => (
-            <div className="word-and-buttons" key={item.id}>
+                <div className="word-and-buttons" key={item.id}>
 
-              <input
-              className="checklist"
-              type="checkbox"
-              checked={item.fusen}
-              onChange={(e) => handleCheckboxChange(item.id, e.target.checked)}/>
+                  <input
+                    className="checklist"
+                    type="checkbox"
+                    checked={item.fusen}
+                    onChange={(e) => handleCheckboxChange(item.id, e.target.checked)} />
 
-              <span style={{flex:0.1}}>{ item.word }</span>
-              <div style={{flex:0.8, display: "flex", flexDirection: "column"}}>
-              <span >{ item.eibun }</span>
-              <span >{ item.wayaku }</span>
-              </div>
-              {/* <span className="date">{formatDate(item.reg_date)}</span> */}
-            
-            {/* <div className="buttons">
+                  <span style={{ flex: 0.1 }}>{item.word}</span>
+                  <div style={{ flex: 0.8, display: "flex", flexDirection: "column" }}>
+                    <span >{item.eibun}</span>
+                    <span >{item.wayaku}</span>
+                  </div>
+                  {/* <span className="date">{formatDate(item.reg_date)}</span> */}
+
+                  {/* <div className="buttons">
             <button onClick={() => {setSelectedItem(item);setDeleteIsOpen(true)}} className="btn btn-success">削除</button>
 
             {selectedItem &&(
@@ -133,16 +135,16 @@ const SentenceList = () => {
             )}
 
             </div> */}
-            </div>
+                </div>
 
-    ))}
-    </div>
+              ))}
+          </div>
 
-    <Pagenation totalPages={totalPages} currentPage={currentPage}
-           handlePageChange={handlePageChange} />
+          <Pagenation totalPages={totalPages} currentPage={currentPage}
+            handlePageChange={handlePageChange} />
 
-    </div>
-    </div></div>
+        </div>
+      </div></div>
   )
 }
 

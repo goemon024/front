@@ -2,8 +2,14 @@ import React, { useState, useEffect } from 'react';
 import './css/hovermenu.css';
 import LogoutButton from './LogoutButton';
 import { throttle, debounce } from 'lodash';
+import { Link } from 'react-router-dom';
 
-const HoverMenu = ({links}) => {
+// const HoverMenu = ({ 
+//   firstLink = { href: "/mainpage", text: "TOP" },
+//   secondLink = { href: "/", text: "Menu" }
+// }) 
+
+const HoverMenu = ({ links }) => {
   const [menuWidth, setMenuWidth] = useState(0);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 567);
   // reactのmaterial UI、アニメーション用のライブラリをreactで。
@@ -23,29 +29,31 @@ const HoverMenu = ({links}) => {
 
     const handleResize = debounce(() => {
       setIsMobile(window.innerWidth <= 567);
-    }, 150); 
+    }, 150);
 
 
-  if (!isMobile) {
-    window.addEventListener('mousemove', handleMouseMove);
-  }
+    if (!isMobile) {
+      window.addEventListener('mousemove', handleMouseMove);
+    }
 
-  window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', handleResize);
 
-  return () => {
-    window.removeEventListener('mousemove', handleMouseMove);
-    window.removeEventListener('resize', handleResize);
-  };
-}, []);
-  
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <div
       id="hoverMenu"
-      style={ isMobile ? {} : { width: `${menuWidth}px` }
+      style={isMobile ? {} : { width: `${menuWidth}px` }
       }>
 
-      <a href="/main" >TOP</a>
-      <a href={links.href} >{links.text}</a>
+      {/* <a href="/main" >TOP</a>
+      <a href={links.href} >{links.text}</a> */}
+      <Link to="/mainpage">TOP</Link>
+      <Link to={links.href}>{links.text}</Link>
       <LogoutButton />
 
     </div>

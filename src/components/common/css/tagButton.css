@@ -1,0 +1,61 @@
+.tag-button {
+    display: inline-block;
+    background-color: orange;
+    color: #1a1a1f;
+    text-decoration: none;
+    padding: 10px 20px;
+    font-size: 30px;
+    font-weight: bold;
+    position: fixed;
+    right: -15px;
+    width: fit-content;
+    transform: rotate(-7deg);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+/* デモ用のスタイル */
+.tag-button::before {
+    content: "";
+    position: absolute;
+    left: -20px;
+    /* ここを大きめにする */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    /* 0に変更して三角形に */
+    height: 0;
+    /* 0に変更して三角形に */
+    border-style: solid;
+    border-width: 32px 20px 32px 0;
+    /* 三角形のサイズを調整 */
+    border-color: transparent var(--triangle-color) transparent transparent;
+    transition: border-color 0.3s ease;
+    /* border-colorのみに対するtransitionに修正 */
+}
+
+/* ホバー時のアニメーション */
+.tag-button.hovered {
+    transform: rotate(-7deg) translateX(-50px);
+    background-color: #ffda88;
+}
+
+/* ホバー時の三角形の色変更 */
+.tag-button.hovered::before {
+    border-color: transparent var(--triangle-color) transparent transparent;
+    opacity: 0.8;
+}
+
+/* 本来のスタイルは一時的にコメントアウト */
+/* .tag-button::before {
+    content: "";
+    position: absolute;
+    left: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 33px 20px 33px 0;
+    border-color: transparent orange transparent transparent;
+    transition: border-color 0.3s ease;
+} */
