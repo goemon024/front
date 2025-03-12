@@ -1,11 +1,11 @@
 import React from 'react';
 
-const LogoutButton = ({style, label = "LOG OUT" }) => {
-    const handleLogout = async () => {          
-          localStorage.removeItem('current-token');
-          localStorage.removeItem('username');
-          window.location.href = '/';
-      };
+const LogoutButton = ({ style, label = 'LOG OUT' }) => {
+  const handleLogout = async () => {
+    localStorage.removeItem('current-token');
+    localStorage.removeItem('username');
+    window.location.href = '/';
+  };
 
   return (
     <button

@@ -10,33 +10,31 @@ import { useCookies } from 'react-cookie';
 import Pagenation from './Pagenation';
 import { Link } from 'react-router-dom';
 
-
 const Memo1List = () => {
-  const [cookies] = useCookies(['current-token']);  // useCookiesを使う
-  const token = cookies['current-token'];           // useCookiesを使う
+  const [cookies] = useCookies(['current-token']); // useCookiesを使う
+  const token = cookies['current-token']; // useCookiesを使う
 
   const { memo1Table, setMemo1Table } = useContext(DataContext);
   const [deleteIsOpen, setDeleteIsOpen] = useState(false);
   const [updateIsOpen, setUpdateIsOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(null);  // モーダル表示時の値の受渡し
+  const [selectedItem, setSelectedItem] = useState(null); // モーダル表示時の値の受渡し
 
   const [pageData, setPageData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-  const api_url = `/api_memo1/memo1/`
+  const api_url = `/api_memo1/memo1/`;
 
   useEffect(() => {
-
     const fetchData = async () => {
       try {
         const response = await fetch(`/api_memo1/pageMemo1/?page=${currentPage}`, {
           headers: {
-            'Authorization': `Token ${token}`
+            Authorization: `Token ${token}`,
           },
         });
         const result = await response.json();
-        console.log(result)
+        console.log(result);
         setPageData(result.results);
         setTotalPages(Math.ceil(result.count / 20)); // 1ページあたり20件の場合
       } catch (error) {
@@ -45,9 +43,7 @@ const Memo1List = () => {
     };
 
     fetchData();
-
   }, [currentPage, memo1Table]);
-
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -58,7 +54,6 @@ const Memo1List = () => {
     return `${date.getMonth() + 1}月${date.getDate()}日`; // 月は0始まり
   };
 
-
   return (
     <div style={{ display: 'flex' }}>
       <div id="staticMenu">
@@ -66,56 +61,86 @@ const Memo1List = () => {
         <LogoutButton />
       </div>
 
-
       <div className="listContent">
         <div className="jumbotron jumbotron-fluid">
           <div className="container">
-            <h3 className="display-4" style={{ marginTop: '20px' }}>メモリスト１</h3>
+            <h3 className="display-4" style={{ marginTop: '20px' }}>
+              メモリスト１
+            </h3>
           </div>
         </div>
 
-        <Pagenation totalPages={totalPages} currentPage={currentPage}
-          handlePageChange={handlePageChange} />
+        <Pagenation
+          totalPages={totalPages}
+          currentPage={currentPage}
+          handlePageChange={handlePageChange}
+        />
 
         <div>
           <div className="container" style={{ height: '100%' }}>
             {pageData
               .slice()
               .sort((a, b) => new Date(b.reg_date) - new Date(a.reg_date))
-              .map(item => (
+              .map((item) => (
                 <div className="word-and-buttons" key={item.id}>
                   <span className="memo">{item.memo}</span>
                   <span className="date">{formatDate(item.reg_date)}</span>
 
                   <div className="buttons">
-                    <button onClick={() => { setSelectedItem(item); setUpdateIsOpen(true) }} className="btn btn-info"   >編集</button>
-                    <button onClick={() => { setSelectedItem(item); setDeleteIsOpen(true) }} className="btn btn-success">削除</button>
+                    <button
+                      onClick={() => {
+                        setSelectedItem(item);
+                        setUpdateIsOpen(true);
+                      }}
+                      className="btn btn-info"
+                    >
+                      編集
+                    </button>
+                    <button
+                      onClick={() => {
+                        setSelectedItem(item);
+                        setDeleteIsOpen(true);
+                      }}
+                      className="btn btn-success"
+                    >
+                      削除
+                    </button>
 
                     {selectedItem && (
-                      <UpdateModalMemo1 isOpen={updateIsOpen} onRequestClose={() => setUpdateIsOpen(false)}
-                        data={selectedItem} dataDisplay={selectedItem.memo}
-                        setTable={setMemo1Table} apiUrl={api_url} />
+                      <UpdateModalMemo1
+                        isOpen={updateIsOpen}
+                        onRequestClose={() => setUpdateIsOpen(false)}
+                        data={selectedItem}
+                        dataDisplay={selectedItem.memo}
+                        setTable={setMemo1Table}
+                        apiUrl={api_url}
+                      />
                     )}
 
                     {selectedItem && (
-                      <DeleteModal isOpen={deleteIsOpen} onRequestClose={() => setDeleteIsOpen(false)}
-                        data={selectedItem} dataDisplay={selectedItem.memo.slice(0, 30)}
-                        setTable={setMemo1Table} apiUrl={api_url} />
+                      <DeleteModal
+                        isOpen={deleteIsOpen}
+                        onRequestClose={() => setDeleteIsOpen(false)}
+                        data={selectedItem}
+                        dataDisplay={selectedItem.memo.slice(0, 30)}
+                        setTable={setMemo1Table}
+                        apiUrl={api_url}
+                      />
                     )}
-
                   </div>
                 </div>
-
               ))}
           </div>
         </div>
 
-        <Pagenation totalPages={totalPages} currentPage={currentPage}
-          handlePageChange={handlePageChange} />
-
+        <Pagenation
+          totalPages={totalPages}
+          currentPage={currentPage}
+          handlePageChange={handlePageChange}
+        />
       </div>
     </div>
   );
-}
+};
 
-export default Memo1List
+export default Memo1List;

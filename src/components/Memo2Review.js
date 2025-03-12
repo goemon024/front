@@ -10,9 +10,7 @@ import FlashMemo2 from './FlashMemo2';
 import HoverMenu from './HoverMenu';
 // import './css/list.css';
 
-
-const Memo2Review = (props) => {
-
+const Memo2Review = () => {
   // const today    = dayjs().format('YYYY-MM-DD');
   // const agoDay1  = dayjs().subtract(1, 'day').format('YYYY-MM-DD');
   // const agoDay7  = dayjs().subtract(7, 'day').format('YYYY-MM-DD');
@@ -24,7 +22,7 @@ const Memo2Review = (props) => {
     return <p>Loading...</p>;
   }
 
-  // const filteredData = memo2Table.filter(data => 
+  // const filteredData = memo2Table.filter(data =>
   //   [today,agoDay1,agoDay7,agoDay28].includes(data.reg_date));
 
   const filteredData = memo2Table;
@@ -39,13 +37,14 @@ const Memo2Review = (props) => {
   }
 
   return (
-
     <div>
       <FlashMemo2 cardData={shuffleArray(filteredData)} />
-      <HoverMenu menuLink={{ href: '/memo2', text: 'メモ２' }} editlink={{ href: '/memo2list', text: 'メモ２編集' }} />
+      <HoverMenu
+        menuLink={{ href: '/memo2', text: 'メモ２' }}
+        editlink={{ href: '/memo2list', text: 'メモ２編集' }}
+      />
     </div>
+  );
+};
 
-  )
-}
-
-export default Memo2Review
+export default Memo2Review;

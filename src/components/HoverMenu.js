@@ -4,10 +4,10 @@ import LogoutButton from './LogoutButton';
 import { throttle, debounce } from 'lodash';
 import { Link } from 'react-router-dom';
 
-// const HoverMenu = ({ 
+// const HoverMenu = ({
 //   firstLink = { href: "/mainpage", text: "TOP" },
 //   secondLink = { href: "/", text: "Menu" }
-// }) 
+// })
 
 const HoverMenu = ({ menuLink, editLink }) => {
   const [menuWidth, setMenuWidth] = useState(0);
@@ -31,7 +31,6 @@ const HoverMenu = ({ menuLink, editLink }) => {
       setIsMobile(window.innerWidth <= 567);
     }, 150);
 
-
     if (!isMobile) {
       window.addEventListener('mousemove', handleMouseMove);
     }
@@ -45,17 +44,12 @@ const HoverMenu = ({ menuLink, editLink }) => {
   }, []);
 
   return (
-    <div
-      id="hoverMenu"
-      style={isMobile ? {} : { width: `${menuWidth}px` }
-      }>
-
+    <div id="hoverMenu" style={isMobile ? {} : { width: `${menuWidth}px` }}>
       {/* <a href="/main" >TOP</a>
       <a href={links.href} >{links.text}</a> */}
       <Link to={menuLink.href}>{menuLink.text}</Link>
       <Link to={editLink.href}>{editLink.text}</Link>
       <LogoutButton />
-
     </div>
   );
 };

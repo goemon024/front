@@ -11,38 +11,50 @@ const UpdateModalWord = ({ isOpen, onRequestClose, data, setTable, apiUrl }) => 
   const token = cookies['current-token'];
 
   // 1つのformDataで3つのデータの状態管理。
-  const [formData, setFormData] = useState({ word: data.word, mean1: data.mean1, mean2: data.mean2 });
+  const [formData, setFormData] = useState({
+    word: data.word,
+    mean1: data.mean1,
+    mean2: data.mean2,
+  });
 
   useEffect(() => {
     if (isOpen && data) {
-      setFormData({ word: data.word, mean1: data.mean1, mean2: data.mean2 })
+      setFormData({ word: data.word, mean1: data.mean1, mean2: data.mean2 });
     }
   }, [isOpen, data]);
 
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`${apiUrl}${data.id}/`,
+      await axios.put(
+        `${apiUrl}${data.id}/`,
         {
           id: data.id,
           user: data.user,
           word: formData.word,
           mean1: formData.mean1,
           mean2: formData.mean2,
-          reg_date: data.reg_date
-        }, {
-        headers: {
-          'Authorization': `Token ${token}`,
+          reg_date: data.reg_date,
         },
-      });
+        {
+          headers: {
+            Authorization: `Token ${token}`,
+          },
+        }
+      );
 
-      console.log('更新成功')
-      setTable(prevTable => prevTable.map(mapdata => mapdata.id === data.id ?
-        { ...mapdata, word: formData.word, mean1: formData.mean1, mean2: formData.mean2 } : mapdata));
+      console.log('更新成功');
+      setTable((prevTable) =>
+        prevTable.map((mapdata) =>
+          mapdata.id === data.id
+            ? { ...mapdata, word: formData.word, mean1: formData.mean1, mean2: formData.mean2 }
+            : mapdata
+        )
+      );
       onRequestClose();
     } catch (error) {
-      console.log(`${apiUrl}${data.id}/`)
-      console.log(`${token}`)
+      console.log(`${apiUrl}${data.id}/`);
+      console.log(`${token}`);
       console.error('更新失敗:', error.response ? error.response.data : error.message);
     }
   };
@@ -84,11 +96,18 @@ const UpdateModalWord = ({ isOpen, onRequestClose, data, setTable, apiUrl }) => 
         },
       }}
     >
-
-      <form onSubmit={handleUpdate} style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '90%' }}>
-        <p style={{ color: 'silver' }}>入力日時：
-          {new Date(data.reg_date).toLocaleDateString('ja-JP',
-            { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+      <form
+        onSubmit={handleUpdate}
+        style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '90%' }}
+      >
+        <p style={{ color: 'silver' }}>
+          入力日時：
+          {new Date(data.reg_date).toLocaleDateString('ja-JP', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          })}
+        </p>
 
         <p>
           <label htmlFor="word">word:</label>
@@ -130,12 +149,27 @@ const UpdateModalWord = ({ isOpen, onRequestClose, data, setTable, apiUrl }) => 
           />
         </p>
 
-        <div className='container' style={{ display: 'flex', gap: '0.5rem' }}>
-          <button type="submit" className="btn btn-outline-dark block btn-custom" style={{ width: '5rem' }}>Update</button>
-          <button type="button" onClick={() => { onRequestClose(); setFormData('') }} className="btn btn-outline-dark block btn-custom" style={{ width: '5rem' }}>Close</button>
+        <div className="container" style={{ display: 'flex', gap: '0.5rem' }}>
+          <button
+            type="submit"
+            className="btn btn-outline-dark block btn-custom"
+            style={{ width: '5rem' }}
+          >
+            Update
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              onRequestClose();
+              setFormData('');
+            }}
+            className="btn btn-outline-dark block btn-custom"
+            style={{ width: '5rem' }}
+          >
+            Close
+          </button>
         </div>
       </form>
-
     </Modal>
   );
 };

@@ -1,45 +1,76 @@
-import React, { useState } from "react";
-import './css/tagButton.css';
+import React, { useState, useCallback } from 'react';
+import PropTypes from 'prop-types';
+import styles from './css/tagButton.module.css';
 
-const TagButton = ({ text, link, top, color, backgroundColor, logout = false, width = "22.5rem" }) => {
-    const [isHovered, setIsHovered] = useState(false);
+const TagButton = ({
+  text,
+  link,
+  top,
+  color,
+  backgroundColor,
+  logout = false,
+  width = '22.5rem',
+}) => {
+  const [isHovered, setIsHovered] = useState(false);
 
-    const handleLogout = (e) => {
-        e.preventDefault(); // デフォルトのリンク遷移を防止
-        localStorage.removeItem('current-token');
-        localStorage.removeItem('username');
-        window.location.href = '/';
-    };
+  const handleLogout = useCallback((e) => {
+    e.preventDefault();
+    localStorage.removeItem('current-token');
+    localStorage.removeItem('username');
+    window.location.href = '/';
+  }, []);
 
-    const handleClick = (e) => {
-        if (logout) {
-            handleLogout(e);
-        }
-        // logoutがfalseの場合は通常のリンク遷移が発生
-    };
+  const handleClick = useCallback(
+    (e) => {
+      if (logout) {
+        handleLogout(e);
+      }
+    },
+    [logout, handleLogout]
+  );
 
-    // カスタムスタイルを作成
-    const buttonStyle = {
-        top: top,
-        backgroundColor: backgroundColor,
-        color: color,
-        width: `clamp(150px, ${width}, 350px)`,
-        '--triangle-color': backgroundColor // CSS変数として背景色を設定
-    };
+  const handleMouseEnter = useCallback(() => setIsHovered(true), []);
+  const handleMouseLeave = useCallback(() => setIsHovered(false), []);
 
-    return (
-        <a
-            href={logout ? "#" : link}  // ログアウト時は無効なリンクに
-            className={`tag-button ${isHovered ? "hovered" : ""}`}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-            style={buttonStyle}
-            onClick={handleClick}
-        >
-            {text}
-            <span className="tag-triangle"></span>
-        </a>
-    );
+  const buttonStyle = {
+    top,
+    backgroundColor,
+    color,
+    width: `clamp(120px, ${width}, 350px)`,
+    '--triangle-color': backgroundColor,
+  };
+
+  return (
+    <a
+      href={logout ? '#' : link}
+      className={`${styles.tagButton} ${isHovered ? styles.hovered : ''}`}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      style={buttonStyle}
+      onClick={handleClick}
+    >
+      {text}
+      <span className={styles.tagTriangle} />
+    </a>
+  );
+};
+
+TagButton.propTypes = {
+  text: PropTypes.string.isRequired,
+  link: PropTypes.string.isRequired,
+  top: PropTypes.string,
+  color: PropTypes.string,
+  backgroundColor: PropTypes.string,
+  logout: PropTypes.bool,
+  width: PropTypes.string,
+};
+
+TagButton.defaultProps = {
+  top: 'auto',
+  color: '#ffffff',
+  backgroundColor: '#000000',
+  logout: false,
+  width: '22.5rem',
 };
 
 export default TagButton;

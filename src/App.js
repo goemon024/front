@@ -1,4 +1,3 @@
-
 import React from 'react';
 // import { DataContext } from './App';
 
@@ -37,7 +36,7 @@ import Memo2 from './components/pages/Memo2';
 import Word from './components/pages/Word';
 import Sentence from './components/pages/Sentence';
 
-// import Navbar from "./components/Navbar";  
+// import Navbar from "./components/Navbar";
 // import DataProvider from './context/DataContext';
 
 // const theme = createTheme({
@@ -70,35 +69,82 @@ function App() {
                 <Route path="/wordlist" element={<WordList />} />
                 <Route path="/word/create" element={<WordCreate />} />
                 <Route path="/word/review" element={<WordMemoReview selectedTable="word" />} />
-                <Route path="/word/all" element={<WordMemoReview selectedTable="word" isAll={true} />} />
-                <Route path="/word/checklist" element={<WordMemoReview selectedTable="word" isList={true} />} />
-                <Route path="/word/calendar" element={<WordMemoReview selectedTable="word" isCalendar={true} startDate={null} endDate={null} />} />
+                <Route
+                  path="/word/all"
+                  element={<WordMemoReview selectedTable="word" isAll={true} />}
+                />
+                <Route
+                  path="/word/checklist"
+                  element={<WordMemoReview selectedTable="word" isList={true} />}
+                />
+                <Route
+                  path="/word/calendar"
+                  element={
+                    <WordMemoReview
+                      selectedTable="word"
+                      isCalendar={true}
+                      startDate={null}
+                      endDate={null}
+                    />
+                  }
+                />
 
                 <Route path="/sentence" element={<Sentence />} />
                 <Route path="/sentencelist" element={<SentenceList />} />
 
-                <Route path="/sentence/all" element={<WordMemoReview selectedTable="sente" isSentenceAll={true} />} />
-                <Route path="/sentence/checklist" element={<WordMemoReview selectedTable="sente" isSentenceList={true} />} />
-
+                <Route
+                  path="/sentence/all"
+                  element={<WordMemoReview selectedTable="sente" isSentenceAll={true} />}
+                />
+                <Route
+                  path="/sentence/checklist"
+                  element={<WordMemoReview selectedTable="sente" isSentenceList={true} />}
+                />
 
                 <Route path="/memo1" element={<Memo1 />} />
                 <Route path="/memo1list" element={<Memo1List />} />
                 <Route path="/memo1/create" element={<Memo1Create />} />
                 <Route path="/memo1/review" element={<WordMemoReview selectedTable="memo1" />} />
-                <Route path="/memo1/all" element={<WordMemoReview selectedTable="memo1" isAll={true} />} />
-                <Route path="/memo1/calendar" element={<WordMemoReview selectedTable="memo1" isCalendar={true} startDate={null} endDate={null} />} />
+                <Route
+                  path="/memo1/all"
+                  element={<WordMemoReview selectedTable="memo1" isAll={true} />}
+                />
+                <Route
+                  path="/memo1/calendar"
+                  element={
+                    <WordMemoReview
+                      selectedTable="memo1"
+                      isCalendar={true}
+                      startDate={null}
+                      endDate={null}
+                    />
+                  }
+                />
 
                 <Route path="/memo2" element={<Memo2 />} />
                 <Route path="/memo2list" element={<Memo2List />} />
                 <Route path="/memo2/create" element={<Memo2Create />} />
                 <Route path="/memo2/review" element={<WordMemoReview selectedTable="memo2" />} />
-                <Route path="/memo2/all" element={<WordMemoReview selectedTable="memo2" isAll={true} />} />
-                <Route path="/memo2/calendar" element={<WordMemoReview selectedTable="memo2" isCalendar={true} startDate={null} endDate={null} />} />
-
+                <Route
+                  path="/memo2/all"
+                  element={<WordMemoReview selectedTable="memo2" isAll={true} />}
+                />
+                <Route
+                  path="/memo2/calendar"
+                  element={
+                    <WordMemoReview
+                      selectedTable="memo2"
+                      isCalendar={true}
+                      startDate={null}
+                      endDate={null}
+                    />
+                  }
+                />
               </Routes>
             </PrivateRoute>
           </DataProvider>
-        }></Route>
+        }
+      ></Route>
     </Routes>
     // </MuiThemeProvider>
   );

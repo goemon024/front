@@ -19,8 +19,8 @@ const FlashMemo1 = ({ cardData }) => {
 
   return (
     <>
-      {cardData.length > 0 ?
-        (<div className="flashcard-container" onClick={slideToNextCard}>
+      {cardData.length > 0 ? (
+        <div className="flashcard-container" onClick={slideToNextCard}>
           {cardData.map((card, index) => (
             <div
               key={index}
@@ -29,16 +29,19 @@ const FlashMemo1 = ({ cardData }) => {
               {card.memo}
             </div>
           ))}
-        </div>)
-
-        : (<div className="no-data">
+        </div>
+      ) : (
+        <div className="no-data">
           記録されているメモがありません。
           <div>
-            <Link to="/memo1" className="button">戻る</Link>
+            <Link to="/memo1" className="button">
+              戻る
+            </Link>
           </div>
-        </div>)}
+        </div>
+      )}
     </>
   );
-}
+};
 
-export default FlashMemo1
+export default FlashMemo1;

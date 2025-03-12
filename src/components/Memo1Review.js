@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { DataContext } from '../context/DataContext';
 
 // import axios from 'axios'
-import { Typography } from '@mui/material';
+// import { Typography } from '@mui/material';
 
 // import { useCookies } from 'react-cookie';          // useCookiesを使う
 import dayjs from 'dayjs';
@@ -27,10 +27,10 @@ const Memo1Review = () => {
   const agoDay7 = dayjs().subtract(7, 'day').format('YYYY-MM-DD');
   const agoDay28 = dayjs().subtract(28, 'day').format('YYYY-MM-DD');
 
-  // const filteredData = memo1Table.filter(data => 
+  // const filteredData = memo1Table.filter(data =>
   //   [today,agoDay1,agoDay7,agoDay28].includes(data.reg_date));
 
-  const filteredData = memo1Table.filter(data =>
+  const filteredData = memo1Table.filter((data) =>
     [today, agoDay1, agoDay7, agoDay28].includes(dayjs(data.reg_date).format('YYYY-MM-DD'))
   );
 
@@ -51,9 +51,12 @@ const Memo1Review = () => {
   return (
     <div>
       <FlashMemo1 cardData={shuffleArray(filteredData)} />
-      <HoverMenu menuLink={{ href: '/memo1', text: 'メモ帳１' }} editLink={{ href: '/memo1list', text: 'メモ帳１編集' }} />
+      <HoverMenu
+        menuLink={{ href: '/memo1', text: 'メモ帳１' }}
+        editLink={{ href: '/memo1list', text: 'メモ帳１編集' }}
+      />
     </div>
-  )
-}
+  );
+};
 
-export default Memo1Review
+export default Memo1Review;

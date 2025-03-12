@@ -39,8 +39,8 @@
 }
 
 /* List(word,memo1,memo2) */
-.List{
-  color:white;
+.List {
+  color: white;
   background-color: black;
 }
 
@@ -57,9 +57,8 @@
 }
 
 .date {
-  flex: 0 0 60; 
+  flex: 0 0 60;
   overflow: hidden; /* テキストが長すぎる場合は隠す */
   text-overflow: ellipsis; /* テキストが長すぎる場合は省略記号を表示 */
   padding-left: 10px; /* 少しの間隔を設定 */
 }
-

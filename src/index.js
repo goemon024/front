@@ -6,9 +6,8 @@ import reportWebVitals from './reportWebVitals';
 import { CookiesProvider } from 'react-cookie';
 
 import App from './App';
-import './components/css/reset.css'
-import './components/css/style.css'
-
+import './components/css/reset.css';
+import './components/css/style.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -24,14 +23,12 @@ root.render(
 
 reportWebVitals();
 
-
-
 // import React from 'react';
 // import ReactDOM from 'react-dom/client';
 // import './index.css';
 // import reportWebVitals from './reportWebVitals';
 // import * as serviceWorker from './serviceWorker';
-// import {Route,BrowserRouter,Routes} from 'react-router-dom'; 
+// import {Route,BrowserRouter,Routes} from 'react-router-dom';
 
 // import Login from './components/Login';
 // import App from './App';
@@ -61,9 +58,6 @@ reportWebVitals();
 //     </BrowserRouter>
 //   </React.StrictMode>
 // )
-
-
-
 
 // const root = ReactDOM.createRoot(document.getElementById('root'));
 // root.render(

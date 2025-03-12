@@ -28,11 +28,11 @@ const FlashWord = ({ cardData }) => {
     if (isAnimating) return; // アニメーション中は次のカードに移動しない
     if (paging === 0) {
       setPaging(1);
-      return
+      return;
     }
     if (paging === 1) {
       setPaging(2);
-      return
+      return;
     }
     // if (isAnimating) return; // アニメーション中は次のカードに移動しない
     setPaging(0);
@@ -61,7 +61,7 @@ const FlashWord = ({ cardData }) => {
       setCurrentIndex(nextIndex);
     }
     setTimeout(() => {
-      setAnimation('active')
+      setAnimation('active');
       setIsAnimating(false); // アニメーションが終わったらフラグをリセット
     }, 400); // アニメーション時間と一致させる
   };
@@ -78,47 +78,85 @@ const FlashWord = ({ cardData }) => {
     }
   };
 
-
-
   return (
     <>
-      {cardData.length > 0 ?
-        (<div className="flashcard-container">
+      {cardData.length > 0 ? (
+        <div className="flashcard-container">
           {cardData.map((card, index) => (
-            <div key={index} className={`flashcard ${index === currentIndex ? animation : 'hidden'}`}
-              style={{ display: 'block', width: '100%', height: '100%' }}>
-
+            <div
+              key={index}
+              className={`flashcard ${index === currentIndex ? animation : 'hidden'}`}
+              style={{ display: 'block', width: '100%', height: '100%' }}
+            >
               <div className={'upperpart'} style={{ height: '30%', position: 'relative' }}>
-                <div className={'left'} onClick={slideToPrevious1} style={{ position: 'absolute', zIndex: "2", left: '0', width: '40%' }}></div>
-                <div className={'right'} onClick={slideToNextCard1} style={{ position: 'absolute', zIndex: "2", right: '0', width: '60%' }}></div>
-                <span style={{ whiteSpace: 'nowrap', position: 'absolute', zIndex: "1", top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
-                  {card.word} </span>
+                <div
+                  className={'left'}
+                  onClick={slideToPrevious1}
+                  style={{ position: 'absolute', zIndex: '2', left: '0', width: '40%' }}
+                ></div>
+                <div
+                  className={'right'}
+                  onClick={slideToNextCard1}
+                  style={{ position: 'absolute', zIndex: '2', right: '0', width: '60%' }}
+                ></div>
+                <span
+                  style={{
+                    whiteSpace: 'nowrap',
+                    position: 'absolute',
+                    zIndex: '1',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                  }}
+                >
+                  {card.word}{' '}
+                </span>
               </div>
 
-              <div className={paging === 0 ? 'underpart graystatus' : 'underpart'}
-                style={{ height: '65%', width: '100%', position: 'relative', overflow: 'hidden' }}>
-                <div className={'left'} onClick={slideToPrevious2} style={{ position: 'absolute', zIndex: "2", left: '0', top: '0', width: '40%' }}></div>
-                <div className={'right'} onClick={slideToNextCard2} style={{ position: 'absolute', zIndex: "2", right: '0', top: '0', width: '60%' }}></div>
-                <div style={{ position: 'absolute', zIndex: "1" }}>
-                  <span className={paging === 2 ? "mean1" : "noneDisplay"}>{card.mean1}<br /><br /></span>
-                  <span className={paging === 2 ? 'mean2' : "noneDisplay"}>{card.mean2}</span>
-                  <img className={paging === 1 ? "meanImage" : "noneDisplay"} src={card.img} alt="generated image by API"
+              <div
+                className={paging === 0 ? 'underpart graystatus' : 'underpart'}
+                style={{ height: '65%', width: '100%', position: 'relative', overflow: 'hidden' }}
+              >
+                <div
+                  className={'left'}
+                  onClick={slideToPrevious2}
+                  style={{ position: 'absolute', zIndex: '2', left: '0', top: '0', width: '40%' }}
+                ></div>
+                <div
+                  className={'right'}
+                  onClick={slideToNextCard2}
+                  style={{ position: 'absolute', zIndex: '2', right: '0', top: '0', width: '60%' }}
+                ></div>
+                <div style={{ position: 'absolute', zIndex: '1' }}>
+                  <span className={paging === 2 ? 'mean1' : 'noneDisplay'}>
+                    {card.mean1}
+                    <br />
+                    <br />
+                  </span>
+                  <span className={paging === 2 ? 'mean2' : 'noneDisplay'}>{card.mean2}</span>
+                  <img
+                    className={paging === 1 ? 'meanImage' : 'noneDisplay'}
+                    src={card.img}
+                    alt="generated image by API"
                     style={{ height: '100%', objectFit: 'contain' }}
                   />
                 </div>
               </div>
-
             </div>
           ))}
-        </div>)
-        : (<div className="no-data">
+        </div>
+      ) : (
+        <div className="no-data">
           記録されているメモがありません。
           <div>
-            <Link to="/word" className="button">戻る</Link>
+            <Link to="/word" className="button">
+              戻る
+            </Link>
           </div>
-        </div>)}
+        </div>
+      )}
     </>
   );
-}
+};
 
-export default FlashWord
+export default FlashWord;

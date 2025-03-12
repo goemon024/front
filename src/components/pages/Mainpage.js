@@ -8,60 +8,56 @@ import styles from '../css/main.module.css';
 import axios from 'axios';
 // import API_URL from '../../config';
 
-import TagButton from '../common/tagButton'
+import TagButton from '../common/tagButton';
 import CardButton from '../common/cardButton';
 import { useCookies } from 'react-cookie';
 
 const MainPage = (props) => {
-  const [cookies] = useCookies(['current-token']);  // useCookiesを使う
-  const token = cookies['current-token'];           // useCookiesを使う
+  const [cookies] = useCookies(['current-token']); // useCookiesを使う
+  const token = cookies['current-token']; // useCookiesを使う
 
-  const [randomWord, setRandomWord] = useState("");
-  const [randomWordMean, setRandomWordMean] = useState("");
-  const [randomMemo1, setRandomMemo1] = useState("");
+  const [randomWord, setRandomWord] = useState('');
+  const [randomWordMean, setRandomWordMean] = useState('');
+  const [randomMemo1, setRandomMemo1] = useState('');
 
   useEffect(() => {
     const fetchRandomWord = async () => {
-
       try {
         const response1 = await axios.get(`/api_word/pageWord/?page=1`, {
           headers: {
-            'Authorization': `Token ${token}`
+            Authorization: `Token ${token}`,
           },
-        }
-        );
+        });
         if (response1.data.results && response1.data.results.length > 0) {
           const words = response1.data.results;
           const randomIndex = Math.floor(Math.random() * words.length);
           setRandomWord(words[randomIndex].word);
           setRandomWordMean(words[randomIndex].mean1);
-
-
         }
       } catch (error) {
         console.error('Failed to fetch random word:', error);
-        setRandomWord("word not found"); // エラー時はデフォルトテキストを表示
-        setRandomWordMean(""); // エラー時はデフォルトテキストを表示
+        setRandomWord('word not found'); // エラー時はデフォルトテキストを表示
+        setRandomWordMean(''); // エラー時はデフォルトテキストを表示
       }
 
       try {
         const response = await fetch(`/api_memo1/pageMemo1/?page=1`, {
           headers: {
-            'Authorization': `Token ${token}`
+            Authorization: `Token ${token}`,
           },
         });
 
         const data = await response.json();
-        console.log(data.results[9].memo)
+        console.log(data.results[9].memo);
         if (data.results && data.results.length > 0) {
           const randomIndex = Math.floor(Math.random() * data.results.length);
           data.results[randomIndex].memo.length < 75
             ? setRandomMemo1(data.results[randomIndex].memo)
-            : setRandomMemo1(data.results[randomIndex].memo.substring(0, 50) + "...");
+            : setRandomMemo1(data.results[randomIndex].memo.substring(0, 50) + '...');
         }
       } catch (error) {
         console.error('Failed to fetch random memo1:', error);
-        setRandomMemo1("memo1 not found"); // エラー時はデフォルトテキストを表示
+        setRandomMemo1('memo1 not found'); // エラー時はデフォルトテキストを表示
       }
     };
     fetchRandomWord();
@@ -70,52 +66,74 @@ const MainPage = (props) => {
     return () => clearInterval(interval);
   }, []);
 
-
   return (
-
-    <div style={{
-      backgroundImage: 'url("/static/react/images/login_background2.webp")',
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      backgroundAttachment: 'fixed',
-      justifyContent: 'center',
-      alignItems: 'center',
-      minHeight: '100vh',
-      height: 'auto',
-      color: '#d0d0d0',
-      position: 'relative',
-      width: '100%',
-      overflow: 'auto'
-    }}>
-      <div className={styles["content-container"]}>
-        <div className={styles["container"]} style={{ display: "block", margin: "20px", paddingLeft: "10%" }}>
-          <h2 style={{ fontSize: "2.5rem" }}>エビングハウス メモ帳１</h2>
-          <p style={{ fontSize: "1.5rem" }}>{props.cookies.get("username")} さん</p>
+    <div
+      style={{
+        backgroundImage: 'url("/static/react/images/login_background2.webp")',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '100vh',
+        height: 'auto',
+        color: '#d0d0d0',
+        position: 'relative',
+        width: '100%',
+        overflow: 'auto',
+      }}
+    >
+      <div className={styles['content-container']}>
+        <div
+          className={styles['container']}
+          style={{ display: 'block', margin: '20px', paddingLeft: '10%' }}
+        >
+          <h2 style={{ fontSize: '2.5rem' }}>エビングハウス メモ帳１</h2>
+          <p style={{ fontSize: '1.5rem' }}>{props.cookies.get('username')} さん</p>
         </div>
 
-        <div className={styles["double-container"]} >
-
-          <div className={styles["memo-container"]} style={{ display: "flex", flexDirection: "column", gap: "30px", marginTop: "25px" }}>
-            <div className={styles["card-a"]}>
-              <CardButton titleText="英単語帳" detailText1={randomWord} href="/word" detailText2={randomWordMean} backgroundColor="rgba(190, 255, 255, 0.9)" />
+        <div className={styles['double-container']}>
+          <div
+            className={styles['memo-container']}
+            style={{ display: 'flex', flexDirection: 'column', gap: '30px', marginTop: '25px' }}
+          >
+            <div className={styles['card-a']}>
+              <CardButton
+                titleText="英単語帳"
+                detailText1={randomWord}
+                href="/word"
+                detailText2={randomWordMean}
+                backgroundColor="rgba(190, 255, 255, 0.9)"
+              />
             </div>
-            <div className={styles["card-b"]}>
-              <CardButton titleText="英語 例文帳" detailText1="英単語帳でチェックした単語を用いた例文（複数単語の同時使用例文をGPT生成）" href="/sentence" />
+            <div className={styles['card-b']}>
+              <CardButton
+                titleText="英語 例文帳"
+                detailText1="英単語帳でチェックした単語を用いた例文（複数単語の同時使用例文をGPT生成）"
+                href="/sentence"
+              />
             </div>
           </div>
 
-          <div className={styles["memo-container"]}>
-            <div className={styles["card-c"]}>
+          <div className={styles['memo-container']}>
+            <div className={styles['card-c']}>
               <CardButton titleText="メモ帳１" detailText1={randomMemo1} href="/memo1" />
             </div>
-            <div className={styles["card-d"]}>
+            <div className={styles['card-d']}>
               <CardButton titleText="メモ帳２" detailText1="" href="/memo2" />
             </div>
           </div>
         </div>
       </div>
-      <TagButton text="Logout" link="/" top="85%" backgroundColor="rgba(255, 170, 110, 0.8)" color="rgba(50,50,50)" logout={true} width="25rem" />
-
+      <TagButton
+        text="Logout"
+        link="/"
+        top="85%"
+        backgroundColor="rgba(255, 170, 110, 0.8)"
+        color="rgba(50,50,50)"
+        logout={true}
+        width="25rem"
+      />
     </div>
 
     // /* <div className={styles["memo-container"]}>
@@ -181,13 +199,9 @@ const MainPage = (props) => {
     //     //     </div>
     //     //   </div>
 
-
     //     //   <TagButton text="Logout" link="/" top="75%" backgroundColor="rgba(255, 170, 110, 0.8)" color="rgba(50,50,50)" logout={true} width="25rem" />
 
-
-
     //     // </div>
-
   );
 };
 

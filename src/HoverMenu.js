@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './css/hovermenu.css';
-import axios from 'axios';
-import API_URL from '../config';
+// import axios from 'axios';
+// import API_URL from '../config';
 
-const HoverMenu = ({links}) => {
+const HoverMenu = ({ links }) => {
   const [menuWidth, setMenuWidth] = useState(0);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 567);
   // reactのmaterial UI、アニメーション用のライブラリをreactで。
@@ -26,35 +26,32 @@ const HoverMenu = ({links}) => {
     //   }
     // };
 
-  //   // 初期実行
-  //   handleResize();
-  //   window.addEventListener('resize', handleResize);
+    //   // 初期実行
+    //   handleResize();
+    //   window.addEventListener('resize', handleResize);
 
-  //   return () => {
-  //     window.removeEventListener('mousemove', handleMouseMove);
-  //     window.removeEventListener('resize', handleResize);
-  //   };
+    //   return () => {
+    //     window.removeEventListener('mousemove', handleMouseMove);
+    //     window.removeEventListener('resize', handleResize);
+    //   };
 
-  // }, []);
+    // }, []);
 
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 567);
+    };
 
-  const handleResize = () => {
-    setIsMobile(window.innerWidth <= 567);
-  };
+    if (!isMobile) {
+      window.addEventListener('mousemove', handleMouseMove);
+    }
 
-  if (!isMobile) {
-    window.addEventListener('mousemove', handleMouseMove);
-  }
+    window.addEventListener('resize', handleResize);
 
-  window.addEventListener('resize', handleResize);
-
-  return () => {
-    window.removeEventListener('mousemove', handleMouseMove);
-    window.removeEventListener('resize', handleResize);
-  };
-}, [isMobile]);
-
-
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [isMobile]);
 
   const handleLogout = async () => {
     // try {
@@ -65,19 +62,20 @@ const HoverMenu = ({links}) => {
     //     },
     //     withCredentials: true, // クッキーを送信
     //   });
-      
-      localStorage.removeItem('current-token');
-      localStorage.removeItem('username');
-      window.location.href = '/';
+
+    localStorage.removeItem('current-token');
+    localStorage.removeItem('username');
+    window.location.href = '/';
     // } catch (error) {
     //   console.error('ログアウトエラー:', error);
     // }
   };
-  
+
   return (
     <div
       id="hoverMenu"
-      style={ isMobile ? {} : { width: `${menuWidth}px` }
+      style={
+        isMobile ? {} : { width: `${menuWidth}px` }
         // width: `${menuWidth}px`,
         // height: '100vh',
         // position: 'fixed',
@@ -89,17 +87,22 @@ const HoverMenu = ({links}) => {
         // transition: 'width 0.3s ease',
       }
     >
+      <a href="/main">TOP</a>
+      <a href={links.href}>{links.text}</a>
 
-      <a href="/main" >TOP</a>
-      <a href={links.href} >{links.text}</a>
-
-      <button className='LogoutButton' onClick={handleLogout} style={{
-        backgroundColor: 'transparent',
-        color: 'rgba(15, 115, 230, 1)',
-        border: 'none',
-        cursor: 'pointer',
-      }}aria-label="ログアウト">LOG OUT</button>
-
+      <button
+        className="LogoutButton"
+        onClick={handleLogout}
+        style={{
+          backgroundColor: 'transparent',
+          color: 'rgba(15, 115, 230, 1)',
+          border: 'none',
+          cursor: 'pointer',
+        }}
+        aria-label="ログアウト"
+      >
+        LOG OUT
+      </button>
     </div>
   );
 };

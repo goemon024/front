@@ -23,7 +23,7 @@ const FlashCard = ({ cardData }) => {
   const slideToNextCard2 = () => {
     if (paging === 0) {
       setPaging(1);
-      return
+      return;
     }
     // if (isAnimating) return; // アニメーション中は次のカードに移動しない
     setPaging(0);
@@ -36,34 +36,51 @@ const FlashCard = ({ cardData }) => {
     }, 400); // アニメーション時間と一致させる
   };
 
-
   return (
     <>
-      {cardData.length > 0 ?
-        (<div className="flashcard-container">
+      {cardData.length > 0 ? (
+        <div className="flashcard-container">
           {cardData.map((card, index) => (
-            <div key={index} className={`flashcard ${index === currentIndex ? 'active' : 'hidden'}`}
-              style={{ display: 'block', width: '100%', height: '100%' }}>
-              <div className={'upperpart-sen'} onClick={slideToNextCard1} style={{
-                width: '100%', height: '45%', alignContent: 'center', justifyContent: 'center',
-                alignItems: 'center'
-              }}>{card.eibun}</div>
-              <div className={paging === 0 ? 'underpart-sen graystatus' : 'underpart-sen'}
-                onClick={slideToNextCard2} style={{ width: '100%', height: '45%', alignContent: 'center' }}>{card.wayaku}
+            <div
+              key={index}
+              className={`flashcard ${index === currentIndex ? 'active' : 'hidden'}`}
+              style={{ display: 'block', width: '100%', height: '100%' }}
+            >
+              <div
+                className={'upperpart-sen'}
+                onClick={slideToNextCard1}
+                style={{
+                  width: '100%',
+                  height: '45%',
+                  alignContent: 'center',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
+                {card.eibun}
+              </div>
+              <div
+                className={paging === 0 ? 'underpart-sen graystatus' : 'underpart-sen'}
+                onClick={slideToNextCard2}
+                style={{ width: '100%', height: '45%', alignContent: 'center' }}
+              >
+                {card.wayaku}
               </div>
             </div>
           ))}
-        </div>)
-        : (<div className="no-data">
+        </div>
+      ) : (
+        <div className="no-data">
           記録されているメモがありません。
           <div>
-            <Link to="/sentence" class="button">戻る</Link>
+            <Link to="/sentence" class="button">
+              戻る
+            </Link>
           </div>
-        </div>)}
+        </div>
+      )}
     </>
   );
-}
+};
 
-export default FlashCard
-
-
+export default FlashCard;

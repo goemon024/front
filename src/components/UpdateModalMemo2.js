@@ -26,26 +26,32 @@ const UpdateModalMemo2 = ({ isOpen, onRequestClose, data, setTable, apiUrl }) =>
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`${apiUrl}${data.id}/`,
+      await axios.put(
+        `${apiUrl}${data.id}/`,
         {
           id: data.id,
           user: data.user,
           memo1: formData1,
           memo2: formData2,
-          reg_date: data.reg_date
-        }, {
-        headers: {
-          'Authorization': `Token ${token}`,
+          reg_date: data.reg_date,
         },
-      });
+        {
+          headers: {
+            Authorization: `Token ${token}`,
+          },
+        }
+      );
 
-      console.log('更新成功')
-      setTable(prevTable => prevTable.map(mapdata => mapdata.id === data.id ?
-        { ...mapdata, memo1: formData1, memo2: formData2 } : mapdata));
+      console.log('更新成功');
+      setTable((prevTable) =>
+        prevTable.map((mapdata) =>
+          mapdata.id === data.id ? { ...mapdata, memo1: formData1, memo2: formData2 } : mapdata
+        )
+      );
       onRequestClose();
     } catch (error) {
-      console.log(`${apiUrl}${data.id}/`)
-      console.log(`${token}`)
+      console.log(`${apiUrl}${data.id}/`);
+      console.log(`${token}`);
       console.error('更新失敗:', error.response ? error.response.data : error.message);
     }
   };
@@ -56,8 +62,6 @@ const UpdateModalMemo2 = ({ isOpen, onRequestClose, data, setTable, apiUrl }) =>
   const handleInputChange2 = (e) => {
     setFormData2(e.target.value);
   };
-
-
 
   return (
     <Modal
@@ -86,11 +90,18 @@ const UpdateModalMemo2 = ({ isOpen, onRequestClose, data, setTable, apiUrl }) =>
         },
       }}
     >
-
-      <form onSubmit={handleUpdate} style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '90%' }}>
-        <p style={{ color: 'silver' }}>入力日時：
-          {new Date(data.reg_date).toLocaleDateString('ja-JP',
-            { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+      <form
+        onSubmit={handleUpdate}
+        style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '90%' }}
+      >
+        <p style={{ color: 'silver' }}>
+          入力日時：
+          {new Date(data.reg_date).toLocaleDateString('ja-JP', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          })}
+        </p>
 
         <p>
           <label htmlFor="memo">memo:</label>
@@ -118,10 +129,6 @@ const UpdateModalMemo2 = ({ isOpen, onRequestClose, data, setTable, apiUrl }) =>
           />
         </p>
 
-
-
-
-
         {/* <p>
           <label htmlFor="memo">memo:</label>
           <textarea
@@ -134,12 +141,27 @@ const UpdateModalMemo2 = ({ isOpen, onRequestClose, data, setTable, apiUrl }) =>
             onChange={handleInputChange}
           />
         </p> */}
-        <div className='container' style={{ display: 'flex', gap: '0.5rem' }}>
-          <button type="submit" className="btn btn-outline-dark block btn-custom" style={{ width: '5rem' }}>Update</button>
-          <button type="button" onClick={() => { onRequestClose(); setFormData1(''); }} className="btn btn-outline-dark block btn-custom" style={{ width: '5rem' }}>Close</button>
+        <div className="container" style={{ display: 'flex', gap: '0.5rem' }}>
+          <button
+            type="submit"
+            className="btn btn-outline-dark block btn-custom"
+            style={{ width: '5rem' }}
+          >
+            Update
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              onRequestClose();
+              setFormData1('');
+            }}
+            className="btn btn-outline-dark block btn-custom"
+            style={{ width: '5rem' }}
+          >
+            Close
+          </button>
         </div>
       </form>
-
     </Modal>
   );
 };

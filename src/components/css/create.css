@@ -1,44 +1,46 @@
-body, html {
-    align-items: center;
-    overflow-x: auto;
+body,
+html {
+  align-items: center;
+  overflow-x: auto;
 }
 
-#memo, #memo2{
+#memo,
+#memo2 {
   width: 400px;
-  height: 150px; 
+  height: 150px;
 }
 
-#memo1{
+#memo1 {
   width: 400px;
-  height: 35px; 
+  height: 35px;
 }
 
 .createContent {
-  margin-left: 100px;        /* メニューの幅分だけ余白を作る */
-  padding: 10px;            /* コンテンツの余白 */
-  overflow-y: auto;          /* 縦方向にスクロール可能にする */
+  margin-left: 100px; /* メニューの幅分だけ余白を作る */
+  padding: 10px; /* コンテンツの余白 */
+  overflow-y: auto; /* 縦方向にスクロール可能にする */
 }
 
-@media (max-width: 576px){
-   .form {
-   max-width:100% ;
-   min-width: 300px;
-   }
-
-  #memo,#memo2{
-      width: 300px;
-      height: 200px; 
+@media (max-width: 576px) {
+  .form {
+    max-width: 100%;
+    min-width: 300px;
   }
 
-  #memo1{
+  #memo,
+  #memo2 {
     width: 300px;
-    height: 35px; 
+    height: 200px;
+  }
+
+  #memo1 {
+    width: 300px;
+    height: 35px;
   }
 
   .createContent {
-    margin-left: 0px;        /* メニューの幅分だけ余白を作る */
-    padding: 10px;            /* コンテンツの余白 */
-    overflow-y: auto;          /* 縦方向にスクロール可能にする */
+    margin-left: 0px; /* メニューの幅分だけ余白を作る */
+    padding: 10px; /* コンテンツの余白 */
+    overflow-y: auto; /* 縦方向にスクロール可能にする */
   }
-
 }
