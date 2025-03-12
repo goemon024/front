@@ -73,7 +73,7 @@ const WordCreate = () => {
   return (
     <div style={{ display: 'flex' }}>
       <div id="staticMenu">
-        <Link to="/main">TOP</Link>
+        <Link to="/word">英単語帳</Link>
         <Link to="/wordlist">英単語編集</Link>
         {/* <a href="/main">TOP</a>
       <a href="/wordlist">英単語編集</a> */}
@@ -100,7 +100,7 @@ const WordCreate = () => {
               required
               value={formData1}
               rows="1"
-              column="100"
+              // column="100"
               onChange={handleInputChange1}
               style={{ padding: '5px', fontSize: '16px', width: '100%', marginBottom: '10px', resize: 'vertical' }}
               placeholder="new word"

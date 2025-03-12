@@ -95,7 +95,7 @@ const WordList = () => {
     <div style={{ display: 'flex' }}>
       <div id="staticMenu">
         {/* <a href="/main">TOP</a> */}
-        <Link to="/main">TOP</Link>
+        <Link to="/word">英単語帳</Link>
         <LogoutButton />
       </div>
       <div className='listContent'>

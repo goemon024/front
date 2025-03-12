@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import './css/tagButton.css';
 
-const TagButton = ({ text, link, top, color, backgroundColor, logout = false, width = "10%" }) => {
+const TagButton = ({ text, link, top, color, backgroundColor, logout = false, width = "22.5rem" }) => {
     const [isHovered, setIsHovered] = useState(false);
 
     const handleLogout = (e) => {
@@ -18,26 +18,13 @@ const TagButton = ({ text, link, top, color, backgroundColor, logout = false, wi
         // logoutがfalseの場合は通常のリンク遷移が発生
     };
 
-    // 三角形のスタイル
-    const triangleStyle = {
-        position: 'absolute',
-        left: '-20px',
-        top: '50%',
-        transform: 'translateY(-50%)',
-        width: 0,
-        height: 0,
-        borderStyle: 'solid',
-        borderWidth: '32px 20px 32px 0',
-        borderColor: `transparent ${backgroundColor} transparent transparent`,
-        transition: 'all 0.3s ease',
-        opacity: isHovered ? 0.8 : 1
-    };
-
-    // ボタンのスタイル
+    // カスタムスタイルを作成
     const buttonStyle = {
         top: top,
         backgroundColor: backgroundColor,
-        color: color
+        color: color,
+        width: `clamp(150px, ${width}, 350px)`,
+        '--triangle-color': backgroundColor // CSS変数として背景色を設定
     };
 
     return (
@@ -49,8 +36,8 @@ const TagButton = ({ text, link, top, color, backgroundColor, logout = false, wi
             style={buttonStyle}
             onClick={handleClick}
         >
-            <div style={triangleStyle} />
             {text}
+            <span className="tag-triangle"></span>
         </a>
     );
 };

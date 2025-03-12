@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react'
 import { DataContext } from '../context/DataContext';
 import './css/list.css';
 
-import DeleteModal from './DeleteModal';
+// import DeleteModal from './DeleteModal';
 
 import LogoutButton from './LogoutButton';
 
@@ -15,7 +15,7 @@ const SentenceList = () => {
   const [cookies] = useCookies(['current-token']);  // useCookiesを使う
   const token = cookies['current-token'];           // useCookiesを使う
 
-  const { sentenceTable, setSentenceTable } = useContext(DataContext);
+  const { sentenceTable } = useContext(DataContext);
   // const [deleteIsOpen, setDeleteIsOpen] = useState(false);
   // const [updateIsOpen, setUpdateIsOpen] = useState(false);
   // const [selectedItem, setSelectedItem] = useState(null);  // モーダル表示時の値の受渡し
@@ -24,7 +24,7 @@ const SentenceList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-  const api_url = `/api_word/word/`
+  // const api_url = `/api_word/word/`
 
   useEffect(() => {
     const fetchData = async () => {
@@ -92,7 +92,7 @@ const SentenceList = () => {
     <div style={{ display: 'flex' }}>
       <div id="staticMenu">
         {/* <a href="/main">TOP</a> */}
-        <Link to="/main">TOP</Link>
+        <Link to="/sentence">英語例文帳</Link>
         <LogoutButton />
       </div>
       <div className='listContent' style={{ width: '100%' }}>

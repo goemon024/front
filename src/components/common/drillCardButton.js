@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import "./css/cardButton.css";
 import dayjs from "dayjs";
 
-const DrillCardButton = ({ titleText, className = "btn btn-primary block" }) => {
+const DrillCardButton = ({ titleText, link }) => {
     const navigate = useNavigate();
     const today = dayjs().format("YYYY-MM-DD");
     const oneWeekAgo = dayjs().subtract(7, "day").format("YYYY-MM-DD");
@@ -16,7 +16,7 @@ const DrillCardButton = ({ titleText, className = "btn btn-primary block" }) => 
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(startDate, endDate)
-        navigate(`/word/calendar?startDate=${startDate}&endDate=${endDate}`);
+        navigate(`/${link}/calendar?startDate=${startDate}&endDate=${endDate}`);
     };
 
     return (
@@ -43,7 +43,7 @@ const DrillCardButton = ({ titleText, className = "btn btn-primary block" }) => 
                             <label htmlFor="end_date">to:</label>
                             <input type="date" id="end_date" value={endDate} onChange={(e) => setEndDate(e.target.value)}
                             /></div>
-                        <button type="submit" class={className} style={{ width: '75%', alignSelf: 'right', marginTop: '0.5rem' }}>開始</button>
+                        <button type="submit" className="btn btn-primary block" style={{ width: '75%', alignSelf: 'right', marginTop: '0.5rem' }}>開始</button>
                     </form>
                 </div>
 

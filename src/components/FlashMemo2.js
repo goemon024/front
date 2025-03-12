@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './css/flashcard.css';
-import HoverMenu from './HoverMenu';
 import { Link } from 'react-router-dom';
 
 const FlashCard = ({ cardData }) => {
@@ -54,10 +53,10 @@ const FlashCard = ({ cardData }) => {
             </div>
           ))}
         </div>)
-        : (<div class="no-data">
+        : (<div className="no-data">
           記録されているメモがありません。
           <div>
-            <Link to="/main" class="button">戻る</Link>
+            <Link to="/memo2" className="button">戻る</Link>
           </div>
         </div>)}
     </>

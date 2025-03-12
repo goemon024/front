@@ -1,14 +1,14 @@
 
-import React, { useContext } from 'react';
-import { DataContext } from './App';
+import React from 'react';
+// import { DataContext } from './App';
 
 import './App.css';
 
-import Main from './components/Main';
-import Test from './components/Test';
+// import Main from './components/Main';
+// import Test from './components/Test';
 
-import { createTheme, ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
-import indigo from "@mui/material/colors/indigo";
+// import { createTheme } from "@mui/material/styles";
+// import indigo from "@mui/material/colors/indigo";
 
 import { Routes, Route } from 'react-router-dom';
 import MainPage from './components/pages/Mainpage';
@@ -35,21 +35,22 @@ import PrivateRoute from './context/PrivateRoute';
 import Memo1 from './components/pages/Memo1';
 import Memo2 from './components/pages/Memo2';
 import Word from './components/pages/Word';
+import Sentence from './components/pages/Sentence';
 
 // import Navbar from "./components/Navbar";  
 // import DataProvider from './context/DataContext';
 
-const theme = createTheme({
-  palette: {
-    primary: indigo,
-    secondary: {
-      main: "#f44336",
-    },
-  },
-  typography: {
-    fontFamily: "Comic Neue",
-  },
-});
+// const theme = createTheme({
+//   palette: {
+//     primary: indigo,
+//     secondary: {
+//       main: "#f44336",
+//     },
+//   },
+//   typography: {
+//     fontFamily: "Comic Neue",
+//   },
+// });
 
 function App() {
   return (
@@ -73,10 +74,12 @@ function App() {
                 <Route path="/word/checklist" element={<WordMemoReview selectedTable="word" isList={true} />} />
                 <Route path="/word/calendar" element={<WordMemoReview selectedTable="word" isCalendar={true} startDate={null} endDate={null} />} />
 
-                <Route path="/word/sentence_all" element={<WordMemoReview selectedTable="sente" isSentenceAll={true} />} />
-                <Route path="/word/sentence_list" element={<WordMemoReview selectedTable="sente" isSentenceList={true} />} />
+                <Route path="/sentence" element={<Sentence />} />
+                <Route path="/sentencelist" element={<SentenceList />} />
 
-                <Route path="/word/sentence" element={<SentenceList />} />
+                <Route path="/sentence/all" element={<WordMemoReview selectedTable="sente" isSentenceAll={true} />} />
+                <Route path="/sentence/checklist" element={<WordMemoReview selectedTable="sente" isSentenceList={true} />} />
+
 
                 <Route path="/memo1" element={<Memo1 />} />
                 <Route path="/memo1list" element={<Memo1List />} />

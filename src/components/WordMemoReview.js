@@ -112,13 +112,13 @@ const WordMemoReview = ({ selectedTable, isAll = false, isCalendar = false, isLi
       )}
 
       {selectedTable === 'memo1' ? (
-        <HoverMenu links={{ href: '/memo1list', text: 'メモ帳編集' }} />
+        <HoverMenu menuLink={{ href: '/memo1', text: 'メモ帳１' }} editLink={{ href: '/memo1list', text: 'メモ１編集' }} />
       ) : selectedTable === 'memo2' ? (
-        <HoverMenu links={{ href: '/memo2list', text: 'メモ帳編集' }} />
+        <HoverMenu menuLink={{ href: '/memo2', text: 'メモ帳２' }} editLink={{ href: '/memo2list', text: 'メモ２編集' }} />
       ) : selectedTable === 'word' ? (
-        <HoverMenu links={{ href: '/wordlist', text: '英単語帳編集' }} />
+        <HoverMenu menuLink={{ href: '/word', text: '英単語帳' }} editLink={{ href: '/wordlist', text: '英単語帳編集' }} />
       ) : (
-        <HoverMenu links={{ href: '/word/sentence', text: 'Sentence帳編集' }} />
+        <HoverMenu menuLink={{ href: '/sentence', text: '英例文帳' }} editLink={{ href: '/sentencelist', text: 'Sentence帳編集' }} />
       )}
     </div>
   )

@@ -1,12 +1,12 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { DataContext } from '../../context/DataContext';
-import dayjs from "dayjs";
+import React, { useState, useEffect } from 'react';
+// import { Link, useNavigate } from 'react-router-dom';
+// import { DataContext } from '../../context/DataContext';
+// import dayjs from "dayjs";
 
-import { CookiesProvider, withCookies } from 'react-cookie';
+import { withCookies } from 'react-cookie';
 import styles from '../css/main.module.css';
 import axios from 'axios';
-import API_URL from '../../config';
+// import API_URL from '../../config';
 
 import TagButton from '../common/tagButton'
 import CardButton from '../common/cardButton';
@@ -71,114 +71,123 @@ const MainPage = (props) => {
   }, []);
 
 
-  const { memo1Table, loading, userName } = useContext(DataContext);
-  const navigate = useNavigate();
-
-  const today = dayjs().format("YYYY-MM-DD");
-  const oneWeekAgo = dayjs().subtract(7, "day").format("YYYY-MM-DD");
-
-  const [startDate1, setStartDate1] = useState(oneWeekAgo)
-  const [startDate2, setStartDate2] = useState(oneWeekAgo)
-  const [startDate3, setStartDate3] = useState(oneWeekAgo)
-  const [endDate1, setEndDate1] = useState(today)
-  const [endDate2, setEndDate2] = useState(today)
-  const [endDate3, setEndDate3] = useState(today)
-
-  const handleSubmit1 = (event) => {
-    event.preventDefault();
-    console.log(startDate1, endDate1)
-    navigate(`/word/calendar?startDate=${startDate1}&endDate=${endDate1}`);
-  };
-
-  const handleSubmit2 = (event) => {
-    event.preventDefault();
-    console.log(startDate2, endDate2)
-    navigate(`/memo1/calendar?startDate=${startDate2}&endDate=${endDate2}`);
-  };
-
-  const handleSubmit3 = (event) => {
-    event.preventDefault();
-    console.log(startDate3, endDate3)
-    navigate(`/memo2/calendar?startDate=${startDate3}&endDate=${endDate3}`);
-  };
-
-  const handleLogout = async () => {
-
-    // const token = localStorage.getItem('current-token');
-    // try {
-    //   await axios.post(`${API_URL}/api/logout/`, null, {
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //       'X-CSRFToken': document.cookie.match(/csrftoken=([^;]*)/)?.[1], // CSRFトークンを取得
-    //       ...(token && { 'Authorization': `Bearer ${token}` }),
-    //     },
-    //     withCredentials: true, // クッキーを送信
-    //   });
-    localStorage.removeItem('current-token');
-    localStorage.removeItem('username');
-    window.location.href = '/';
-    // } catch (error) {
-    //   console.error('ログアウトエラー:', error);
-    // }
-  };
-
   return (
 
     <div style={{
       backgroundImage: 'url("/static/react/images/login_background2.webp")',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
+      backgroundAttachment: 'fixed',
       justifyContent: 'center',
       alignItems: 'center',
-      height: '100vh',
+      minHeight: '100vh',
+      height: 'auto',
       color: '#d0d0d0',
+      position: 'relative',
+      width: '100%',
+      overflow: 'auto'
     }}>
-      <div className={styles['main-container']}>
+      <div className={styles["content-container"]}>
+        <div className={styles["container"]} style={{ display: "block", margin: "20px", paddingLeft: "10%" }}>
+          <h2 style={{ fontSize: "2.5rem" }}>エビングハウス メモ帳１</h2>
+          <p style={{ fontSize: "1.5rem" }}>{props.cookies.get("username")} さん</p>
+        </div>
 
-        <div className={styles["content-container"]}>
-          <div className={styles["container"]} style={{ display: "block", margin: "20px" }}>
-            <h2>エビングハウス 英単語帳＆メモ帳</h2>
-            <p>{props.cookies.get("username")} さん</p>
+        <div className={styles["double-container"]} >
+
+          <div className={styles["memo-container"]} style={{ display: "flex", flexDirection: "column", gap: "30px", marginTop: "25px" }}>
+            <div className={styles["card-a"]}>
+              <CardButton titleText="英単語帳" detailText1={randomWord} href="/word" detailText2={randomWordMean} backgroundColor="rgba(190, 255, 255, 0.9)" />
+            </div>
+            <div className={styles["card-b"]}>
+              <CardButton titleText="英語 例文帳" detailText1="英単語帳でチェックした単語を用いた例文（複数単語の同時使用例文をGPT生成）" href="/sentence" />
+            </div>
           </div>
 
-          <div className={styles["card-container"]} style={{
-            display: "flex", justifyContent: "center",
-            alignContent: "center",
-            gap: "40px"
-          }}>
-            <div className={styles["word-container"]} style={{ display: "flex", flexDirection: "column", gap: "30px" }}>
-              <div className={styles["card-a"]}>
-                <CardButton titleText="英単語帳" detailText1={randomWord} href="/word" detailText2={randomWordMean} />
-              </div>
-              <div className={styles["card-b"]}>
-                <CardButton titleText="英単語 例文帳" detailText1="" href="/word" />
-              </div>
+          <div className={styles["memo-container"]}>
+            <div className={styles["card-c"]}>
+              <CardButton titleText="メモ帳１" detailText1={randomMemo1} href="/memo1" />
             </div>
-
-            <div className={styles["memo-container"]}>
-              <div className={styles["card-c"]}>
-                <CardButton titleText="メモ帳１" detailText1={randomMemo1} href="/memo1" />
-              </div>
-              <div className={styles["card-d"]}>
-                <CardButton titleText="メモ帳２" detailText1="" href="/memo2" />
-              </div>
+            <div className={styles["card-d"]}>
+              <CardButton titleText="メモ帳２" detailText1="" href="/memo2" />
             </div>
-
-            {/* <CardButton titleText="英単語帳" detailText1={randomWord} href="/wordlist" detailText2={randomWordMean} />
-            <CardButton titleText="メモ帳１" detailText1={randomMemo1} href="/memo1list" />
-            <CardButton titleText="メモ帳２" detailText1="" href="/memo2list" />
-            <CardButton titleText="英単語 例文帳" detailText1="" href="/memo2list" /> */}
-
           </div>
         </div>
       </div>
-
-      {/* <TagButton text="top" link="/mainpage" top="55%" backgroundColor="orange" color="rgba(50,50,50)" />
-      <TagButton text="編集" link="/wordlist" top="65%" backgroundColor="orange" color="rgba(50,50,50)" /> */}
-      <TagButton text="logout" link="/" top="75%" backgroundColor="orange" color="rgba(50,50,50)" logout={true} />
-
+      <TagButton text="Logout" link="/" top="85%" backgroundColor="rgba(255, 170, 110, 0.8)" color="rgba(50,50,50)" logout={true} width="25rem" />
 
     </div>
+
+    // /* <div className={styles["memo-container"]}>
+    //               <div className={styles["memo-upper-container"]}>
+    //                   <CardButton titleText="復習" detailText1="1,7,28日前に登録したメモ" href="/memo1/review" />
+    //                   <CardButton titleText="ＡＬＬ" detailText1="" href="/memo1/all" />
+    //               </div>
+    //               <div style={{ marginLeft: '60px' }}>
+    //                   <DrillCardButton titleText="メモ帳１ドリル" link="memo1" />
+    //               </div>
+    //           </div>
+    //       </div>
+    //       <TagButton text="メモ１登録" link="/memo1/create" top="15%" backgroundColor="rgba(231, 76, 115, 0.8)" color="white" />
+    //       <TagButton text="編集" link="/memo1list" top="25%" backgroundColor="rgba(52, 152, 219, 0.8)" color="white" />
+    //       <TagButton text="TOP" link="/mainpage" top="35%" backgroundColor="rgba(46, 230, 113, 0.7)" color="rgba(50,50,50)" width="15rem" />
+    //       <TagButton text="Logout" link="/" top="45%" backgroundColor="rgba(255, 170, 110, 0.8)" color="rgba(50,50,50)" logout={true} width="15rem" /> */}
+
+    //     // </div >
+    //     // <div style={{
+    //     //   backgroundImage: 'url("/static/react/images/login_background2.webp")',
+    //     //   backgroundSize: 'cover',
+    //     //   backgroundPosition: 'center',
+    //     //   justifyContent: 'center',
+    //     //   alignItems: 'center',
+    //     //   height: '100vh',
+    //     //   color: '#d0d0d0',
+    //     // }}>
+    //     //   <div className={styles['main-container']}>
+
+    //     //     <div className={styles["content-container"]}>
+    //     //       <div className={styles["container"]} style={{ display: "block", margin: "20px", paddingLeft: "10%" }}>
+    //     //         <h2 style={{ fontSize: "2.5rem" }}>エビングハウス 英単語帳＆メモ帳</h2>
+    //     //         <p style={{ fontSize: "1.5rem" }}>{props.cookies.get("username")} さん</p>
+    //     //       </div>
+
+    //     //       <div className={styles["double-container"]} style={{
+    //     //         display: "flex",
+    //     //         // justifyContent: "center",
+    //     //         // alignContent: "center",
+    //     //         margin: "0 auto",  // 中央揃え
+    //     //         padding: "0 200px"  // 左右の余白
+    //     //       }}>
+
+    //     //         <div className={styles["memo-container"]} style={{ display: "flex", flexDirection: "column", gap: "30px", marginTop: "25px" }}>
+    //     //           <div className={styles["card-a"]}>
+    //     //             <CardButton titleText="英単語帳" detailText1={randomWord} href="/word" detailText2={randomWordMean} backgroundColor="rgba(190, 255, 255, 0.9)" />
+    //     //           </div>
+    //     //           <div className={styles["card-b"]}>
+    //     //             <CardButton titleText="英語 例文帳" detailText1="英単語帳でチェックした単語を用いた例文（複数単語の同時使用例文をGPT生成）" href="/sentence" />
+    //     //           </div>
+    //     //         </div>
+
+    //     //         <div className={styles["memo-container"]}>
+    //     //           <div className={styles["card-c"]}>
+    //     //             <CardButton titleText="メモ帳１" detailText1={randomMemo1} href="/memo1" />
+    //     //           </div>
+    //     //           <div className={styles["card-d"]}>
+    //     //             <CardButton titleText="メモ帳２" detailText1="" href="/memo2" />
+    //     //           </div>
+    //     //         </div>
+
+    //     //       </div>
+    //     //     </div>
+    //     //   </div>
+
+
+    //     //   <TagButton text="Logout" link="/" top="75%" backgroundColor="rgba(255, 170, 110, 0.8)" color="rgba(50,50,50)" logout={true} width="25rem" />
+
+
+
+    //     // </div>
+
   );
 };
 

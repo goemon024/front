@@ -3,6 +3,11 @@
     /* パディングとボーダーを幅と高さに含める */
 }
 
+:root {
+    font-size: 16px;
+    /* ベースフォントサイズを設定 */
+}
+
 body,
 html {
     height: 100vh;
@@ -10,6 +15,8 @@ html {
     margin: 0;
     /* マージンをリセット */
     display: flex;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 1rem;
 }
 
 .main-container {
@@ -57,6 +64,14 @@ html {
     /* 各要素の間にスペースを追加 */
 }
 
+.container h2 {
+    font-size: 1.75rem;
+}
+
+.container p {
+    font-size: 1rem;
+}
+
 #menu1,
 #menu2 {
 
@@ -75,7 +90,7 @@ html {
     /* ブロックレベル要素として表示 */
     padding: 0em;
     margin-bottom: 0;
-    font-size: 1.2em;
+    font-size: 1rem;
 }
 
 #m1_date,
@@ -98,18 +113,41 @@ html {
     color: rgba(175, 175, 175, 1);
     cursor: pointer;
     text-decoration: underline;
-    font-size: 20px;
+    font-size: 1.125rem;
     display: inline-block;
 }
 
 
 .memo-container {
     display: flex;
+    flex-direction: column;
     gap: 30px;
-    margin-left: 10px;
+    margin: 20px;
+    margin-top: px;
+    padding-left: 10%;
 }
 
+.memo-upper-container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
 
+.double-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0px;
+    margin-top: 25px;
+    margin: 25px auto 0;
+    max-width: 1200px;
+    padding: 0 10%;
+    padding-left: 5%;
+    position: relative;
+    left: 45%;
+    transform: translateX(-50%);
+}
 
 @media (max-width: 768px) {
     .card-container {
@@ -118,12 +156,31 @@ html {
         gap: 30px;
     }
 
+    .double-container {
+        /* display: flex; */
+        flex-direction: column;
+        gap: 30px;
+        margin-left: 0;
+        padding-left: 0;
+        height: auto;
+        overflow-y: visible;
+    }
+
     .memo-container {
         display: flex;
         flex-direction: column;
         gap: 30px;
-        margin-left: 0;
+        margin-left: 60px;
+        padding-left: 5%;
+        margin-top: 0;
     }
+
+    .memo-upper-container {
+        flex-direction: column;
+        gap: 30px;
+        margin-left: 60px;
+    }
+
 
 
     .content-container {
@@ -157,13 +214,16 @@ html {
         flex-direction: column-reverse;
         gap: 0rem;
         width: 100%;
-        overflow-x: auto;
+        overflow-x: hidden;
         overflow-y: auto;
-        height: 100vh;
+        height: auto;
+        min-height: 100vh;
     }
 
     .content-container {
         overflow-y: visible;
+        height: auto;
+        padding-bottom: 80px;
     }
 
     .menu-container {
@@ -174,10 +234,12 @@ html {
     #menu1,
     #menu2 {
         width: 75vw;
+        height: auto;
     }
 
     .logout {
         margin: 20px 20px;
+        position: relative;
+        bottom: 0;
     }
-
 }

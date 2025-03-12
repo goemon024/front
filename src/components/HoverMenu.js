@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 //   secondLink = { href: "/", text: "Menu" }
 // }) 
 
-const HoverMenu = ({ links }) => {
+const HoverMenu = ({ menuLink, editLink }) => {
   const [menuWidth, setMenuWidth] = useState(0);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 567);
   // reactのmaterial UI、アニメーション用のライブラリをreactで。
@@ -52,8 +52,8 @@ const HoverMenu = ({ links }) => {
 
       {/* <a href="/main" >TOP</a>
       <a href={links.href} >{links.text}</a> */}
-      <Link to="/mainpage">TOP</Link>
-      <Link to={links.href}>{links.text}</Link>
+      <Link to={menuLink.href}>{menuLink.text}</Link>
+      <Link to={editLink.href}>{editLink.text}</Link>
       <LogoutButton />
 
     </div>

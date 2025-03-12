@@ -14,7 +14,7 @@ const Memo2List = () => {
   const [cookies] = useCookies(['current-token']);  // useCookiesを使う
   const token = cookies['current-token'];
 
-  const { memo2Table, setMemo2Table, loading } = useContext(DataContext);
+  const { memo2Table, setMemo2Table } = useContext(DataContext);
   const [deleteIsOpen, setDeleteIsOpen] = useState(false);
   const [updateIsOpen, setUpdateIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);  // モーダル表示時の値の受渡し
@@ -60,7 +60,7 @@ const Memo2List = () => {
     <div style={{ display: 'flex' }}>
       <div id="staticMenu">
         {/* <a href="/main">TOP</a> */}
-        <Link to="/main">TOP</Link>
+        <Link to="/memo2">メモ帳２</Link>
         <LogoutButton />
       </div>
 

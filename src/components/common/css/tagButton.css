@@ -1,16 +1,15 @@
 .tag-button {
     display: inline-block;
-    background-color: orange;
     color: #1a1a1f;
     text-decoration: none;
     padding: 10px 20px;
     font-size: 30px;
     font-weight: bold;
     position: fixed;
-    right: -15px;
-    width: fit-content;
+    right: -7rem;
     transform: rotate(-7deg);
     transition: transform 0.3s ease, background-color 0.3s ease;
+    z-index: 20;
 }
 
 /* デモ用のスタイル */
@@ -35,14 +34,12 @@
 
 /* ホバー時のアニメーション */
 .tag-button.hovered {
-    transform: rotate(-7deg) translateX(-50px);
-    background-color: #ffda88;
+    transform: rotate(-7deg) translateX(-5rem);
 }
 
 /* ホバー時の三角形の色変更 */
 .tag-button.hovered::before {
     border-color: transparent var(--triangle-color) transparent transparent;
-    opacity: 0.8;
 }
 
 /* 本来のスタイルは一時的にコメントアウト */

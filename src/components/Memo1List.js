@@ -62,7 +62,6 @@ const Memo1List = () => {
   return (
     <div style={{ display: 'flex' }}>
       <div id="staticMenu">
-        {/* <a href="/main">TOP</a> */}
         <Link to="/memo1">メモ帳１</Link>
         <LogoutButton />
       </div>

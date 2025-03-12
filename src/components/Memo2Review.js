@@ -42,7 +42,7 @@ const Memo2Review = (props) => {
 
     <div>
       <FlashMemo2 cardData={shuffleArray(filteredData)} />
-      <HoverMenu links={{ href: '/memo2list', text: 'メモ帳編集' }} />
+      <HoverMenu menuLink={{ href: '/memo2', text: 'メモ２' }} editlink={{ href: '/memo2list', text: 'メモ２編集' }} />
     </div>
 
   )

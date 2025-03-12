@@ -81,7 +81,7 @@ const Memo2Create = () => {
     <div style={{ display: 'flex' }}>
       <div id="staticMenu">
         {/* <a href="/main">TOP</a> */}
-        <Link to="/main">TOP</Link>
+        <Link to="/memo2">メモ帳２</Link>
         <Link to="/memo2list">メモ帳２編集</Link>
         <LogoutButton />
       </div>
