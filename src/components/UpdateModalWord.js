@@ -1,21 +1,21 @@
-import React,{ useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 
 Modal.setAppElement('#root'); // アクセシビリティのため
 
-const UpdateModalWord = ({ isOpen, onRequestClose, data, dataDisplay, setTable, apiUrl}) => {
+const UpdateModalWord = ({ isOpen, onRequestClose, data, setTable, apiUrl }) => {
   // const { memo1Table, setMemo1Table } = useContext(DataContext);
-  const [ cookies ] = useCookies(['current-token']);
-  const token = cookies['current-token'];           
+  const [cookies] = useCookies(['current-token']);
+  const token = cookies['current-token'];
 
   // 1つのformDataで3つのデータの状態管理。
-  const [ formData, setFormData ]= useState({word:data.word, mean1:data.mean1,mean2:data.mean2});
+  const [formData, setFormData] = useState({ word: data.word, mean1: data.mean1, mean2: data.mean2 });
 
   useEffect(() => {
     if (isOpen && data) {
-      setFormData({word: data.word,mean1:data.mean1,mean2:data.mean2}) 
+      setFormData({ word: data.word, mean1: data.mean1, mean2: data.mean2 })
     }
   }, [isOpen, data]);
 
@@ -23,21 +23,23 @@ const UpdateModalWord = ({ isOpen, onRequestClose, data, dataDisplay, setTable, 
     e.preventDefault();
     try {
       await axios.put(`${apiUrl}${data.id}/`,
-        {id:   data.id,
-         user: data.user,
-         word: formData.word,
-         mean1: formData.mean1,
-         mean2: formData.mean2,
-         reg_date: data.reg_date},{
+        {
+          id: data.id,
+          user: data.user,
+          word: formData.word,
+          mean1: formData.mean1,
+          mean2: formData.mean2,
+          reg_date: data.reg_date
+        }, {
         headers: {
-          'Authorization': `Token ${token}`, 
+          'Authorization': `Token ${token}`,
         },
       });
-      
+
       console.log('更新成功')
       setTable(prevTable => prevTable.map(mapdata => mapdata.id === data.id ?
-      {...mapdata, word: formData.word, mean1: formData.mean1 ,mean2: formData.mean2} : mapdata ));
-      onRequestClose(); 
+        { ...mapdata, word: formData.word, mean1: formData.mean1, mean2: formData.mean2 } : mapdata));
+      onRequestClose();
     } catch (error) {
       console.log(`${apiUrl}${data.id}/`)
       console.log(`${token}`)
@@ -68,7 +70,7 @@ const UpdateModalWord = ({ isOpen, onRequestClose, data, dataDisplay, setTable, 
           marginRight: '-50%',
           transform: 'translate(-50%, -50%)',
           maxWidth: '90%',
-          maxHeight: '90%', 
+          maxHeight: '90%',
           overflowY: 'auto',
 
           // width: '90%', // 画面幅の90%を占める
@@ -84,11 +86,11 @@ const UpdateModalWord = ({ isOpen, onRequestClose, data, dataDisplay, setTable, 
     >
 
       <form onSubmit={handleUpdate} style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '90%' }}>
-      <p style={{ color: 'silver' }}>入力日時：
-        {new Date(data.reg_date).toLocaleDateString('ja-JP',
-        { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+        <p style={{ color: 'silver' }}>入力日時：
+          {new Date(data.reg_date).toLocaleDateString('ja-JP',
+            { year: 'numeric', month: 'long', day: 'numeric' })}</p>
 
-          <p>
+        <p>
           <label htmlFor="word">word:</label>
           <textarea
             id="word"
@@ -100,8 +102,8 @@ const UpdateModalWord = ({ isOpen, onRequestClose, data, dataDisplay, setTable, 
             value={formData.word}
             onChange={handleInputChange1}
           />
-          </p>
-          <p>
+        </p>
+        <p>
           <label htmlFor="mean1">mean1:</label>
           <textarea
             id="mean1"
@@ -113,8 +115,8 @@ const UpdateModalWord = ({ isOpen, onRequestClose, data, dataDisplay, setTable, 
             value={formData.mean1}
             onChange={handleInputChange2}
           />
-          </p>
-          <p>
+        </p>
+        <p>
           <label htmlFor="mean2">mean1:</label>
           <textarea
             id="mean2"
@@ -126,11 +128,11 @@ const UpdateModalWord = ({ isOpen, onRequestClose, data, dataDisplay, setTable, 
             value={formData.mean2}
             onChange={handleInputChange3}
           />
-          </p>
+        </p>
 
-        <div class ='container' style={{display: 'flex', gap: '0.5rem'}}>
-        <button type="submit" className="btn btn-outline-dark block btn-custom" style={{width:'5rem'}}>Update</button>
-        <button type="button" onClick={()=>{onRequestClose();setFormData('') }} className="btn btn-outline-dark block btn-custom" style={{width:'5rem'}}>Close</button>
+        <div className='container' style={{ display: 'flex', gap: '0.5rem' }}>
+          <button type="submit" className="btn btn-outline-dark block btn-custom" style={{ width: '5rem' }}>Update</button>
+          <button type="button" onClick={() => { onRequestClose(); setFormData('') }} className="btn btn-outline-dark block btn-custom" style={{ width: '5rem' }}>Close</button>
         </div>
       </form>
 

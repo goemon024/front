@@ -1,18 +1,18 @@
-import React,{ useEffect,useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import axios from 'axios';
-import { useCookies } from 'react-cookie';     
+import { useCookies } from 'react-cookie';
 
 Modal.setAppElement('#root'); // アクセシビリティのため
 
-const UpdateModalMemo1 = ({ isOpen, onRequestClose, data, dataDisplay, setTable, apiUrl}) => {
+const UpdateModalMemo1 = ({ isOpen, onRequestClose, data, setTable, apiUrl }) => {
   // const { memo1Table, setMemo1Table } = useContext(DataContext);
-  const [ cookies ] = useCookies(['current-token']);
-  const token = cookies['current-token'];           
+  const [cookies] = useCookies(['current-token']);
+  const token = cookies['current-token'];
 
   // deleteでは不要だったがformDataを更新するために必要。
 
-  const [ formData, setFormData ]= useState(data.memo);
+  const [formData, setFormData] = useState(data.memo);
 
   useEffect(() => {
     if (isOpen && data) {
@@ -24,18 +24,20 @@ const UpdateModalMemo1 = ({ isOpen, onRequestClose, data, dataDisplay, setTable,
     e.preventDefault();
     try {
       await axios.put(`${apiUrl}${data.id}/`,
-        {id:   data.id,
-         user: data.user,
-         memo: formData,
-         reg_date: data.reg_date},{
+        {
+          id: data.id,
+          user: data.user,
+          memo: formData,
+          reg_date: data.reg_date
+        }, {
         headers: {
-          'Authorization': `Token ${token}`, 
+          'Authorization': `Token ${token}`,
         },
       });
       console.log('更新成功')
       setTable(prevTable => prevTable.map(mapdata => mapdata.id === data.id ?
-      {...mapdata, memo: formData } : mapdata ));
-      onRequestClose(); 
+        { ...mapdata, memo: formData } : mapdata));
+      onRequestClose();
     } catch (error) {
       console.error('更新失敗:', error.response ? error.response.data : error.message);
     }
@@ -112,7 +114,7 @@ const UpdateModalMemo1 = ({ isOpen, onRequestClose, data, dataDisplay, setTable,
           marginRight: '-50%',
           transform: 'translate(-50%, -50%)',
           maxWidth: '90%',
-          maxHeight: '90%', 
+          maxHeight: '90%',
           overflowY: 'auto',
           // width: '90%', // 画面幅の90%を占める
           // maxWidth: '500px', // 最大幅を500pxに制限
@@ -127,11 +129,11 @@ const UpdateModalMemo1 = ({ isOpen, onRequestClose, data, dataDisplay, setTable,
     >
 
       <form onSubmit={handleUpdate} style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '90%' }}>
-      <p style={{ color: 'silver' }}>入力日時：
-        {new Date(data.reg_date).toLocaleDateString('ja-JP',
-        { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+        <p style={{ color: 'silver' }}>入力日時：
+          {new Date(data.reg_date).toLocaleDateString('ja-JP',
+            { year: 'numeric', month: 'long', day: 'numeric' })}</p>
 
-          <p>
+        <p>
           <label htmlFor="memo">memo:</label>
           <textarea
             id="memo"
@@ -143,7 +145,7 @@ const UpdateModalMemo1 = ({ isOpen, onRequestClose, data, dataDisplay, setTable,
             value={formData}
             onChange={handleInputChange}
           />
-          </p>
+        </p>
 
         {/* <p>
           <label htmlFor="memo">memo:</label>
@@ -157,9 +159,9 @@ const UpdateModalMemo1 = ({ isOpen, onRequestClose, data, dataDisplay, setTable,
             onChange={handleInputChange}
           />
         </p> */}
-        <div class ='container' style={{display: 'flex', gap: '0.5rem'}}>
-        <button type="submit" className="btn btn-outline-dark block btn-custom" style={{width:'5rem'}}>Update</button>
-        <button type="button" onClick={()=>{onRequestClose();setFormData('');}} className="btn btn-outline-dark block btn-custom" style={{width:'5rem'}}>Close</button>
+        <div className='container' style={{ display: 'flex', gap: '0.5rem' }}>
+          <button type="submit" className="btn btn-outline-dark block btn-custom" style={{ width: '5rem' }}>Update</button>
+          <button type="button" onClick={() => { onRequestClose(); setFormData(''); }} className="btn btn-outline-dark block btn-custom" style={{ width: '5rem' }}>Close</button>
         </div>
       </form>
 
