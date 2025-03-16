@@ -36,6 +36,7 @@ const DrillCardButton = ({ titleText, link }) => {
             flexDirection: 'column',
             alignItems: 'flex-start',
             gap: '1em',
+
           }}
         >
           <form onSubmit={handleSubmit}>

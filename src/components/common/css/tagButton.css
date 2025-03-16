@@ -3,7 +3,7 @@
   color: #1a1a1f;
   text-decoration: none;
   padding: 10px 20px;
-  font-size: 30px;
+  font-size: 32px;
   font-weight: bold;
   position: fixed;
   right: -7rem;
@@ -12,6 +12,8 @@
     transform 0.3s ease,
     background-color 0.3s ease;
   z-index: 20;
+  width: var(--width);
+  top: var(--top);
 }
 
 /* デモ用のスタイル */
@@ -27,7 +29,7 @@
   height: 0;
   /* 0に変更して三角形に */
   border-style: solid;
-  border-width: 32px 20px 32px 0;
+  border-width: 2rem 20px 2rem 0;
   /* 三角形のサイズを調整 */
   border-color: transparent var(--triangle-color) transparent transparent;
   transition: border-color 0.3s ease;
@@ -58,3 +60,20 @@
     border-color: transparent orange transparent transparent;
     transition: border-color 0.3s ease;
 } */
+
+@media (max-width: 768px) {
+  .tag-button {
+    top: var(--responsive-top);
+    width: var(--responsive-width);
+    font-size: 1.3rem;
+    transform: rotate(0deg);
+  }
+
+  .tag-button.hovered {
+    transform: rotate(0deg) translateX(-6rem);
+  }
+
+  .tag-button::before {
+    border-width: 1.5rem 20px 1.5rem 0;
+  }
+}

@@ -43,7 +43,7 @@ const Memo2List = () => {
     };
 
     fetchData();
-  }, [currentPage, memo2Table]);
+  }, [currentPage, memo2Table, token]);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);

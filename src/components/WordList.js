@@ -45,7 +45,7 @@ const WordList = () => {
     };
 
     fetchData();
-  }, [currentPage, wordTable]);
+  }, [currentPage, wordTable, token]);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);

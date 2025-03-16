@@ -44,7 +44,7 @@ const SentenceList = () => {
     };
 
     fetchData();
-  }, [currentPage, sentenceTable]);
+  }, [currentPage, sentenceTable, token]);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);

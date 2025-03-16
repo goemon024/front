@@ -36,7 +36,7 @@ const WordCreate = () => {
       (data) => dayjs(data.reg_date).format('YYYY-MM-DD') === today
     );
     setTodayWord(filteredData);
-  }, [wordTable]);
+  }, [wordTable, today]);
 
   useEffect(() => {
     if (todayWord.length > 8) {

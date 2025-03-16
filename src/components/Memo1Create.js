@@ -37,7 +37,7 @@ const Memo1Create = () => {
       (data) => dayjs(data.reg_date).format('YYYY-MM-DD') === today
     );
     setTodayMemo(filteredData);
-  }, [memo1Table]);
+  }, [memo1Table, today]);
 
   useEffect(() => {
     if (todayMemo.length > 8) {
