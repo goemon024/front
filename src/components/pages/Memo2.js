@@ -12,7 +12,7 @@ const Memo2 = (props) => {
 
         <div className={styles['content-container']}>
           <div
-            className={styles['container']}
+            className={styles['title-container']}
             style={{ display: 'block', margin: '20px', paddingLeft: '10%' }}
           >
             <h2 style={{ fontSize: 'clamp(1.5rem, 5vw, 2.5rem)', whiteSpace: 'nowrap', }}>エビングハウス メモ帳２</h2>

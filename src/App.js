@@ -36,20 +36,6 @@ import Memo2 from './components/pages/Memo2';
 import Word from './components/pages/Word';
 import Sentence from './components/pages/Sentence';
 
-// import Navbar from "./components/Navbar";
-// import DataProvider from './context/DataContext';
-
-// const theme = createTheme({
-//   palette: {
-//     primary: indigo,
-//     secondary: {
-//       main: "#f44336",
-//     },
-//   },
-//   typography: {
-//     fontFamily: "Comic Neue",
-//   },
-// });
 
 function App() {
   return (

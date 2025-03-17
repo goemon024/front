@@ -13,36 +13,6 @@ import CardButton from '../common/cardButton';
 import DrillCardButton from '../common/drillCardButton';
 
 const Memo1 = (props) => {
-  // const { memo1Table, loading, userName } = useContext(DataContext);
-  // const navigate = useNavigate();
-
-  // const today = dayjs().format("YYYY-MM-DD");
-  // const oneWeekAgo = dayjs().subtract(7, "day").format("YYYY-MM-DD");
-
-  // const [startDate1, setStartDate1] = useState(oneWeekAgo)
-  // const [startDate2, setStartDate2] = useState(oneWeekAgo)
-  // const [startDate3, setStartDate3] = useState(oneWeekAgo)
-  // const [endDate1, setEndDate1] = useState(today)
-  // const [endDate2, setEndDate2] = useState(today)
-  // const [endDate3, setEndDate3] = useState(today)
-
-  // const handleSubmit1 = (event) => {
-  //     event.preventDefault();
-  //     console.log(startDate1, endDate1)
-  //     navigate(`/word/calendar?startDate=${startDate1}&endDate=${endDate1}`);
-  // };
-
-  // const handleSubmit2 = (event) => {
-  //     event.preventDefault();
-  //     console.log(startDate2, endDate2)
-  //     navigate(`/memo1/calendar?startDate=${startDate2}&endDate=${endDate2}`);
-  // };
-
-  // const handleSubmit3 = (event) => {
-  //     event.preventDefault();
-  //     console.log(startDate3, endDate3)
-  //     navigate(`/memo2/calendar?startDate=${startDate3}&endDate=${endDate3}`);
-  // };
 
   return (
     <div className={styles['background-wrapper']}
@@ -51,7 +21,7 @@ const Memo1 = (props) => {
 
         <div className={styles['content-container']}>
           <div
-            className={styles['container']}
+            className={styles['title-container']}
             style={{ display: 'block', margin: '20px', paddingLeft: '10%' }}
           >
             <h2 style={{ fontSize: 'clamp(1.5rem, 5vw, 2.5rem)', whiteSpace: 'nowrap', }}>

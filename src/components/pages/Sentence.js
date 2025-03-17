@@ -10,7 +10,7 @@ const Sentence = (props) => {
       <div className={styles['background-wrapper2']}>
         <div className={styles['content-container']}>
           <div
-            className={styles['container']}
+            className={styles['title-container']}
             style={{ display: 'block', margin: '20px', paddingLeft: '10%' }}
           >
             <h2 style={{ fontSize: 'clamp(1.5rem, 5vw, 2.5rem)', whiteSpace: 'nowrap' }}>エビングハウス 英語 例文帳</h2>

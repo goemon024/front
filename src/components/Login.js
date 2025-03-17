@@ -10,10 +10,6 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import CircularProgress from '@mui/material/CircularProgress';
 import { styled } from '@mui/system'; // styled or makeStyles
-// import { makeStyles } from '@mui/styles';
-// import { backdropClasses } from "@mui/material";
-
-// import API_URL from '../config';
 
 import {
   START_FETCH,
@@ -25,14 +21,7 @@ import {
 } from './actionTypes';
 
 const useStyles = styled((theme) => ({
-  // textfield: {
-  //     input: { color: '#999999' }, // 入力文字の色とサイズ
-  //     label: { color: 'rgba(255, 255, 255, 0.7)' }, // ラベルの色
-  //     '& .MuiOutlinedInput-root': {
-  //         '& fieldset': {
-  //             borderColor: 'gray', // 非アクティブ時の枠の色
-  //         },},
-  // },
+
 
   paper: {
     marginTop: theme.spacing(8),

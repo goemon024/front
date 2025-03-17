@@ -20,7 +20,7 @@ const Word = (props) => {
 
                 <div className={styles['content-container']}>
                     <div
-                        className={styles['container']}
+                        className={styles['title-container']}
                         style={{ display: 'block', margin: '20px', paddingLeft: '10%' }}
                     >
                         <h2 style={{ fontSize: 'clamp(1.5rem, 5vw, 2.5rem)', whiteSpace: 'nowrap', }}>
@@ -34,7 +34,7 @@ const Word = (props) => {
                                 titleText="復習"
                                 detailText1="1,7,28日前に登録した英単語"
                                 href="/word/review"
-                            // backgroundColor="rgba(205, 255, 255, 0.9)"
+                                backgroundColor="rgba(205, 255, 255, 0.9)"
                             />
                             <CardButton titleText="ＡＬＬ" detailText1="" href="/word/all" />
                         </div>

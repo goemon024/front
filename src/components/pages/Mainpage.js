@@ -87,7 +87,7 @@ const MainPage = (props) => {
                   detailText1={randomWord}
                   href="/word"
                   detailText2={randomWordMean}
-                // backgroundColor="rgba(205, 255, 255, 0.9)"
+                  backgroundColor="rgba(205, 255, 255, 0.9)"
                 />
               </div>
               <div>
